@@ -46,9 +46,9 @@ function loadPages(ePortfolioData) {
     bannerImageLoc = ePortfolioData.bannerImageLoc;
     
     for (var i = 0; i < numPages; i++) {
-	var rawPage = ePortfolioData.slides[i];
-	var slide = new Slide(rawSlide.image_file_name, rawSlide.caption);
-	pages[i] = slide;
+	var rawPage = ePortfolioData.page[i];
+	//var page = new Page(rawSlide.image_file_name, rawSlide.caption);
+	pages[i] =  ePortfolioData.page[i];
     }
 }
 

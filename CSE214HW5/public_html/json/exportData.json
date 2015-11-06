@@ -8,13 +8,13 @@
   "pageText03": "Inspiration",
   "pageText04": "Senior Design Project",
   "pageText05": "Home Video",
-  "pages": [
+  "page": [
     {
     "cssLayout": "cssLocHere.css",
     "cssColor": "cssLocHere.css",
     "pageTitle": "Home",
     "numComponents": 3,
-    "c01": {
+    "compenent": [{
       "type": 1,
       "text": "Welcome to my portfolio. I strive to change the way people interact with their world around them through inspired design and emerging technologies.",
       "imageLoc": null,
@@ -27,7 +27,7 @@
         "numOfImages": 0
       }
     },
-    "c02": {
+    {
       "type": 2,
       "text": null,
       "imageLoc": "./img/danIsTheBest.jpg",
@@ -40,7 +40,7 @@
         "numOfImages": 0
       }
     },
-    "c03": {
+    {
       "type": 1,
       "text": " \"Men are like steel. When they lose their temper, they lose their worth.\" - Chuck Norris",
       "imageLoc": null,
@@ -53,13 +53,14 @@
         "numOfImages": 0
       }
     }
+    ]
   },
   {
     "cssLayout": "cssLocHere.css",
     "cssColor": "cssLocHere.css",
     "pageTitle": "Biography",
     "numComponents": 3,
-    "c01": {
+    "compenent": [{
       "type": 1,
       "text": "Chuck Norris is familiar to fans worldwide as the star of action films such as The Hitman (1991), The Delta Force (1986) and Delta Force 2: The Colombian Connection (1990). He also starred in Missing in Action (1984) and its sequels, Firewalker (1986) and Sidekicks (1992). He was an executive producer of Walker, Texas Ranger (1993) as well as the star.",
       "imageLoc": null,
@@ -73,7 +74,7 @@
         "numOfImages": 0
       }
     },
-    "c02": {
+    {
       "type": 1,
       "text": "Chuck Norris was born in Ryan, Oklahoma, to Wilma (Scarberry) and Ray Norris, who was a truck driver, mechanic, and bus driver. The eldest of three children, he helped his mother raise his two younger brothers in Torrance, CA, where his family moved when he was 12. Norris attended North Torrance High School from its inception in September, 1955 until his graduation in June, 1958. He is one of several storied alumni from the school. ",
       "imageLoc": null,
@@ -86,7 +87,7 @@
         "numOfImages": 0
       }
     },
-    "c03": {
+    {
       "type": 5,
       "text": null,
       "imageLoc": null,
@@ -99,7 +100,7 @@
         "numOfImages": 0
       }
     },
-    "c04": {
+    {
       "type": 1,
       "text": "yada yada.",
       "imageLoc": null,
@@ -112,13 +113,14 @@
         "numOfImages": 0
       }
     }
+    ]
   },
   {
     "cssLayout": "cssLocHere.css",
     "cssColor": "cssLocHere.css",
     "pageTitle": "Inspiration",
     "numComponents": 1,
-    "c01": {
+    "compenent": [{
       "type": 4,
       "text": null,
       "imageLoc": null,
@@ -143,13 +145,14 @@
         ]
       }
     }
+    ]
   },
   {
     "cssLayout": "cssLocHere.css",
     "cssColor": "cssLocHere.css",
     "pageTitle": "Senior Design Project",
     "numComponents": 6,
-    "c01": {
+    "compenent": [{
       "type": 1,
       "text": "I made this",
       "imageLoc": null,
@@ -162,7 +165,7 @@
         "numOfImages": 0
       }
     },
-    "c02": {
+    {
       "type": 2,
       "text": null,
       "imageLoc": "./img/iMadeThis.jpg",
@@ -175,7 +178,7 @@
         "numOfImages": 0
       }
     },
-    "c03": {
+    {
       "type": 1,
       "text": "I made this too.",
       "imageLoc": null,
@@ -188,7 +191,7 @@
         "numOfImages": 0
       }
     },
-    "c04": {
+    {
       "type": 2,
       "text": null,
       "imageLoc": "./img/iMadeThis2.jpg",
@@ -201,7 +204,7 @@
         "numOfImages": 0
       }
     },
-    "c05": {
+    {
       "type": 1,
       "text": "Final project.",
       "imageLoc": null,
@@ -214,7 +217,7 @@
         "numOfImages": 0
       }
     },
-    "c06": {
+    {
       "type": 1,
       "text": null,
       "imageLoc": "./img/iMadeThis3.jpg",
@@ -227,13 +230,14 @@
         "numOfImages": 0
       }
     }
+    ]
   },
   {
     "cssLayout": "cssLocHere.css",
     "cssColor": "cssLocHere.css",
     "pageTitle": "Home Video",
     "numComponents": 2,
-    "c01": {
+    "compenent": [{
       "type": 1,
       "text": "What I watch every morning for motivation",
       "imageLoc": null,
@@ -246,7 +250,7 @@
         "numOfImages": 0
       }
     },
-    "c02": {
+    {
       "type": 3,
       "text": null,
       "imageLoc": null,
@@ -259,6 +263,7 @@
         "numOfImages": 0
       }
     }
+    ]
   }
   ]
 }
