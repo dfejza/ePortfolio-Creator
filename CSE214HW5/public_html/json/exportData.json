@@ -8,7 +8,8 @@
   "pageText03": "Inspiration",
   "pageText04": "Senior Design Project",
   "pageText05": "Home Video",
-  "page01": {
+  "pages": [
+    {
     "cssLayout": "cssLocHere.css",
     "cssColor": "cssLocHere.css",
     "pageTitle": "Home",
@@ -53,7 +54,7 @@
       }
     }
   },
-  "page02": {
+  {
     "cssLayout": "cssLocHere.css",
     "cssColor": "cssLocHere.css",
     "pageTitle": "Biography",
@@ -112,7 +113,7 @@
       }
     }
   },
-  "page03": {
+  {
     "cssLayout": "cssLocHere.css",
     "cssColor": "cssLocHere.css",
     "pageTitle": "Inspiration",
@@ -143,7 +144,7 @@
       }
     }
   },
-  "page04": {
+  {
     "cssLayout": "cssLocHere.css",
     "cssColor": "cssLocHere.css",
     "pageTitle": "Senior Design Project",
@@ -227,7 +228,7 @@
       }
     }
   },
-  "page05": {
+  {
     "cssLayout": "cssLocHere.css",
     "cssColor": "cssLocHere.css",
     "pageTitle": "Home Video",
@@ -259,4 +260,5 @@
       }
     }
   }
+  ]
 }
