@@ -23,8 +23,14 @@ var pages;
 var currentPage;
 var currentComponent;
 
+// DATA FOR SLIDESHOW
+var numOfSlideshows;
+var slides = new Array();
+var currentSlide;
+
 // MODIFY CURRENT PAGE's DOM IN THIS FOLLOWING FUNCTION
-function initPage() {
+function initPage() {    
+    numOfSlideshows = 0;
     //Get current page
     var fileName = location.href.split("/").slice(-1); 
     fileName = fileName[0];
@@ -34,6 +40,11 @@ function initPage() {
             currentPage = i;
         }
     }
+    
+    // LOAD THE CSS STYLE,FONT AND COLOR
+    loadjscssfile(pages[currentPage].cssColor) ////dynamically load and add this .css file
+    loadjscssfile(pages[currentPage].cssLayout) ////dynamically load and add this .css file
+    loadjscssfile(pages[currentPage].cssFont) ////dynamically load and add this .css file
     
     //Modify DOMs banner img loc
     document.getElementById("bannerImgID").src = bannerImageLoc;
@@ -66,12 +77,15 @@ function initPage() {
          // type == 5 -> Hyperlink 
          // type == 9 -> Header
          if(currentComponent.type == 1){
+             
              var para = document.createElement("P");                       // Create a <p> element
              var t = document.createTextNode(currentComponent.text);      // Create a text node
              para.appendChild(t);
              para.id = "c".concat(i);            // Create a ID for later use
              document.getElementById("content_body").appendChild(para);  
+             
          }else if(currentComponent.type == 2){
+             
              var elem = document.createElement("img");
              elem.setAttribute("src", currentComponent.imageLoc);
              elem.id = "c".concat(i);
@@ -81,7 +95,96 @@ function initPage() {
              
          }else if(currentComponent.type == 3){
              
+             // Video function
+            var video = document.createElement('video');
+
+             /*// First create the canvas
+            var canvas;
+             canvas = document.createElement('canvas');
+             canvas.id = "canvas"+i;
+             document.getElementById("content_body").appendChild(canvas);*/
+            
+             // Next create the video
+            video.src = currentComponent.videoLoc;
+            video.controls = true;
+            video.id = "c".concat(i);
+            document.getElementById("content_body").appendChild(video);   
+             
          }else if(currentComponent.type == 4){
+             var tempSlideShow = new Array();
+             //Create a slideshow object
+            for (var j = 0; j < currentComponent.slideShow.numOfImages; j++) {
+                var slide = new Slide(currentComponent.slideShow.image[j], currentComponent.slideShow.caption[j]);
+                tempSlideShow[j] = slide;
+            }
+            tempSlideShow.numOfImages = currentComponent.slideShow.numOfImages;
+            tempSlideShow.currentSlide = 0;
+            slides[numOfSlideshows] = tempSlideShow;
+            
+             
+             //Slide Show Component
+             var elem = document.createElement("div");
+             elem.id = "c".concat(i);
+             elem.className = "SlideShowImage";
+             document.getElementById("content_body").appendChild(elem);
+             
+             var slideshowimg = document.createElement("img");
+             slideshowimg.id = "ssi".concat(i);
+             slideshowimg.src = tempSlideShow[0].imgFile;
+             document.getElementById("c".concat(i)).appendChild(slideshowimg);
+             var caption = document.createElement("P");
+             caption.id = "ssc".concat(i);
+             caption.innerHTML = tempSlideShow[0].caption;
+             document.getElementById("content_body").appendChild(caption);
+              
+             elem = document.createElement("div");
+             elem.id = "slideshow_controls".concat(i);
+             elem.className = "slideshow_controls";
+             document.getElementById("content_body").appendChild(elem);
+             
+            var btn = document.createElement("BUTTON");        // Create a <button> element
+            var t = document.createTextNode("Previous");       // Create a text node
+            btn.id = "btnP"+i;
+            r = btn.id;
+            btn.appendChild(t);                                // Append the text to <button>
+            // Use an immediate function to dynamically create slideshows
+             (function(r){
+                btn.onclick = function () {
+                    var thenum = r.replace( /^\D+/g, ''); 
+                    thenum = parseInt(thenum);
+
+                    //increment slides
+                    slides[thenum].currentSlide--;
+                    if(slides[thenum].currentSlide==-1)
+                        slides[thenum].currentSlide = slides[thenum].numOfImages-1;
+
+                    document.getElementById("ssi"+thenum).src = slides[thenum][slides[thenum].currentSlide].imgFile;
+                    document.getElementById("ssc"+thenum).innerHTML = slides[thenum][slides[thenum].currentSlide].caption;
+                };
+            })(r);
+            document.getElementById("slideshow_controls".concat(i)).appendChild(btn);                    // Append <button>
+            
+            btn = document.createElement("BUTTON");        // Create a <button> element
+            t = document.createTextNode("Next");       // Create a text node
+            btn.id = "btnN"+i;
+            btn.appendChild(t);                                // Append the text to <button>
+             (function(r){
+                btn.onclick = function () {
+                    var thenum = r.replace( /^\D+/g, ''); 
+                    thenum = parseInt(thenum);
+
+                    //increment slides
+                    slides[thenum].currentSlide++;
+                    if(slides[thenum].currentSlide==slides[thenum].numOfImages)
+                        slides[thenum].currentSlide = 0;
+
+                    document.getElementById("ssi"+thenum).src = slides[thenum][slides[thenum].currentSlide].imgFile;
+                    document.getElementById("ssc"+thenum).innerHTML = slides[thenum][slides[thenum].currentSlide].caption;
+                };
+            })(r);
+            document.getElementById("slideshow_controls".concat(i)).appendChild(btn);                    // Append <button>
+            
+            numOfSlideshows++;
              
          }else if(currentComponent.type == 5){
              var temp =  document.getElementById(currentComponent.hyperlinkComponentInject).innerHTML;
@@ -124,12 +227,6 @@ function loadPages(ePortfolioData) {
     }
 }
 
-
-/*function Page(initImgFile, initCaption) {
-    this.imgFile = initImgFile;
-    this.caption = initCaption;
-}*/
-
 function initEPortfolio() {
     IMG_PATH = "./img/";
     VIDEO_PATH = "./video/";
@@ -140,4 +237,17 @@ function initEPortfolio() {
     pages = new Array();
     var ePortfolioDataFile = "./json/exportData.json";
     loadData(ePortfolioDataFile);
+}
+
+function Slide(initImgFile, initCaption) {
+    this.imgFile = initImgFile;
+    this.caption = initCaption;
+}
+
+
+function loadjscssfile(filename){
+        var fileref=document.createElement("link")
+        fileref.setAttribute("rel", "stylesheet")
+        fileref.setAttribute("type", "text/css")
+        fileref.setAttribute("href", filename)
 }

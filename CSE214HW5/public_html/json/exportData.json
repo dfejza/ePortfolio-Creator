@@ -3,15 +3,11 @@
   "bannerImageLoc": "./img/SBUDarkRedShieldLogo.png",
   "footer": "Goodbye World",
   "numPages": 5,
-  "pageText01": "Home",
-  "pageText02": "Biography",
-  "pageText03": "Inspiration",
-  "pageText04": "Senior Design Project",
-  "pageText05": "Home Video",
   "page": [
     {
-    "cssLayout": "cssLocHere.css",
-    "cssColor": "cssLocHere.css",
+    "cssLayout": "./css/layout/layout1.css",
+    "cssColor": "./css/color/color1.css",
+    "cssFont": "./css/font/font1.css",
     "pageTitle": "Home",
     "numComponents": 3,
     "component": [{
@@ -56,8 +52,9 @@
     ]
   },
   {
-    "cssLayout": "cssLocHere.css",
-    "cssColor": "cssLocHere.css",
+    "cssLayout": "./css/layout/layout2.css",
+    "cssColor": "./css/color/color2.css",
+    "cssFont": "./css/font/font2.css",
     "pageTitle": "Biography",
     "numComponents": 3,
     "component": [{
@@ -116,10 +113,11 @@
     ]
   },
   {
-    "cssLayout": "cssLocHere.css",
-    "cssColor": "cssLocHere.css",
+    "cssLayout": "./css/layout/layout3.css",
+    "cssColor": "./css/color/color3.css",
+    "cssFont": "./css/font/font3.css",
     "pageTitle": "Inspiration",
-    "numComponents": 1,
+    "numComponents": 2,
     "component": [{
       "type": 4,
       "text": null,
@@ -138,18 +136,44 @@
           "Soft like a flower"
         ],
         "image": [
-          "./img/SignalHillNewfoundland.jpg",
-          "./img/QuirponIslandNewfoundland.jpg",
-          "./img/CapeSpearNewfoundland.jpg",
-          "./img/ArchesUtah.jpg"
+          "./img/sexy.jpg",
+          "./img/strong.jpg",
+          "./img/resilent.jpg",
+          "./img/flower.jpg"
+        ]
+      }
+    },
+    {
+      "type": 4,
+      "text": null,
+      "imageLoc": null,
+      "videoLoc": null,
+      "hyperlinkStartChar": null,
+      "hyperlinkEndChar": null,
+      "hyperlinkAddress": null,
+      "hyperlinkComponentInject": null,
+      "slideShow": {
+        "numOfImages": 3,
+        "caption": [
+          "Sexy",
+          "Strong",
+          "Resilient",
+          "Soft like a flower"
+        ],
+        "image": [
+          "./img/sexy.jpg",
+          "./img/strong.jpg",
+          "./img/resilent.jpg",
+          "./img/flower.jpg"
         ]
       }
     }
     ]
   },
   {
-    "cssLayout": "cssLocHere.css",
-    "cssColor": "cssLocHere.css",
+    "cssLayout": "./css/layout/layout4.css",
+    "cssColor": "./css/color/color4.css",
+    "cssFont": "./css/font/font4.css",
     "pageTitle": "Senior Design Project",
     "numComponents": 6,
     "component": [{
@@ -233,8 +257,9 @@
     ]
   },
   {
-    "cssLayout": "cssLocHere.css",
-    "cssColor": "cssLocHere.css",
+    "cssLayout": "./css/layout/layout5.css",
+    "cssColor": "./css/color/color5.css",
+    "cssFont": "./css/font/font5.css",
     "pageTitle": "Home Video",
     "numComponents": 2,
     "component": [{
@@ -254,7 +279,7 @@
       "type": 3,
       "text": null,
       "imageLoc": null,
-      "videoLoc": "./video/morningInsperation.wmv",
+      "videoLoc": "./video/morningInsperation.mp4",
       "hyperlinkStartChar": null,
       "hyperlinkEndChar": null,
       "hyperlinkAddress": null,
