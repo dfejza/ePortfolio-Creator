@@ -10,12 +10,7 @@ var VIDEO_PATH;
 var ICON_PATH;
 var HTML_TAG;
 var HTML_PRETAG;
-// nav bar text
-var pageText01;
-var pageText02;
-var pageText03;
-var pageText04;
-var pageText05;
+
 //page count
 var numPages;
 
@@ -23,9 +18,10 @@ var header;
 var footer;
 var bannerImageLoc;
 
-// DATA FOR CURRENT PAGE
+// DATA FOR PAGES
 var pages;
 var currentPage;
+var currentComponent;
 
 // MODIFY CURRENT PAGE's DOM IN THIS FOLLOWING FUNCTION
 function initPage() {
@@ -34,7 +30,9 @@ function initPage() {
     fileName = fileName[0];
     currentPage = 0;
     for(var i = 1; i < numPages; i++) {
-        if(fileName === pages[i].pageTitle.concat(HTML_TAG)){
+        var temp1 = fileName.replace(/%20/g, " ");
+        var temp2 = pages[i].pageTitle.concat(HTML_TAG);
+        if(fileName.replace(/%20/g, " ") === pages[i].pageTitle.concat(HTML_TAG)){
             currentPage = i;
         }
     }
@@ -42,10 +40,10 @@ function initPage() {
     //Modify DOMs banner img loc
     document.getElementById("bannerImgID").src = bannerImageLoc;
     
-    //Modify DOM's nav bar link text
+    //Modify DOM's nav bar link text for index.html
     document.getElementById("navbar_indexlink").innerHTML = pages[0].pageTitle;
     
-    // Generate the rest of the pages dynamically
+    // Generate the rest of the page's hyperlinks dynamically
     var a;
     for (var i = 1; i < numPages; i++) {
         a = document.createElement('a');
@@ -58,6 +56,47 @@ function initPage() {
         //document.divs[i].href = pages[i].pageTitle.concat(HTML_TAG);
     }
     
+    //Generat the Body of the selected page
+     for (var i = 0; i < pages[currentPage].numComponents; i++) {
+         currentComponent = pages[currentPage].component[i];
+         
+         // There is an int vale for each component, depicting type
+         // type == 1 -> Text
+         // type == 2 -> img
+         // type == 3 -> video
+         // type == 4 -> SlideShow
+         // type == 5 -> Hyperlink 
+         // type == 9 -> Header
+         if(currentComponent.type == 1){
+             var para = document.createElement("P");                       // Create a <p> element
+             var t = document.createTextNode(currentComponent.text);      // Create a text node
+             para.appendChild(t);
+             para.id = "c".concat(i);            // Create a ID for later use
+             document.getElementById("content_body").appendChild(para);  
+         }else if(currentComponent.type == 2){
+             var elem = document.createElement("img");
+             elem.setAttribute("src", currentComponent.imageLoc);
+             elem.id = "c".concat(i);
+             //elem.setAttribute("height", "768");
+             //elem.setAttribute("width", "1024");
+             document.getElementById("content_body").appendChild(elem);
+             
+         }else if(currentComponent.type == 3){
+             
+         }else if(currentComponent.type == 4){
+             
+         }else if(currentComponent.type == 5){
+             
+         }else if(currentComponent.type == 6){
+             
+         }else if(currentComponent.type == 9){
+             var elem = document.createElement("H1");                       // Create a <p> element
+             var t = document.createTextNode(currentComponent.text);      // Create a text node
+             elem.appendChild(t);
+             elem.id = "c".concat(i);            // Create a ID for later use
+             document.getElementById("content_body").appendChild(elem);  
+         }
+     }
 }
 
 function loadData(jsonFile) {
@@ -68,12 +107,6 @@ function loadData(jsonFile) {
 }
 
 function loadPages(ePortfolioData) {
-    pageText01 = ePortfolioData.pageText01;
-    pageText02 = ePortfolioData.pageText02;
-    pageText03 = ePortfolioData.pageText03;
-    pageText04 = ePortfolioData.pageText04;
-    pageText05 = ePortfolioData.pageText05;
-    
     numPages = ePortfolioData.numPages;
     header = ePortfolioData.header;
     footer = ePortfolioData.footer;

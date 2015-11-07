@@ -14,7 +14,7 @@
     "cssColor": "cssLocHere.css",
     "pageTitle": "Home",
     "numComponents": 3,
-    "compenent": [{
+    "component": [{
       "type": 1,
       "text": "Welcome to my portfolio. I strive to change the way people interact with their world around them through inspired design and emerging technologies.",
       "imageLoc": null,
@@ -60,7 +60,7 @@
     "cssColor": "cssLocHere.css",
     "pageTitle": "Biography",
     "numComponents": 3,
-    "compenent": [{
+    "component": [{
       "type": 1,
       "text": "Chuck Norris is familiar to fans worldwide as the star of action films such as The Hitman (1991), The Delta Force (1986) and Delta Force 2: The Colombian Connection (1990). He also starred in Missing in Action (1984) and its sequels, Firewalker (1986) and Sidekicks (1992). He was an executive producer of Walker, Texas Ranger (1993) as well as the star.",
       "imageLoc": null,
@@ -120,7 +120,7 @@
     "cssColor": "cssLocHere.css",
     "pageTitle": "Inspiration",
     "numComponents": 1,
-    "compenent": [{
+    "component": [{
       "type": 4,
       "text": null,
       "imageLoc": null,
@@ -152,8 +152,8 @@
     "cssColor": "cssLocHere.css",
     "pageTitle": "Senior Design Project",
     "numComponents": 6,
-    "compenent": [{
-      "type": 1,
+    "component": [{
+      "type": 9,
       "text": "I made this",
       "imageLoc": null,
       "videoLoc": null,
@@ -179,7 +179,7 @@
       }
     },
     {
-      "type": 1,
+      "type": 9,
       "text": "I made this too.",
       "imageLoc": null,
       "videoLoc": null,
@@ -205,7 +205,7 @@
       }
     },
     {
-      "type": 1,
+      "type": 9,
       "text": "Final project.",
       "imageLoc": null,
       "videoLoc": null,
@@ -237,8 +237,8 @@
     "cssColor": "cssLocHere.css",
     "pageTitle": "Home Video",
     "numComponents": 2,
-    "compenent": [{
-      "type": 1,
+    "component": [{
+      "type": 9,
       "text": "What I watch every morning for motivation",
       "imageLoc": null,
       "videoLoc": null,
