@@ -29,6 +29,18 @@ var currentPage;
 
 // MODIFY CURRENT PAGE's DOM IN THIS FOLLOWING FUNCTION
 function initPage() {
+    //Get current page
+    var fileName = location.href.split("/").slice(-1); 
+    fileName = fileName[0];
+    currentPage = 0;
+    for(var i = 1; i < numPages; i++) {
+        if(fileName === pages[i].pageTitle.concat(HTML_TAG)){
+            currentPage = i;
+        }
+    }
+    
+    //Modify DOMs banner img loc
+    document.getElementById("bannerImgID").src = bannerImageLoc;
     
     //Modify DOM's nav bar link text
     document.getElementById("navbar_indexlink").innerHTML = pages[0].pageTitle;

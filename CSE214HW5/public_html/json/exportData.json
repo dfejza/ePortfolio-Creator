@@ -1,6 +1,6 @@
 {
   "header": "Dardan Fejza",
-  "bannerImageLoc": "Hello World",
+  "bannerImageLoc": "./img/SBUDarkRedShieldLogo.png",
   "footer": "Goodbye World",
   "numPages": 5,
   "pageText01": "Home",
