@@ -8,6 +8,8 @@
 var IMG_PATH;
 var VIDEO_PATH;
 var ICON_PATH;
+var HTML_TAG;
+var HTML_PRETAG;
 // nav bar text
 var pageText01;
 var pageText02;
@@ -25,6 +27,26 @@ var bannerImageLoc;
 var pages;
 var currentPage;
 
+// MODIFY CURRENT PAGE's DOM IN THIS FOLLOWING FUNCTION
+function initPage() {
+    
+    //Modify DOM's nav bar link text
+    document.getElementById("navbar_indexlink").innerHTML = pages[0].pageTitle;
+    
+    // Generate the rest of the pages dynamically
+    var a;
+    for (var i = 1; i < numPages; i++) {
+        a = document.createElement('a');
+        a.setAttribute("href", HTML_PRETAG.concat(pages[i].pageTitle.concat(HTML_TAG)));
+        a.innerHTML = pages[i].pageTitle;
+        // apend the anchor to the body
+        // of course you can append it almost to any other dom element
+        document.getElementById('navbar').appendChild(a);
+        //document.divs[i].innerHTML = pages[i].pageTitle;
+        //document.divs[i].href = pages[i].pageTitle.concat(HTML_TAG);
+    }
+    
+}
 
 function loadData(jsonFile) {
     $.getJSON(jsonFile, function(json) {
@@ -53,15 +75,17 @@ function loadPages(ePortfolioData) {
 }
 
 
-function Page(initImgFile, initCaption) {
+/*function Page(initImgFile, initCaption) {
     this.imgFile = initImgFile;
     this.caption = initCaption;
-}
+}*/
 
-function initSlideshow() {
+function initEPortfolio() {
     IMG_PATH = "./img/";
     VIDEO_PATH = "./video/";
     //ICON_PATH = "./icons/";
+    HTML_PRETAG = "./";
+    HTML_TAG = ".html";
     
     pages = new Array();
     var ePortfolioDataFile = "./json/exportData.json";
