@@ -30,8 +30,6 @@ function initPage() {
     fileName = fileName[0];
     currentPage = 0;
     for(var i = 1; i < numPages; i++) {
-        var temp1 = fileName.replace(/%20/g, " ");
-        var temp2 = pages[i].pageTitle.concat(HTML_TAG);
         if(fileName.replace(/%20/g, " ") === pages[i].pageTitle.concat(HTML_TAG)){
             currentPage = i;
         }
@@ -86,6 +84,13 @@ function initPage() {
          }else if(currentComponent.type == 4){
              
          }else if(currentComponent.type == 5){
+             var temp =  document.getElementById(currentComponent.hyperlinkComponentInject).innerHTML;
+             var linkName = temp.substring(currentComponent.hyperlinkStartChar, currentComponent.hyperlinkEndChar)
+             var tempFilling = "".concat("<a href=",currentComponent.hyperlinkAddress,"> ",linkName,"</a>");
+             
+             var tempPrefix = temp.slice(0, currentComponent.hyperlinkStartChar);
+             var tempSuffix = temp.slice(currentComponent.hyperlinkEndChar, temp.length);;
+             document.getElementById(currentComponent.hyperlinkComponentInject).innerHTML = "".concat(tempPrefix,tempFilling,tempSuffix);
              
          }else if(currentComponent.type == 6){
              

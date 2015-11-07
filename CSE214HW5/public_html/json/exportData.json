@@ -92,10 +92,10 @@
       "text": null,
       "imageLoc": null,
       "videoLoc": null,
-      "hyperlinkStartChar": 1,
+      "hyperlinkStartChar": 0,
       "hyperlinkEndChar": 12,
       "hyperlinkAddress": "http://www.imdb.com/name/nm0001569/bio",
-      "hyperlinkComponentInject": "c02",
+      "hyperlinkComponentInject": "c1",
       "slideShow": {
         "numOfImages": 0
       }
