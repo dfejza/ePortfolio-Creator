@@ -48,6 +48,7 @@ function initPage() {
 
     
     //Modify DOMs banner img loc
+    document.getElementById("bannerText").innerHTML = header;
     document.getElementById("bannerImgID").src = bannerImageLoc;
     
     //Modify DOM's nav bar link text for index.html
@@ -55,11 +56,7 @@ function initPage() {
     
     // Generate the rest of the page's hyperlinks dynamically
     var a;
-    for (var i = 1; i < numPages; i++) {
-        // Make a new line
-        a = document.createElement("BR");
-        document.getElementById('navbar').appendChild(a);
-        
+    for (var i = 1; i < numPages; i++) {        
         //Create the link
         a = document.createElement('a');
         a.setAttribute("href", HTML_PRETAG.concat(pages[i].pageTitle.concat(HTML_TAG)));

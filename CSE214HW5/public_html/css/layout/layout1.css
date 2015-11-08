@@ -1,10 +1,12 @@
 #navbar 
 {
-    line-height:50px;
-    height:600px;
-    width:200px;
-    float:left;
-    padding: 30px 1px 1px 20px;
+    left:0;
+    margin: 0;
+    list-style: none;
+    display: inline;
+    margin: 0;
+    position:absolute;
+    top:200px;
 }
 
 #header {
@@ -15,14 +17,37 @@
 }
 
 #content_body {
-    padding:130px; 
-    padding-left:20%;
-    top:140px;
+    margin-left:15.2em;
+    margin-right:10.2em;
+    position:absolute;
+    top:100px;
+    text-align:center;
+    
+    
+}
+
+#content_body img{
+    border-radius: 25px;
 }
 
 #bannerImgID
 {
-	background-color:white;
-	padding-left:10px;
-	float:right;
+    width:100%;
+    height:80px;
+	position:absolute;
+}
+
+#bannerText{
+    margin-left:.2em;
+    margin-top:3.2em;
+    
+position:absolute;
+}
+
+body{
+                  position:absolute;
+	width:80%;
+	left:10%;
+	right:10%;
+	text-align:left;
 }

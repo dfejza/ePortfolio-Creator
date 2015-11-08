@@ -1,9 +1,15 @@
 @import url('http://fonts.googleapis.com/css?family=Alegreya+Sans');
 #navbar {
             font-family: 'Alegreya Sans', sans-serif;
-            font-size:22pt;
+            font-size:17pt;
 }
 
 #content_body{
         color: #ffffff;
+}
+
+#bannerText{
+    text-shadow: 0.1em 0.1em 0.2em white;
+    color: white;
+                font-size:17pt;
 }
