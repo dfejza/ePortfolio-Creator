@@ -129,15 +129,17 @@ function initPage() {
              //Slide Show Component
              var elem = document.createElement("div");
              elem.id = "c".concat(i);
-             elem.className = "SlideShowImage";
+             elem.className = "SlideShow";
              document.getElementById("content_body").appendChild(elem);
              
              var slideshowimg = document.createElement("img");
              slideshowimg.id = "ssi".concat(i);
+             slideshowimg.className = "SlideShowImage";
              slideshowimg.src = tempSlideShow[0].imgFile;
              document.getElementById("c".concat(i)).appendChild(slideshowimg);
              var caption = document.createElement("P");
              caption.id = "ssc".concat(i);
+             caption.className = "SlideShowCaption";
              caption.innerHTML = tempSlideShow[0].caption;
              document.getElementById("content_body").appendChild(caption);
               
@@ -147,6 +149,7 @@ function initPage() {
              document.getElementById("content_body").appendChild(elem);
              
             var btn = document.createElement("BUTTON");        // Create a <button> element
+            btn.className = "SlideShowButtonPrev";
             var t = document.createTextNode("Previous");       // Create a text node
             btn.id = "btnP"+i;
             r = btn.id;
@@ -171,6 +174,7 @@ function initPage() {
             btn = document.createElement("BUTTON");        // Create a <button> element
             t = document.createTextNode("Next");       // Create a text node
             btn.id = "btnN"+i;
+            btn.className = "SlideShowButtonNext";
             btn.appendChild(t);                                // Append the text to <button>
              (function(r){
                 btn.onclick = function () {
