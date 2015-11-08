@@ -1,0 +1,23 @@
+body {
+    background-color:rgb(0,0,0);
+}
+
+
+#navbar{
+        background-color:#eeeeee;
+        border-radius: 25px;
+}
+
+#navbar a{
+        color: #000000;
+        text-decoration: none !important;
+}
+
+#navbar a:hover { 
+    color: #666666;
+    text-shadow: 0.1em 0.1em 0.2em black;
+}
+
+#content_body{
+    border-radius: 25px;
+}

@@ -42,9 +42,10 @@ function initPage() {
     }
     
     // LOAD THE CSS STYLE,FONT AND COLOR
-    loadjscssfile(pages[currentPage].cssColor) ////dynamically load and add this .css file
-    loadjscssfile(pages[currentPage].cssLayout) ////dynamically load and add this .css file
-    loadjscssfile(pages[currentPage].cssFont) ////dynamically load and add this .css file
+    document.getElementById("color_css").href=pages[currentPage].cssColor;
+    document.getElementById("font_css").href=pages[currentPage].cssLayout;
+    document.getElementById("layout_css").href=pages[currentPage].cssFont;
+
     
     //Modify DOMs banner img loc
     document.getElementById("bannerImgID").src = bannerImageLoc;
@@ -55,12 +56,18 @@ function initPage() {
     // Generate the rest of the page's hyperlinks dynamically
     var a;
     for (var i = 1; i < numPages; i++) {
+        // Make a new line
+        a = document.createElement("BR");
+        document.getElementById('navbar').appendChild(a);
+        
+        //Create the link
         a = document.createElement('a');
         a.setAttribute("href", HTML_PRETAG.concat(pages[i].pageTitle.concat(HTML_TAG)));
         a.innerHTML = pages[i].pageTitle;
         // apend the anchor to the body
         // of course you can append it almost to any other dom element
         document.getElementById('navbar').appendChild(a);
+
         //document.divs[i].innerHTML = pages[i].pageTitle;
         //document.divs[i].href = pages[i].pageTitle.concat(HTML_TAG);
     }
@@ -242,12 +249,4 @@ function initEPortfolio() {
 function Slide(initImgFile, initCaption) {
     this.imgFile = initImgFile;
     this.caption = initCaption;
-}
-
-
-function loadjscssfile(filename){
-        var fileref=document.createElement("link")
-        fileref.setAttribute("rel", "stylesheet")
-        fileref.setAttribute("type", "text/css")
-        fileref.setAttribute("href", filename)
 }

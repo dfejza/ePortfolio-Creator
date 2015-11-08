@@ -1,0 +1,28 @@
+#navbar 
+{
+    line-height:50px;
+    height:600px;
+    width:200px;
+    float:left;
+    padding: 30px 1px 1px 20px;
+}
+
+#header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+
+#content_body {
+    padding:130px; 
+    padding-left:20%;
+    top:140px;
+}
+
+#bannerImgID
+{
+	background-color:white;
+	padding-left:10px;
+	float:right;
+}
