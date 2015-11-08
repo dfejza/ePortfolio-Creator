@@ -320,9 +320,9 @@
       }
     },
     {
-      "type": 1,
+      "type": 2,
       "text": null,
-      "imageLoc": "./img/iMadeThis3.jpg",
+      "imageLoc": "./img/space.jpg",
       "videoLoc": null,
       "hyperlinkStartChar": null,
       "hyperlinkEndChar": null,

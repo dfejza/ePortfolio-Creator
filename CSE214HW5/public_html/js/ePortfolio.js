@@ -93,6 +93,7 @@ function initPage() {
              var elem = document.createElement("img");
              elem.setAttribute("src", currentComponent.imageLoc);
              elem.id = "c".concat(i);
+             elem.className = "image_class";
              //elem.setAttribute("height", "768");
              //elem.setAttribute("width", "1024");
              document.getElementById("content_body").appendChild(elem);
@@ -111,6 +112,7 @@ function initPage() {
              // Next create the video
             video.src = currentComponent.videoLoc;
             video.controls = true;
+            video.className = "video_class";
             video.id = "c".concat(i);
             document.getElementById("content_body").appendChild(video);   
              
