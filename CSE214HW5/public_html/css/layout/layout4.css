@@ -15,9 +15,9 @@ body, html {
 #banner{
 	position:absolute	;
 	top:40px;
-        	width:80%;
-	left:10%;
-	right:10%;
+        	width:90%;
+	left:5%;
+	right:5%;
 }
 #bannerText{
 	position:absolute	;
@@ -40,9 +40,9 @@ body, html {
 #content_body{
 	position:absolute	;
 	top:240px;
-        	width:80%;
-	left:10%;
-	right:10%;
+        	width:90%;
+	left:5%;
+	right:5%;
 }
 #content{
     	position:absolute;

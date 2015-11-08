@@ -1,5 +1,6 @@
 body, html,h1 {
     text-align:center;
+       font-family: 'Titillium Web', sans-serif;
 }
 #bannerText{
 	font-size:24pt;
@@ -12,7 +13,7 @@ body, html,h1 {
 }
 
 #content{
-   font-family: 'Titillium Web', sans-serif;
+
 }
 
 .SlideShowCaption{
