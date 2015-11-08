@@ -206,6 +206,25 @@ function initPage() {
              document.getElementById(currentComponent.hyperlinkComponentInject).innerHTML = "".concat(tempPrefix,tempFilling,tempSuffix);
              
          }else if(currentComponent.type == 6){
+             // LISTS
+              var listContainer = document.createElement("div");
+              document.getElementById("content_body").appendChild(listContainer);
+              var listElement = document.createElement("ul");
+              listContainer.appendChild(listElement);
+              var numberOfListItems = currentComponent.listData.length;
+                for( var i =  0 ; i < numberOfListItems ; ++i){
+
+                        // create a <li> for each one.
+                        var listItem = document.createElement("li");
+
+                        // add the item text
+                        listItem.innerHTML = currentComponent.listData[i];
+
+                        // add listItem to the listElement
+                        listElement.appendChild(listItem);
+
+                }
+              
              
          }else if(currentComponent.type == 9){
              var elem = document.createElement("H1");                       // Create a <p> element

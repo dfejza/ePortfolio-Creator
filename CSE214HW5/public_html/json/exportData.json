@@ -339,7 +339,7 @@
     "cssColor": "./css/color/color5.css",
     "cssFont": "./css/font/font5.css",
     "pageTitle": "Home Video",
-    "numComponents": 2,
+    "numComponents": 3,
     "component": [{
       "type": 9,
       "text": "What I watch every morning for motivation",
@@ -365,6 +365,25 @@
       "slideShow": {
         "numOfImages": 0
       }
+    },
+    {
+      "type": 6,
+      "text": null,
+      "imageLoc": null,
+      "videoLoc": "./video/morningInsperation.mp4",
+      "hyperlinkStartChar": null,
+      "hyperlinkEndChar": null,
+      "hyperlinkAddress": null,
+      "hyperlinkComponentInject": null,
+      "slideShow": {
+        "numOfImages": 0
+      },
+	  "listData": [
+	  "Life is 10% what happens to you and 90% how you react to it. -Charles R. Swindoll",
+	  "Failure will never overtake me if my determination to succeed is strong enough. -Og Mandino",
+	  "What you do today can improve all your tomorrows. -Ralph Marston",
+	  "In order to succeed, we must first believe that we can. -Nikos Kazantzakis"
+		]
     }
     ]
   }
