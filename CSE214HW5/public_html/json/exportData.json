@@ -56,7 +56,7 @@
     "cssColor": "./css/color/color2.css",
     "cssFont": "./css/font/font2.css",
     "pageTitle": "Biography",
-    "numComponents": 3,
+    "numComponents": 10,
     "component": [{
       "type": 1,
       "text": "Chuck Norris is familiar to fans worldwide as the star of action films such as The Hitman (1991), The Delta Force (1986) and Delta Force 2: The Colombian Connection (1990). He also starred in Missing in Action (1984) and its sequels, Firewalker (1986) and Sidekicks (1992). He was an executive producer of Walker, Texas Ranger (1993) as well as the star.",
@@ -100,6 +100,84 @@
     {
       "type": 1,
       "text": "yada yada.",
+      "imageLoc": null,
+      "videoLoc": null,
+      "hyperlinkStartChar": null,
+      "hyperlinkEndChar": null,
+      "hyperlinkAddress": null,
+      "hyperlinkComponentInject": null,
+      "slideShow": {
+        "numOfImages": 0
+      }
+    },
+    {
+      "type": 1,
+      "text": "Norris is a devout Christian and politically conservative. He has written several books on Christianity and donated to a number of Republican candidates and causes. In 2007 and 2008, he campaigned for former Arkansas Governor Mike Huckabee, who was running for the Republican nomination for president in 2008.[5] Norris also writes a column for the conservative website WorldNetDaily.[6] Since 2005 Norris has been widely associated with an internet meme which documents fictional and often absurd feats associated with him.",
+      "imageLoc": null,
+      "videoLoc": null,
+      "hyperlinkStartChar": null,
+      "hyperlinkEndChar": null,
+      "hyperlinkAddress": null,
+      "hyperlinkComponentInject": null,
+      "slideShow": {
+        "numOfImages": 0
+      }
+    },
+    {
+      "type": 1,
+      "text": "Norris was defeated in his first two tournaments, dropping decisions to Joe Lewis and Allen Steen and three matches at the International Karate Championships to Tony Tulleners. By 1967 Norris had improved enough that he scored victories over the likes of Lewis, Skipper Mullins, Arnold Urquidez, Victor Moore, Ron Marchini, and Steve Sanders. Norris would be a two time winner at S. Henry Cho's All American Championship.[15] In early 1968, Norris suffered the tenth and last loss of his career, losing an upset decision to Louis Delgado. On November 24, 1968, he avenged his defeat to Delgado and by doing so won the Professional Middleweight Karate champion title, which he held for six consecutive years.[11] In 1969, he won Karate's triple crown for the most tournament wins of the year, and the Fighter of the Year award by Black Belt (magazine) magazine.",
+      "imageLoc": null,
+      "videoLoc": null,
+      "hyperlinkStartChar": null,
+      "hyperlinkEndChar": null,
+      "hyperlinkAddress": null,
+      "hyperlinkComponentInject": null,
+      "slideShow": {
+        "numOfImages": 0
+      }
+    },
+    {
+      "type": 1,
+      "text": "Norris made history in 1990 when he was the first Westerner in the documented history of Tae Kwon Do to be given the rank of 8th Degree Black Belt Grand Master.[16] In 1999, Norris was inducted into the Martial Arts History Museum's Hall of Fame. On July 1, 2000, Norris was presented the Golden Lifetime Achievement Award by the World Karate Union Hall of Fame.",
+      "imageLoc": null,
+      "videoLoc": null,
+      "hyperlinkStartChar": null,
+      "hyperlinkEndChar": null,
+      "hyperlinkAddress": null,
+      "hyperlinkComponentInject": null,
+      "slideShow": {
+        "numOfImages": 0
+      }
+    },
+    {
+      "type": 1,
+      "text": "During the 2012 presidential election, Norris first recommended Ron Paul, and then later formally endorsed Newt Gingrich as the Republican presidential candidate.[46] After Gingrich suspended his campaign in May 2012, Norris endorsed Republican presumptive nominee Mitt Romney, despite Norris having previously accused Romney of flip-flopping and of trying to buy the nomination for the Republican Party candidacy for 2012.[47][48] On the eve of the election he and his wife Gina made a video warning that if evangelicals didn't show up at the polls and vote out President Obama, [49][50] Norris also produced the film Answering the Call, which featured his 2007 trip to Iraq to visit the troops. Norris made history in 1990 when he was the first Westerner in the documented history of Tae Kwon Do to be given the rank of 8th Degree Black Belt Grand Master.[16] In 1999, Norris was inducted into the Martial Arts History Museum's Hall of Fame. On July 1, 2000, Norris was presented the Golden Lifetime Achievement Award by the World Karate Union Hall of Fame.",
+      "imageLoc": null,
+      "videoLoc": null,
+      "hyperlinkStartChar": null,
+      "hyperlinkEndChar": null,
+      "hyperlinkAddress": null,
+      "hyperlinkComponentInject": null,
+      "slideShow": {
+        "numOfImages": 0
+      }
+    },
+    {
+      "type": 1,
+      "text": "In late 2005, Norris became the object of an ironic internet meme known as , which document fictional, often absurdly heroic feats and characteristics about Norris. Norris has written his own response to the parody on his website, stating that he does not feel offended by them and finds some of them funny,[55] claiming that his personal favorite is that they wanted to add his face to Mount Rushmore, but the granite is not hard enough for his beard. Norris made history in 1990 when he was the first Westerner in the documented history of Tae Kwon Do to be given the rank of 8th Degree Black Belt Grand Master.[16] In 1999, Norris was inducted into the Martial Arts History Museum's Hall of Fame. On July 1, 2000, Norris was presented the Golden Lifetime Achievement Award by the World Karate Union Hall of Fame.",
+      "imageLoc": null,
+      "videoLoc": null,
+      "hyperlinkStartChar": null,
+      "hyperlinkEndChar": null,
+      "hyperlinkAddress": null,
+      "hyperlinkComponentInject": null,
+      "slideShow": {
+        "numOfImages": 0
+      }
+    },
+    {
+      "type": 1,
+      "text": "On November 29, 2007, Gotham Books, the adult division of Penguin USA, released a book entitled The Truth About Chuck Norris: 400 facts about the World's Greatest Human based on the Chuck Norris Facts.[57] Norris filed suit in December against Penguin USA and author Ian Spector claiming [58] Norris dropped the suit in May of the following year. Norris made history in 1990 when he was the first Westerner in the documented history of Tae Kwon Do to be given the rank of 8th Degree Black Belt Grand Master.[16] In 1999, Norris was inducted into the Martial Arts History Museum's Hall of Fame. On July 1, 2000, Norris was presented the Golden Lifetime Achievement Award by the World Karate Union Hall of Fame.",
       "imageLoc": null,
       "videoLoc": null,
       "hyperlinkStartChar": null,
