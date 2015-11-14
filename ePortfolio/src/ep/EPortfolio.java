@@ -5,6 +5,9 @@
  */
 package ep;
 
+import ep.file.EPortfolioFileManager;
+import ep.file.EPortfolioSiteExporter;
+import ep.view.EPortfolioView;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,11 +22,11 @@ import javafx.stage.Stage;
  */
 public class EPortfolio extends Application {
     
-     // THIS WILL PERFORM SLIDESHOW READING AND WRITING
-    EPortfolioManager fileManager = new EPortfolioFileManager();
+     // THIS WILL PERFORM READING AND WRITING OF METADATA
+    EPortfolioFileManager fileManager = new EPortfolioFileManager();
     
     // THIS WILL EXPORT THE WEB SITES
-    EPortfolioExporter siteExporter = new EPortfolioSiteExporter();
+    EPortfolioSiteExporter siteExporter = new EPortfolioSiteExporter();
     
     // THIS HAS THE FULL USER INTERFACE AND ONCE IN EVENT
     // HANDLING MODE, BASICALLY IT BECOMES THE FOCAL
