@@ -46,6 +46,21 @@ public class EPortfolioView {
     // This pane holds both FileToolbarPan and Tab Pane, and is ment to be in the top portion of epPane.
     BorderPane epPaneTopSegment_Toolbars;
     
+    // This toolbar privides buttons allowing user to place/edit components
+    FlowPane pageEditorWorkspaceToolbar;
+    Button selectLayoutButton;
+    Button selectColorButton;
+    Button selectBannerImageButton;
+    Button chooseComponentFontButton;
+    //textbox for page title and student name
+    Button addTextComponentButton;
+    Button addImageComponentButton;
+    Button addSlideshowComponentButton;
+    Button addVideoComponentButton;
+    Button addHyperlinkComponentButton;
+    Button removeComponentButton;
+    Button editComponentButton;
+    
     // THIS IS THE PAGE TOOLBAR AND ITS CONTROLS
     FlowPane siteToolbarPane;
     Button removePageButton;
@@ -67,7 +82,8 @@ public class EPortfolioView {
         epPaneTopSegment_Toolbars.setBottom(workspaceModeToolbar);
         
         epPaneCenterSegment_Content = new BorderPane();
-        epPaneCenterSegment_Content.setLeft(siteToolbarPane);
+        epPaneCenterSegment_Content.setTop(siteToolbarPane);
+        epPaneCenterSegment_Content.setLeft(pageEditorWorkspaceToolbar);
         epPaneCenterSegment_Content.setCenter(PageContainerVBox);
         
         epPane = new BorderPane();
