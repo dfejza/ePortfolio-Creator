@@ -10,6 +10,7 @@ import ep.file.EPortfolioSiteExporter;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Separator;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
@@ -34,6 +35,7 @@ public class EPortfolioView {
     // Placeholder Icon files
     public static String PATH_IMAGES = "./images/";
     public static String PATH_ICONS = PATH_IMAGES + "icons/";
+    public static String PATH_ICONS_PAGESELECTION = PATH_ICONS + "page/";
     public static String PATH_CSS = "/ep/style/";
     public static String STYLE_SHEET_UI = PATH_CSS + "EPortfolioStyle.css";
     
@@ -206,24 +208,26 @@ public class EPortfolioView {
     
     private void initSiteToolbarPane(){
         siteToolbarPane = new FlowPane();
-        selectPageButton = initChildButton(siteToolbarPane, ICON_ADD_SLIDE,	"Select page",    "horizontal_toolbar_button", false);
-        addPageButton = initChildButton(siteToolbarPane, ICON_ADD_SLIDE,	"Add page",    "horizontal_toolbar_button", true);
-        removePageButton = initChildButton(siteToolbarPane, ICON_ADD_SLIDE,	"Remove page",	    "horizontal_toolbar_button", false);
+        addPageButton = initChildButton(siteToolbarPane, "page/add.png",	"Add page",    "horizontal_toolbar_button", false);
+        removePageButton = initChildButton(siteToolbarPane, "page/remove.png",	"Remove page",	    "horizontal_toolbar_button", true);
+        selectPageButton = initChildButton(siteToolbarPane, "page/select.png",	"Select page",    "horizontal_toolbar_button", true);
     }
     
     private void initPageEditorWorkspaceToolbar(){
         pageEditorWorkspaceToolbar = new FlowPane();
-        selectLayoutButton = initChildButton(pageEditorWorkspaceToolbar, ICON_EXIT,	"Select page",    "vertical_toolbar_button", false);
-        selectColorButton = initChildButton(pageEditorWorkspaceToolbar, ICON_EXIT,	"Add page",    "vertical_toolbar_button", false);
-        selectBannerImageButton = initChildButton(pageEditorWorkspaceToolbar, ICON_EXIT,	"Remove page",	    "vertical_toolbar_button", false);
-        chooseComponentFontButton = initChildButton(pageEditorWorkspaceToolbar, ICON_EXIT,	"Select page",    "vertical_toolbar_button", false);
-        addTextComponentButton = initChildButton(pageEditorWorkspaceToolbar, ICON_EXIT,	"Add page",    "vertical_toolbar_button", false);
-        addImageComponentButton = initChildButton(pageEditorWorkspaceToolbar, ICON_EXIT,	"Remove page",	    "vertical_toolbar_button", false);
-        addSlideshowComponentButton = initChildButton(pageEditorWorkspaceToolbar, ICON_EXIT,	"Select page",    "vertical_toolbar_button", false);
-        addVideoComponentButton = initChildButton(pageEditorWorkspaceToolbar, ICON_EXIT,	"Add page",    "vertical_toolbar_button", false);
-        addHyperlinkComponentButton = initChildButton(pageEditorWorkspaceToolbar, ICON_EXIT,	"Remove page",	    "vertical_toolbar_button", false);
-        removeComponentButton = initChildButton(pageEditorWorkspaceToolbar, ICON_EXIT,	"Select page",    "vertical_toolbar_button", false);
-        editComponentButton = initChildButton(pageEditorWorkspaceToolbar, ICON_EXIT,	"Add page",    "vertical_toolbar_button", false);
+        addTextComponentButton = initChildButton(pageEditorWorkspaceToolbar, "workspace/addtext.png",	"Add text component",    "vertical_toolbar_button", false);
+        addImageComponentButton = initChildButton(pageEditorWorkspaceToolbar, "workspace/addimage.png",	"Add image component",	    "vertical_toolbar_button", false);
+        addVideoComponentButton = initChildButton(pageEditorWorkspaceToolbar, "workspace/addvideo.png",	"Add video component",    "vertical_toolbar_button", false);
+        addSlideshowComponentButton = initChildButton(pageEditorWorkspaceToolbar, "workspace/addslideshow.png",	"Add a slideshow",    "vertical_toolbar_button", false);
+        editComponentButton = initChildButton(pageEditorWorkspaceToolbar, "workspace/editcomponent.png",	"Edit selected component",    "vertical_toolbar_button", false);
+        removeComponentButton = initChildButton(pageEditorWorkspaceToolbar,  "workspace/remove.png",	"Remove selected component",    "vertical_toolbar_button", false);
+        
+        Separator separator = new Separator();
+        separator.setMaxWidth(80);
+        pageEditorWorkspaceToolbar.getChildren().add(separator);
+        
+        selectLayoutButton = initChildButton(pageEditorWorkspaceToolbar, "workspace/selectlayout.png",	"Select the layout of your portfolio",    "vertical_toolbar_button", false);
+        selectColorButton = initChildButton(pageEditorWorkspaceToolbar, "workspace/selectcolor.png",	"Select the color scheme for your portfolio",    "vertical_toolbar_button", false);
     }
     
     private void initTabBar(){
