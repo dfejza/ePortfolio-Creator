@@ -7,18 +7,23 @@ package ep.view;
 
 import ep.file.EPortfolioFileManager;
 import ep.file.EPortfolioSiteExporter;
+import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -93,7 +98,9 @@ public class EPortfolioView {
     Button addPageButton;
     
     // This holds the page's components (its a page)
+    BorderPane pageContainer;
     VBox PageContainerVBox;
+    GridPane pageContainerPageSettings;
     
     // This pane holds the siteToolbarPane and the current page being viewed. Only meant to be displayed in the page editor view.
     // SiteToolbarPane should be to the left, and pageVBox should be center.
@@ -136,7 +143,7 @@ public class EPortfolioView {
         initWorkspace();
         setLayoutHierarchy();
         initTabBar();
-        
+        initPageInputs();
         initPaneCSS();
         
         primaryStage = initPrimaryStage;
@@ -144,13 +151,32 @@ public class EPortfolioView {
     }
     
     private void initWorkspace() {
-        // NOW PUT THESE TWO IN THE WORKSPACE
+        pageContainer = new BorderPane();
+        pageContainerPageSettings = new GridPane();
         PageContainerVBox = new VBox();
+        
+        pageContainer.setTop(pageContainerPageSettings);
+        pageContainer.setCenter(PageContainerVBox);
+    }
+    
+    private void initPageInputs(){
+        pageContainerPageSettings.setHgap(5.5);
+        pageContainerPageSettings.setVgap(5.5);
+
+
+        pageContainerPageSettings.add(new Label("Student Name:"),0,0);
+        pageContainerPageSettings.add(new TextField(),1,0);
+        pageContainerPageSettings.add(new Label("Page Title:"),0,1);
+        pageContainerPageSettings.add(new TextField(),1,1);
+        pageContainerPageSettings.add(new Label("Page Footer:"),2,1);
+        pageContainerPageSettings.add(new TextField(),3,1);
+        pageContainerPageSettings.add(new Label("Banner Image:"),0,3);
+        pageContainerPageSettings.add(new ImageView(),1,3);
     }
     
     private void initPaneCSS() {
         // SETUP ALL THE STYLE CLASSES
-        PageContainerVBox.getStyleClass().add("workspace");
+        pageContainer.getStyleClass().add("workspace");
         pageEditorWorkspaceToolbar.getStyleClass().add("vertical_toolbar_pane");
         siteToolbarPane.getStyleClass().add("horizontal_toolbar_pane");
     }
@@ -177,6 +203,7 @@ public class EPortfolioView {
 	primaryScene = new Scene(epPane);
 	
         // NOW TIE THE SCENE TO THE WINDOW, SELECT THE STYLESHEET
+                 primaryStage.setTitle("ePortfolio Generator");
 	// WE'LL USE TO STYLIZE OUR GUI CONTROLS, AND OPEN THE WINDOW
 	primaryScene.getStylesheets().add(STYLE_SHEET_UI);
 	primaryStage.setScene(primaryScene);
@@ -193,7 +220,7 @@ public class EPortfolioView {
         epPaneCenterSegment_Content = new BorderPane();
         epPaneCenterSegment_Content.setTop(siteToolbarPane);
         epPaneCenterSegment_Content.setLeft(pageEditorWorkspaceToolbar);
-        epPaneCenterSegment_Content.setCenter(PageContainerVBox);
+        epPaneCenterSegment_Content.setCenter(pageContainer);
     }
     
     private void initFileToolbar(){
@@ -201,7 +228,7 @@ public class EPortfolioView {
         newEPButton = initChildButton(fileToolbarPane, ICON_NEW_SLIDE_SHOW,	"New ePortfolio",	    "horizontal_toolbar_button", false);
         loadEPButton = initChildButton(fileToolbarPane, ICON_LOAD_SLIDE_SHOW,	"Load ePortfolio",    "horizontal_toolbar_button", false);
         saveEPButton = initChildButton(fileToolbarPane, ICON_SAVE_SLIDE_SHOW,	"Save ePortfolio",    "horizontal_toolbar_button", true);
-        saveAsEPButton = initChildButton(fileToolbarPane, ICON_VIEW_SLIDE_SHOW,	"Save ePortfolio As...",    "horizontal_toolbar_button", true);
+        saveAsEPButton = initChildButton(fileToolbarPane, ICON_SAVE_SLIDE_SHOW,	"Save ePortfolio As...",    "horizontal_toolbar_button", true);
         exportEPButton = initChildButton(fileToolbarPane, ICON_VIEW_SLIDE_SHOW,	"Generate ePortfolio site",    "horizontal_toolbar_button", true);
         exitButton = initChildButton(fileToolbarPane, ICON_EXIT, "Exit Application", "horizontal_toolbar_button", false);
     }

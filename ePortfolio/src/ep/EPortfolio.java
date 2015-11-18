@@ -8,11 +8,15 @@ package ep;
 import ep.file.EPortfolioFileManager;
 import ep.file.EPortfolioSiteExporter;
 import ep.view.EPortfolioView;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -34,15 +38,15 @@ public class EPortfolio extends Application {
     EPortfolioView ui = new EPortfolioView(fileManager, siteExporter);
     
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws MalformedURLException {
         // SET THE WINDOW ICON
-	//String imagePath = PATH_IMAGES + ICON_WINDOW_LOGO;
-	//File file = new File(imagePath);
+        String imagePath = "./images/icons/titleimage.png";
+        File file = new File(imagePath);
         
         // GET AND SET THE IMAGE
-        //URL fileURL = file.toURI().toURL();
-        //Image windowIcon = new Image(fileURL.toExternalForm());
-        //primaryStage.getIcons().add(windowIcon);
+        URL fileURL = file.toURI().toURL();
+        Image windowIcon = new Image(fileURL.toExternalForm());
+        primaryStage.getIcons().add(windowIcon);
         
         //String appTitle = props.getProperty(TITLE_WINDOW);
         String appTitle = "ePortfolio Maker";
