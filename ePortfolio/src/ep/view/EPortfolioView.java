@@ -5,6 +5,9 @@
  */
 package ep.view;
 
+import ep.controller.ComponentEditController;
+import ep.controller.FileController;
+import ep.controller.PagesEditController;
 import ep.file.EPortfolioFileManager;
 import ep.file.EPortfolioSiteExporter;
 import javafx.geometry.Insets;
@@ -111,16 +114,18 @@ public class EPortfolioView {
     
     // THIS IS FOR EXPORTING THE SLIDESHOW SITE
      EPortfolioSiteExporter siteExporter;
+     
 
     // THIS CLASS WILL HANDLE ALL ERRORS FOR THIS PROGRAM
     //private ErrorHandler errorHandler;
 
     // THIS CONTROLLER WILL ROUTE THE PROPER RESPONSES
     // ASSOCIATED WITH THE FILE TOOLBAR
-    //private FileController fileController;
+    private FileController fileController;
     
     // THIS CONTROLLER RESPONDS TO SLIDE SHOW EDIT BUTTONS
-    //private SlideShowEditController editController;
+    private PagesEditController pagesEditController;
+    private ComponentEditController componentEditController;
     
      public EPortfolioView(EPortfolioFileManager initFileManager, EPortfolioSiteExporter initSiteExporter) {
         // FIRST HOLD ONTO THE FILE MANAGER
@@ -162,8 +167,6 @@ public class EPortfolioView {
     private void initPageInputs(){
         pageContainerPageSettings.setHgap(5.5);
         pageContainerPageSettings.setVgap(5.5);
-
-
         pageContainerPageSettings.add(new Label("Student Name:"),0,0);
         pageContainerPageSettings.add(new TextField(),1,0);
         pageContainerPageSettings.add(new Label("Page Title:"),0,1);
@@ -210,6 +213,71 @@ public class EPortfolioView {
 	primaryStage.show();
     }
      
+        private void initEventHandlers() {
+            
+	// FIRST THE FILE CONTROLS
+	fileController = new FileController(this, fileManager);
+        
+	newEPButton.setOnAction(e -> {
+	    fileController.handleNewEPRequest();
+	});
+	loadEPButton.setOnAction(e -> {
+	    fileController.handleLoadEPRequest();
+	});
+	saveEPButton.setOnAction(e -> {
+	    fileController.handleSaveEPRequest();
+	});
+        	saveAsEPButton.setOnAction(e -> {
+	    fileController.handleSaveAsEPRequest();
+	});
+	exportEPButton.setOnAction(e -> {
+	    fileController.handleViewEPRequest();
+	});
+	exitButton.setOnAction(e -> {
+	    fileController.handleExitRequest();
+	});
+        
+	
+	// PAGE CONTROLS
+	pagesEditController = new PagesEditController(this);
+	addPageButton.setOnAction(e -> {
+	    pagesEditController.processAddPageRequest();
+	});
+	removePageButton.setOnAction(e -> {
+	    pagesEditController.processRemovePageRequest();
+	});
+	selectPageButton.setOnAction(e -> {
+	    pagesEditController.processSelectPageRequest();
+	});
+        
+                  componentEditController = new ComponentEditController(this);
+                  // WORKSPACE CONTROLS
+	addTextComponentButton.setOnAction(e -> {
+	    ComponentEditController.processAddTextComponent();
+	});
+        	addImageComponentButton.setOnAction(e -> {
+	    ComponentEditController.processAddImageComponent();
+	});
+                	addVideoComponentButton.setOnAction(e -> {
+	    ComponentEditController.processAddVideoComponent();
+	});
+                  addSlideshowComponentButton.setOnAction(e -> {
+	    ComponentEditController.processAddSlideshowComponent();
+	});
+                  editComponentButton.setOnAction(e -> {
+	    ComponentEditController.processEditComponent();
+	});
+                  removeComponentButton.setOnAction(e -> {
+	    ComponentEditController.processRemoveComponent();
+	});
+                  selectLayoutButton.setOnAction(e -> {
+	    ComponentEditController.selectLayout();
+	});
+                  selectColorButton.setOnAction(e -> {
+	    ComponentEditController.selectColor();
+	});
+    }
+    
     // Creates the intended layout schemes of major panes. This is meant to be called AFTER all the children panels are constructed and 
     // before the main window is constructed.
     private void setLayoutHierarchy(){
