@@ -10,6 +10,8 @@ import ep.controller.FileController;
 import ep.controller.PagesEditController;
 import ep.file.EPortfolioFileManager;
 import ep.file.EPortfolioSiteExporter;
+import ep.model.Page;
+import ep.model.PagesModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -18,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -76,6 +79,9 @@ public class EPortfolioView {
     Tab selectPageEditorWorkspaceTab;
     Tab selectSiteViewerWorkspace;
     
+        // this is to control the pages
+    TabPane pageSelectionPane;
+    
     // This pane holds both FileToolbarPan and Tab Pane, and is ment to be in the top portion of epPane.
     BorderPane epPaneTopSegment_Toolbars;
     
@@ -118,6 +124,8 @@ public class EPortfolioView {
 
     // THIS CLASS WILL HANDLE ALL ERRORS FOR THIS PROGRAM
     //private ErrorHandler errorHandler;
+    // THIS IS THE SLIDE SHOW WE'RE WORKING WITH
+    PagesModel pages;
 
     // THIS CONTROLLER WILL ROUTE THE PROPER RESPONSES
     // ASSOCIATED WITH THE FILE TOOLBAR
@@ -135,7 +143,7 @@ public class EPortfolioView {
         siteExporter = initSiteExporter;
 
         // MAKE THE DATA MANAGING MODEL
-        //slideShow = new SlideShowModel(this);
+        pages = new PagesModel(this);
 
         // WE'LL USE THIS ERROR HANDLER WHEN SOMETHING GOES WRONG
         //errorHandler = new ErrorHandler(this);
@@ -148,8 +156,9 @@ public class EPortfolioView {
         initWorkspace();
         setLayoutHierarchy();
         initTabBar();
-        initPageInputs();
         initPaneCSS();
+        
+        initEventHandlers();
         
         primaryStage = initPrimaryStage;
         initWindow(windowTitle);
@@ -158,13 +167,14 @@ public class EPortfolioView {
     private void initWorkspace() {
         pageContainer = new BorderPane();
         pageContainerPageSettings = new GridPane();
+        pageSelectionPane = new TabPane();
         PageContainerVBox = new VBox();
         
         pageContainer.setTop(pageContainerPageSettings);
-        pageContainer.setCenter(PageContainerVBox);
+        pageContainer.setCenter(pageSelectionPane);
     }
     
-    private void initPageInputs(){
+    public void initPageInputs(){
         pageContainerPageSettings.setHgap(5.5);
         pageContainerPageSettings.setVgap(5.5);
         pageContainerPageSettings.add(new Label("Student Name:"),0,0);
@@ -327,7 +337,7 @@ public class EPortfolioView {
     
     private void initTabBar(){
         workspaceModeToolbar = new TabPane();
-        
+        workspaceModeToolbar.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
         selectPageEditorWorkspaceTab = new Tab();
         selectSiteViewerWorkspace = new Tab();
         
@@ -337,8 +347,6 @@ public class EPortfolioView {
         selectPageEditorWorkspaceTab.setContent(epPaneCenterSegment_Content);
         //selectSiteViewerWorkspace.setContent(SOMETHINGWEBVIEWER);
                 
-        workspaceModeToolbar.getTabs().add(selectPageEditorWorkspaceTab);
-        workspaceModeToolbar.getTabs().add(selectSiteViewerWorkspace);
     }
     
     public Button initChildButton(Pane toolbar, String iconFileName, String tooltip, String cssClass, boolean disabled) {
@@ -354,4 +362,27 @@ public class EPortfolioView {
 	toolbar.getChildren().add(button);
 	return button;
     }
+
+    
+    // Initialize the UI for a new session
+    public void startNewSession() {
+        workspaceModeToolbar.getTabs().add(selectPageEditorWorkspaceTab);
+        workspaceModeToolbar.getTabs().add(selectSiteViewerWorkspace);
+    }
+
+    public PagesModel getPages() {
+        return pages;
+    }
+    
+    public void reloadPages(){
+        pageSelectionPane.getTabs().clear();
+        for (Page page : pages.getPages()) {
+            Tab tab = new Tab();
+            tab.setText(page.getPageTitle());
+            VBox vbox = new VBox();
+            tab.setContent(vbox);
+            pageSelectionPane.getTabs().add(tab);
+        }
+    }
+    
 }

@@ -32,7 +32,7 @@ public class FileController {
         //siteExporter = initSiteExporter;
     }
     public void handleNewEPRequest() {
-        
+        ui.startNewSession();
     }
     public void handleLoadEPRequest() {
         

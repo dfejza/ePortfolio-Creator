@@ -5,6 +5,7 @@
  */
 package ep.controller;
 
+import ep.model.PagesModel;
 import ep.view.EPortfolioView;
 
 /**
@@ -18,9 +19,16 @@ public class PagesEditController {
     public PagesEditController(EPortfolioView initUI){
         ui = initUI;
     }
+    
     public void processAddPageRequest() {
-        
+        PagesModel pages = ui.getPages();
+        if(pages.size()==0){
+            ui.initPageInputs();
+        }
+        pages.addPage();
+        ui.reloadPages();
     }
+    
     public void processRemovePageRequest() {
         
     }

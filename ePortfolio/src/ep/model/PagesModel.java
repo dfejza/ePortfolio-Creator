@@ -17,13 +17,22 @@ public class PagesModel {
     EPortfolioView ui;
     String title;
     ObservableList<Page> pages;
-    Page selectedSlide;
+    Page selectedPage;
     
    public PagesModel(EPortfolioView initUI) {
-	ui = initUI;
-	pages = FXCollections.observableArrayList();
-	reset();	
+        ui = initUI;
+        pages = FXCollections.observableArrayList();
+        reset();	
     }
+  public ObservableList<Page> getPages() {
+	return pages;
+    }
+  
+   public void addPage(){
+        Page pageToAdd = new Page();
+        pageToAdd.setPageTitle("Page " + pages.size());
+        pages.add(pageToAdd);
+   }
    
    
     /**
@@ -31,6 +40,10 @@ public class PagesModel {
      */
     public void reset() {
 	pages.clear();
-	selectedSlide = null;
+	selectedPage = null;
+    }
+
+    public int size() {
+        return pages.size();
     }
 }

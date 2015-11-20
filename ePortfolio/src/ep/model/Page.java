@@ -5,6 +5,7 @@
  */
 package ep.model;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
@@ -17,12 +18,26 @@ public class Page {
     String cssLayout;
     String cssColor;
     String cssFont;
-    String numComponents;
+    int numComponents;
     ObservableList<Component> components;
     
 
-    public Page(String pageTitle , String pageFooter, String initCaption) {
-        
+    public Page() {
+        pageTitle = "New Page Title";
+        pageFooter = "New Page Footer";
+        cssLayout = "temp";
+        cssColor= "temp";
+        cssFont= "temp";
+        numComponents = 0;
+        components = FXCollections.observableArrayList();
+    }
+
+    public String getPageTitle() {
+        return pageTitle;
+    }
+
+    void setPageTitle(String string) {
+        this.pageTitle = string;
     }
     
     
