@@ -168,6 +168,7 @@ public class EPortfolioView {
         pageContainer = new BorderPane();
         pageContainerPageSettings = new GridPane();
         pageSelectionPane = new TabPane();
+        pageSelectionPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
         PageContainerVBox = new VBox();
         
         pageContainer.setTop(pageContainerPageSettings);
@@ -263,28 +264,28 @@ public class EPortfolioView {
                   componentEditController = new ComponentEditController(this);
                   // WORKSPACE CONTROLS
 	addTextComponentButton.setOnAction(e -> {
-	    ComponentEditController.processAddTextComponent();
+	    componentEditController.processAddTextComponent();
 	});
         	addImageComponentButton.setOnAction(e -> {
-	    ComponentEditController.processAddImageComponent();
+	    componentEditController.processAddImageComponent();
 	});
                 	addVideoComponentButton.setOnAction(e -> {
-	    ComponentEditController.processAddVideoComponent();
+	    componentEditController.processAddVideoComponent();
 	});
                   addSlideshowComponentButton.setOnAction(e -> {
-	    ComponentEditController.processAddSlideshowComponent();
+	    componentEditController.processAddSlideshowComponent();
 	});
                   editComponentButton.setOnAction(e -> {
-	    ComponentEditController.processEditComponent();
+	    componentEditController.processEditComponent();
 	});
                   removeComponentButton.setOnAction(e -> {
-	    ComponentEditController.processRemoveComponent();
+	    componentEditController.processRemoveComponent();
 	});
                   selectLayoutButton.setOnAction(e -> {
-	    ComponentEditController.selectLayout();
+	    componentEditController.selectLayout();
 	});
                   selectColorButton.setOnAction(e -> {
-	    ComponentEditController.selectColor();
+	    componentEditController.selectColor();
 	});
     }
     
@@ -375,6 +376,9 @@ public class EPortfolioView {
     }
     
     public void reloadPages(){
+        int temp = pageSelectionPane.getSelectionModel().getSelectedIndex();
+        pages.setSelectedPage(temp);
+        
         pageSelectionPane.getTabs().clear();
         for (Page page : pages.getPages()) {
             Tab tab = new Tab();
@@ -383,6 +387,7 @@ public class EPortfolioView {
             tab.setContent(vbox);
             pageSelectionPane.getTabs().add(tab);
         }
+        pageSelectionPane.getSelectionModel().select(temp);
     }
     
 }

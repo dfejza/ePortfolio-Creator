@@ -12,42 +12,57 @@ import ep.view.EPortfolioView;
  * @author linti
  */
 public class ComponentEditController {
+    private ImageSelectionController imagesel;
+    private VideoSelectionController videoSel;
+    private EPortfolioView ui;
 
-    public static void processAddTextComponent() {
+    public void processAddTextComponent() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public static void processAddImageComponent() {
+    public void processAddImageComponent() {
+        imagesel.processSelectImage();
+        imagesel.askImageParameters();
+        //imagesel.getImageCaption();
+        //imagesel.getImageHeight();
+        //imagesel.getImageWidth();
+        //imagesel.getAllighnment();
+    }
+
+    public void processAddSlideshowComponent() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public static void processAddSlideshowComponent() {
+    public void processAddVideoComponent() {
+        videoSel.processSelectVideo();
+        videoSel.askVideoParameters();
+        //videoSel.getVideoCaption();
+        //videoSel.getVideoHeight();
+        //videoSel.getVideoWidth();
+    }
+
+    public void processEditComponent() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public static void processAddVideoComponent() {
+    public void processRemoveComponent() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public static void processEditComponent() {
+    public void selectLayout() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public static void processRemoveComponent() {
+    public void selectColor() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    public static void selectLayout() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public static void selectColor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    EPortfolioView ui;
+    
     
    public ComponentEditController(EPortfolioView initUI) {
 	ui = initUI;
+                  imagesel = new ImageSelectionController(ui);
+                  videoSel = new VideoSelectionController(ui);
+                  
     }
    
     

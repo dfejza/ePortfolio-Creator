@@ -17,7 +17,7 @@ public class PagesModel {
     EPortfolioView ui;
     String title;
     ObservableList<Page> pages;
-    Page selectedPage;
+    int selectedPage;
     
    public PagesModel(EPortfolioView initUI) {
         ui = initUI;
@@ -34,13 +34,19 @@ public class PagesModel {
         pages.add(pageToAdd);
    }
    
+   public void setSelectedPage(int sp){
+       this.selectedPage = sp;
+   }
+   public int getSelectedpage(){
+       return selectedPage;
+   }
    
     /**
      * Resets the slide show to have no slides and a default title.
      */
     public void reset() {
 	pages.clear();
-	selectedPage = null;
+	//selectedPage = null;
     }
 
     public int size() {
