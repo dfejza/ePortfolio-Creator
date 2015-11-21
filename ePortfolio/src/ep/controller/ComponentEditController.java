@@ -64,6 +64,10 @@ public class ComponentEditController {
                   videoSel = new VideoSelectionController(ui);
                   
     }
+
+    public void selectBannerImage() {
+        imagesel.processBannerImage();
+    }
    
     
 }

@@ -3,6 +3,7 @@ package ep.controller;
 import ep.model.Component;
 import ep.view.EPortfolioView;
 import java.io.File;
+import java.net.MalformedURLException;
 import java.util.Optional;
 import javafx.geometry.Insets;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -135,6 +136,33 @@ public class ImageSelectionController {
     }
    public int getAllighnment(){
         return imageParameters.allighnment;
+    }
+
+    void processBannerImage() throws MalformedURLException {
+        FileChooser imageFileChooser = new FileChooser();
+
+        // SET THE STARTING DIRECTORY
+        imageFileChooser.setInitialDirectory(new File("./images/"));
+
+        // LET'S ONLY SEE IMAGE FILES
+        FileChooser.ExtensionFilter jpgFilter = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+        FileChooser.ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+        FileChooser.ExtensionFilter gifFilter = new FileChooser.ExtensionFilter("GIF files (*.gif)", "*.GIF");
+        imageFileChooser.getExtensionFilters().addAll(jpgFilter, pngFilter, gifFilter);
+
+        // LET'S OPEN THE FILE CHOOSER
+        File file = imageFileChooser.showOpenDialog(null);
+        if (file != null) {
+            String path = file.getPath().substring(0, file.getPath().indexOf(file.getName()));
+            String fileName = file.getName();
+            ui.bannerImageText.setText(path + fileName);
+            ui.setBannerImage(file);
+            /*slideToEdit.setImage(path, fileName);
+            view.updateSlideImage();
+            ui.updateFileToolbarControls(false);*/
+        }else{
+            ui.bannerImageText.setText("No Banner Image");
+        }
     }
     
     

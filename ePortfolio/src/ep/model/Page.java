@@ -45,8 +45,8 @@ public class Page {
         return pageFooter;
     }
 
-    public Image getBannerImage() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setPageFooter(String text) {
+        this.pageFooter = text;
     }
     
     

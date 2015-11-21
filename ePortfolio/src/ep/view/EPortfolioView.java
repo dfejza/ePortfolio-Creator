@@ -145,10 +145,12 @@ public class EPortfolioView {
     private WebView webView;
     private ScrollPane scrollPane;
     private WebEngine webEngine;
-    private TextField studentName;
+    private TextField studentNameField;
     private TextField pageFooter;
     private TextField pageTitle;
-    private ImageView bannerImage;
+    private String bannerImage;
+    private String studentName;
+    public Label bannerImageText;
     
      public EPortfolioView(EPortfolioFileManager initFileManager, EPortfolioSiteExporter initSiteExporter) {
         // FIRST HOLD ONTO THE FILE MANAGER
@@ -162,6 +164,8 @@ public class EPortfolioView {
 
         // WE'LL USE THIS ERROR HANDLER WHEN SOMETHING GOES WRONG
         //errorHandler = new ErrorHandler(this);
+        bannerImageText = new Label();
+        bannerImageText.setText("No Banner Image");
 
     }
     public void startUI(Stage initPrimaryStage, String windowTitle) throws MalformedURLException{
@@ -194,18 +198,21 @@ public class EPortfolioView {
     public void initPageInputs(){
         pageContainerPageSettings.setHgap(5.5);
         pageContainerPageSettings.setVgap(5.5);
-        studentName = new TextField();
+        studentNameField = new TextField();
         pageTitle = new TextField();
         pageFooter = new TextField();
-        bannerImage = new ImageView();
+        //bannerImage = new ImageView();
+        selectBannerImageButton = new Button();
+        selectBannerImageButton.setText("Select Banner Image");
         pageContainerPageSettings.add(new Label("Student Name:"),0,0);
-        pageContainerPageSettings.add(studentName,1,0);
+        pageContainerPageSettings.add(studentNameField,1,0);
         pageContainerPageSettings.add(new Label("Page Title:"),0,1);
         pageContainerPageSettings.add(pageTitle,1,1);
         pageContainerPageSettings.add(new Label("Page Footer:"),2,1);
         pageContainerPageSettings.add(pageFooter,3,1);
-        pageContainerPageSettings.add(new Label("Banner Image:"),0,3);
-        pageContainerPageSettings.add(bannerImage,1,3);
+        //pageContainerPageSettings.add(new Label("Banner Image:"),0,3);
+        pageContainerPageSettings.add(selectBannerImageButton,0,3);
+        pageContainerPageSettings.add(bannerImageText,1,3);
     }
     
     private void initPaneCSS() {
@@ -309,7 +316,7 @@ public class EPortfolioView {
                   selectColorButton.setOnAction(e -> {
 	    componentEditController.selectColor();
 	});
-                  
+
                   //pagetabpane listener
                     pageSelectionPane.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tab> ov, Tab t, Tab t1) -> {
                         int temp = pageSelectionPane.getSelectionModel().getSelectedIndex();
@@ -327,6 +334,18 @@ public class EPortfolioView {
                   pageSelectionPane.getSelectionModel().getSelectedItem().setText(pageTitle.getText());
                   //reloadPages();
               });
+              pageFooter.textProperty().addListener(e -> {
+                  pages.getSelectedpageObject().setPageFooter(pageFooter.getText());
+                  //reloadPages();
+              });
+                    studentNameField.textProperty().addListener(e -> {
+                        studentName = studentNameField.getText();
+                        //reloadPages();
+                    });
+              
+                selectBannerImageButton.setOnAction(e -> {
+	    componentEditController.selectBannerImage();
+	});
     }
     // Creates the intended layout schemes of major panes. This is meant to be called AFTER all the children panels are constructed and 
     // before the main window is constructed.
@@ -466,7 +485,16 @@ public class EPortfolioView {
     private void redrawCurrentPageText() {
         pageTitle.setText(pages.getSelectedpageObject().getPageTitle());
         pageFooter.setText(pages.getSelectedpageObject().getPageFooter());
+        bannerImageText.setText(bannerImage);
+        studentNameField.setText(studentName);
+        
         //bannerImage.setImage(pages.getSelectedpageObject().getBannerImage());
+    }
+
+    public void setBannerImage(File file) throws MalformedURLException {
+        URL fileURL = file.toURI().toURL();
+        Image slideImage = new Image(fileURL.toExternalForm());
+        bannerImage = bannerImageText.getText();
     }
 
 
