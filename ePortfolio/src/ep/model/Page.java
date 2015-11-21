@@ -7,6 +7,7 @@ package ep.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -36,8 +37,16 @@ public class Page {
         return pageTitle;
     }
 
-    void setPageTitle(String string) {
+    public void setPageTitle(String string) {
         this.pageTitle = string;
+    }
+
+    public String getPageFooter() {
+        return pageFooter;
+    }
+
+    public Image getBannerImage() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

@@ -12,11 +12,17 @@ import ep.file.EPortfolioFileManager;
 import ep.file.EPortfolioSiteExporter;
 import ep.model.Page;
 import ep.model.PagesModel;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -31,6 +37,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -134,6 +142,13 @@ public class EPortfolioView {
     // THIS CONTROLLER RESPONDS TO SLIDE SHOW EDIT BUTTONS
     private PagesEditController pagesEditController;
     private ComponentEditController componentEditController;
+    private WebView webView;
+    private ScrollPane scrollPane;
+    private WebEngine webEngine;
+    private TextField studentName;
+    private TextField pageFooter;
+    private TextField pageTitle;
+    private ImageView bannerImage;
     
      public EPortfolioView(EPortfolioFileManager initFileManager, EPortfolioSiteExporter initSiteExporter) {
         // FIRST HOLD ONTO THE FILE MANAGER
@@ -149,12 +164,13 @@ public class EPortfolioView {
         //errorHandler = new ErrorHandler(this);
 
     }
-    public void startUI(Stage initPrimaryStage, String windowTitle){
+    public void startUI(Stage initPrimaryStage, String windowTitle) throws MalformedURLException{
         initFileToolbar();
         initSiteToolbarPane();
         initPageEditorWorkspaceToolbar();
         initWorkspace();
         setLayoutHierarchy();
+        webView();
         initTabBar();
         initPaneCSS();
         
@@ -178,14 +194,18 @@ public class EPortfolioView {
     public void initPageInputs(){
         pageContainerPageSettings.setHgap(5.5);
         pageContainerPageSettings.setVgap(5.5);
+        studentName = new TextField();
+        pageTitle = new TextField();
+        pageFooter = new TextField();
+        bannerImage = new ImageView();
         pageContainerPageSettings.add(new Label("Student Name:"),0,0);
-        pageContainerPageSettings.add(new TextField(),1,0);
+        pageContainerPageSettings.add(studentName,1,0);
         pageContainerPageSettings.add(new Label("Page Title:"),0,1);
-        pageContainerPageSettings.add(new TextField(),1,1);
+        pageContainerPageSettings.add(pageTitle,1,1);
         pageContainerPageSettings.add(new Label("Page Footer:"),2,1);
-        pageContainerPageSettings.add(new TextField(),3,1);
+        pageContainerPageSettings.add(pageFooter,3,1);
         pageContainerPageSettings.add(new Label("Banner Image:"),0,3);
-        pageContainerPageSettings.add(new ImageView(),1,3);
+        pageContainerPageSettings.add(bannerImage,1,3);
     }
     
     private void initPaneCSS() {
@@ -206,8 +226,10 @@ public class EPortfolioView {
 	// AND USE IT TO SIZE THE WINDOW
 	primaryStage.setX(bounds.getMinX());
 	primaryStage.setY(bounds.getMinY());
-	primaryStage.setWidth(bounds.getWidth());
-	primaryStage.setHeight(bounds.getHeight());
+	//primaryStage.setWidth(bounds.getWidth());
+	//primaryStage.setHeight(bounds.getHeight());
+        	primaryStage.setWidth(1920);
+	primaryStage.setHeight(1080);
 
         // SETUP THE UI, NOTE WE'LL ADD THE WORKSPACE LATER
 	epPane = new BorderPane();
@@ -257,9 +279,9 @@ public class EPortfolioView {
 	removePageButton.setOnAction(e -> {
 	    pagesEditController.processRemovePageRequest();
 	});
-	selectPageButton.setOnAction(e -> {
+	/*selectPageButton.setOnAction(e -> {
 	    pagesEditController.processSelectPageRequest();
-	});
+	});*/
         
                   componentEditController = new ComponentEditController(this);
                   // WORKSPACE CONTROLS
@@ -287,8 +309,25 @@ public class EPortfolioView {
                   selectColorButton.setOnAction(e -> {
 	    componentEditController.selectColor();
 	});
+                  
+                  //pagetabpane listener
+                    pageSelectionPane.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tab> ov, Tab t, Tab t1) -> {
+                        int temp = pageSelectionPane.getSelectionModel().getSelectedIndex();
+                        if(temp>=0){
+                            pages.setSelectedpageObject(pages.getPages().get(temp));
+                            redrawCurrentPageText();
+                            t1.setText(pages.getSelectedpageObject().getPageTitle());
+                        }
+                    });
     }
-    
+        public void initPageInputsListeners() {
+            //pagetitle,footer,studentname and imageview listeners
+              pageTitle.textProperty().addListener(e -> {
+                  pages.getSelectedpageObject().setPageTitle(pageTitle.getText());
+                  pageSelectionPane.getSelectionModel().getSelectedItem().setText(pageTitle.getText());
+                  //reloadPages();
+              });
+    }
     // Creates the intended layout schemes of major panes. This is meant to be called AFTER all the children panels are constructed and 
     // before the main window is constructed.
     private void setLayoutHierarchy(){
@@ -316,9 +355,9 @@ public class EPortfolioView {
         siteToolbarPane = new FlowPane();
         addPageButton = initChildButton(siteToolbarPane, "page/add.png",	"Add page",    "horizontal_toolbar_button", false);
         removePageButton = initChildButton(siteToolbarPane, "page/remove.png",	"Remove page",	    "horizontal_toolbar_button", true);
-        selectPageButton = initChildButton(siteToolbarPane, "page/select.png",	"Select page",    "horizontal_toolbar_button", true);
+       // selectPageButton = initChildButton(siteToolbarPane, "page/select.png",	"Select page",    "horizontal_toolbar_button", true);
     }
-    
+
     private void initPageEditorWorkspaceToolbar(){
         pageEditorWorkspaceToolbar = new FlowPane();
         addTextComponentButton = initChildButton(pageEditorWorkspaceToolbar, "workspace/addtext.png",	"Add text component",    "vertical_toolbar_button", false);
@@ -346,8 +385,7 @@ public class EPortfolioView {
         selectSiteViewerWorkspace.setText("Site Viewer Workspace");
         
         selectPageEditorWorkspaceTab.setContent(epPaneCenterSegment_Content);
-        //selectSiteViewerWorkspace.setContent(SOMETHINGWEBVIEWER);
-                
+        selectSiteViewerWorkspace.setContent(webView);
     }
     
     public Button initChildButton(Pane toolbar, String iconFileName, String tooltip, String cssClass, boolean disabled) {
@@ -363,7 +401,30 @@ public class EPortfolioView {
 	toolbar.getChildren().add(button);
 	return button;
     }
+    
+        public void webView() throws MalformedURLException {
+	// SETUP THE UI
+	webView = new WebView();
+	//scrollPane = new ScrollPane(webView);
+	
+	// GET THE URL
+	String indexPath = "./sites/dummy/index.html";
+	File indexFile = new File(indexPath);
+	URL indexURL = indexFile.toURI().toURL();
+	
+	// SETUP THE WEB ENGINE AND LOAD THE URL
+	webEngine = webView.getEngine();
+	webEngine.load(indexURL.toExternalForm());
+	webEngine.setJavaScriptEnabled(true);
+	
+	// SET THE WINDOW TITLE
+	//this.setTitle(slides.getTitle());
 
+	// NOW PUT STUFF IN THE STAGE'S SCENE
+	//Scene scene = new Scene(webView, 1100, 650);
+	//setScene(scene);
+	//this.showAndWait();
+    }
     
     // Initialize the UI for a new session
     public void startNewSession() {
@@ -378,6 +439,11 @@ public class EPortfolioView {
     public void reloadPages(){
         int temp = pageSelectionPane.getSelectionModel().getSelectedIndex();
         pages.setSelectedPage(temp);
+        if(pages.getPages().size()>0){
+            removePageButton.setDisable(false);
+        }else{
+            removePageButton.setDisable(true);
+        }
         
         pageSelectionPane.getTabs().clear();
         for (Page page : pages.getPages()) {
@@ -389,5 +455,20 @@ public class EPortfolioView {
         }
         pageSelectionPane.getSelectionModel().select(temp);
     }
+
+    /*    private void updatePagesTitle() {
+    int i = 0;
+    pageSelectionPane.getTabs().stream().forEach((tab) -> {
+    tab.setText(pages.getIndexedPage(i).getPageTitle());
+    });
+    }*/
+
+    private void redrawCurrentPageText() {
+        pageTitle.setText(pages.getSelectedpageObject().getPageTitle());
+        pageFooter.setText(pages.getSelectedpageObject().getPageFooter());
+        //bannerImage.setImage(pages.getSelectedpageObject().getBannerImage());
+    }
+
+
     
 }

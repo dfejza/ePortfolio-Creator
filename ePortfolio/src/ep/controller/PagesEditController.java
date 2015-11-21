@@ -24,13 +24,16 @@ public class PagesEditController {
         PagesModel pages = ui.getPages();
         if(pages.size()==0){
             ui.initPageInputs();
+            ui.initPageInputsListeners();
         }
         pages.addPage();
         ui.reloadPages();
     }
     
     public void processRemovePageRequest() {
-        
+        PagesModel pages = ui.getPages();
+        pages.removePage();
+        ui.reloadPages();
     }
     public void processSelectPageRequest(){
         

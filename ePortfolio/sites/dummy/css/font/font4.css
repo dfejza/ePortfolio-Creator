@@ -1,0 +1,22 @@
+body, html,h1 {
+    text-align:center;
+       font-family: 'Titillium Web', sans-serif;
+}
+#bannerText{
+	font-size:24pt;
+	color:#ffffff;
+}
+
+#content_body{
+	font-size:16pt;
+	color:#ffffff;
+}
+
+#content{
+
+}
+
+.SlideShowCaption{
+    font-size:24pt;
+    text-align: center;
+}

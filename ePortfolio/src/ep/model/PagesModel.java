@@ -18,19 +18,26 @@ public class PagesModel {
     String title;
     ObservableList<Page> pages;
     int selectedPage;
+    Page selectedPageObject;
     
    public PagesModel(EPortfolioView initUI) {
         ui = initUI;
         pages = FXCollections.observableArrayList();
         reset();	
     }
+   
   public ObservableList<Page> getPages() {
 	return pages;
     }
   
+  public Page getIndexedPage(int idx){
+      Page temp =  pages.get(idx);
+      return temp;
+  }
+  
    public void addPage(){
         Page pageToAdd = new Page();
-        pageToAdd.setPageTitle("Page " + pages.size());
+        pageToAdd.setPageTitle(pageToAdd.getPageTitle());
         pages.add(pageToAdd);
    }
    
@@ -39,6 +46,13 @@ public class PagesModel {
    }
    public int getSelectedpage(){
        return selectedPage;
+   }
+   public Page getSelectedpageObject(){
+       return selectedPageObject;
+   }
+   
+      public void setSelectedpageObject(Page temp){
+       selectedPageObject = temp;
    }
    
     /**
@@ -51,5 +65,9 @@ public class PagesModel {
 
     public int size() {
         return pages.size();
+    }
+
+    public void removePage() {
+        pages.remove(selectedPageObject);
     }
 }
