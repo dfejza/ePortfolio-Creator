@@ -5,6 +5,8 @@
  */
 package ep.model;
 
+import javafx.scene.control.ListView;
+
 /**
  *
  * @author linti
@@ -19,7 +21,7 @@ public class Component {
     int hyperlinkEndChar;
     String hyperlinkAddress;
     int hyperlinkComponentInject;
-    String listData[];
+    String[] listData;
     SlideShow slideShow;
     
     public Component(){
@@ -46,7 +48,10 @@ public class Component {
         text = bodytxt;
         font = fontChoice;
     }
-    
-    
-    
+
+    public void listComponent(String[] listElements, int elementCount) {
+        type = 6;
+        listData = new String[elementCount];
+        listData = listElements;
+    }
 }
