@@ -15,6 +15,8 @@ import ep.model.PagesModel;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -162,11 +164,9 @@ public class EPortfolioView {
         // MAKE THE DATA MANAGING MODEL
         pages = new PagesModel(this);
 
+        bannerImageText = new Label();
         // WE'LL USE THIS ERROR HANDLER WHEN SOMETHING GOES WRONG
         //errorHandler = new ErrorHandler(this);
-        bannerImageText = new Label();
-        bannerImageText.setText("No Banner Image");
-
     }
     public void startUI(Stage initPrimaryStage, String windowTitle) throws MalformedURLException{
         initFileToolbar();
@@ -196,6 +196,7 @@ public class EPortfolioView {
     }
     
     public void initPageInputs(){
+        bannerImageText.setText("No Banner Image");
         pageContainerPageSettings.setHgap(5.5);
         pageContainerPageSettings.setVgap(5.5);
         studentNameField = new TextField();
@@ -344,7 +345,11 @@ public class EPortfolioView {
                     });
               
                 selectBannerImageButton.setOnAction(e -> {
-	    componentEditController.selectBannerImage();
+                  try {
+                      componentEditController.selectBannerImage();
+                  } catch (MalformedURLException ex) {
+                      Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
+                  }
 	});
     }
     // Creates the intended layout schemes of major panes. This is meant to be called AFTER all the children panels are constructed and 
@@ -399,6 +404,7 @@ public class EPortfolioView {
         workspaceModeToolbar.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
         selectPageEditorWorkspaceTab = new Tab();
         selectSiteViewerWorkspace = new Tab();
+        
         
         selectPageEditorWorkspaceTab.setText("Page Editor Workspace");
         selectSiteViewerWorkspace.setText("Site Viewer Workspace");

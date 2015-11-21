@@ -32,8 +32,10 @@ public class PagesEditController {
     
     public void processRemovePageRequest() {
         PagesModel pages = ui.getPages();
+        if(pages.getPages().size()>1){
         pages.removePage();
         ui.reloadPages();
+        }
     }
     public void processSelectPageRequest(){
         

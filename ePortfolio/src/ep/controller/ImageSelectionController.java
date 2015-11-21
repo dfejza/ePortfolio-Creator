@@ -71,7 +71,6 @@ public class ImageSelectionController {
         dialog.setTitle("Image Parameters");
         dialog.setHeaderText("Enter the parameters for this image");
 
-        // Create the username and password labels and fields.
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);

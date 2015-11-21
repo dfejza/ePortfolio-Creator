@@ -12,6 +12,7 @@ package ep.model;
 public class Component {
     int type;
     String text;
+    String font;
     String imageLoc;
     String videoLoc;
     int hyperlinkStartChar;
@@ -23,6 +24,7 @@ public class Component {
     
     public Component(){
         type = 0;
+        font = null;
         text = null;
         imageLoc = null;
         videoLoc = null;
@@ -32,6 +34,17 @@ public class Component {
         hyperlinkComponentInject = 0;
         listData = null;
         slideShow = null;
+    }
+    
+    public void headingComponent(String headingtxt){
+        type = 9;
+        text = headingtxt;
+    }
+    
+    public void bodyComponent(String bodytxt, String fontChoice){
+        type = 1;
+        text = bodytxt;
+        font = fontChoice;
     }
     
     
