@@ -5,6 +5,7 @@
  */
 package ep.model;
 
+import ep.model.ssm.SlideShow;
 import javafx.scene.control.ListView;
 
 /**

@@ -6,6 +6,7 @@
 package ep.controller;
 
 import ep.model.Component;
+import ep.model.ssm.SlideShowMakerView;
 import ep.view.EPortfolioView;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
 /**
@@ -70,7 +73,11 @@ public class ComponentEditController {
     }
 
     public void processAddSlideshowComponent() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        SlideShowMakerView ssmui = new SlideShowMakerView();
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.UTILITY);
+        String appTitle = "Slide Show Creater";
+        ssmui.startUI(stage, appTitle);
     }
 
     public void processAddVideoComponent() {
