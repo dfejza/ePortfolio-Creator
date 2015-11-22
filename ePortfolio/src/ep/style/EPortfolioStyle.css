@@ -31,7 +31,7 @@
 }
 
 .lang_dialog_pane {
-    -fx-background-color: #FFF373;
+    -fx-background-color: #1D7373;
     -fx-hgap:25;
     -fx-vgap:15;
     -fx-padding: 30;
@@ -39,42 +39,64 @@
 
 // TOOLBAR CONTROLS
 .horizontal_toolbar_pane, .vertical_toolbar_pane {
-    -fx-background-color: #AAAA73;    
+    -fx-background-color: #5CCCCC;    
     -fx-padding:5;
 }
 
 .horizontal_toolbar_pane {
     -fx-alignment: center;
     -fx-hgap:2;
+        -fx-border-color: transparent transparent black transparent;
+}
+.horizontal_toolbar_pane_top {
+     -fx-background-color: #33CCCC;
+    -fx-hgap:2;
+    -fx-vgap:5;
 }
 
 .vertical_toolbar_pane {
-    -fx-background-color: #AAA373;
+    -fx-background-color: #5CCCCC;
     -fx-alignment: center;
     -fx-orientation: vertical;
     -fx-vgap:20;
+    -fx-border-color: transparent black transparent transparent;
 }
 
 .vertical_toolbar_button {
-    -fx-background-color: #FFF373;
+    -fx-background-color: #3EEEEE;
+    -fx-border-color: black;
+    -fx-border-insets: 0;
+    -fx-border-width: 3;
+    -fx-border-style: solid;
+    
     -fx-padding: 10px 10px 10px 10px;
     -fx-spacing: 50px;
 }
 
 .horizontal_toolbar_button {
-    -fx-background-color: #FFF373;
+    -fx-background-color: #3EEEEE;
+    -fx-border-color: black;
+    -fx-border-insets: 0;
+    -fx-border-width: 3;
+    -fx-border-style: solid;
     -fx-padding-left: 10px;
     -fx-padding-right: 20px;
 }
 
 // WORKSPACE AND IT'S CONTAINERS
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #33CCCC;
+    
+}
+.tab-pane *.tab-header-background {
 
+}
 .workspace {
-    -fx-background-color: #FFF373;
+    -fx-background-color: #009999;
 }
 
 .slides_editor_pane {
-    -fx-background-color: #FFF373;
+    -fx-background-color: #33CCCC;
     -fx-padding: 30;    
     -fx-hgap:35;
     -fx-vgap:40;
@@ -87,13 +109,13 @@
 }
 
 .slide_edit_view {
-    -fx-background-color: #C89E00;
+    -fx-background-color: #006363;
     -fx-border-color: black;
 }
 
 .selected_slide_edit_view {
-    -fx-background-color: #FFDC73;
-    -fx-border-color: #BFB330;
+    -fx-background-color: #1daaaa;
+    -fx-border-color: #3EEEEE;
 }
 
 // SLIDE EDIT CONTROLS
@@ -109,7 +131,7 @@
 
 .title_text_field {
     -fx-font: 16pt normal;
-    -fx-background-color: #C89E00;
+    -fx-background-color: #006363;
     -fx-min-width:300px;
 }
 
@@ -120,7 +142,7 @@
 
 .caption_text_field {
     -fx-font-size: 14pt;
-    -fx-background-color: #FFF373; 
+    -fx-background-color: #1D7373; 
     -fx-min-width:600px;
     -fx-padding: 5 5 5 20;
 }

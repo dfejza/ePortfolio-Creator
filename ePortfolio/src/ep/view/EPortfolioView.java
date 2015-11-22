@@ -221,6 +221,9 @@ public class EPortfolioView {
         pageContainer.getStyleClass().add("workspace");
         pageEditorWorkspaceToolbar.getStyleClass().add("vertical_toolbar_pane");
         siteToolbarPane.getStyleClass().add("horizontal_toolbar_pane");
+        fileToolbarPane.getStyleClass().add("horizontal_toolbar_pane_top");
+        workspaceModeToolbar.getStyleClass().add("tab-pane");
+        epPaneTopSegment_Toolbars.getStyleClass().add("tab-pane");
     }
 
     private void initWindow(String windowTitle) {
@@ -250,6 +253,7 @@ public class EPortfolioView {
                  primaryStage.setTitle("ePortfolio Generator");
 	// WE'LL USE TO STYLIZE OUR GUI CONTROLS, AND OPEN THE WINDOW
 	primaryScene.getStylesheets().add(STYLE_SHEET_UI);
+                epPane.getStyleClass().add("workspace");
 	primaryStage.setScene(primaryScene);
 	primaryStage.show();
     }
