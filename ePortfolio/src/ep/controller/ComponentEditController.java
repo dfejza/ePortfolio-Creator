@@ -12,20 +12,26 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.FlowPane;
@@ -39,6 +45,8 @@ import javafx.util.Callback;
  * @author linti
  */
 public class ComponentEditController {
+        public static String PATH_CSS = "/ep/style/";
+    public static String STYLE_SHEET_UI = PATH_CSS + "EPortfolioStyle.css";
     private ImageSelectionController imagesel;
     private VideoSelectionController videoSel;
     private EPortfolioView ui;
@@ -124,11 +132,17 @@ public class ComponentEditController {
         choices.add("Paragraph");
         choices.add("List");
 
+        
         ChoiceDialog<String> dialog = new ChoiceDialog<>("Heading", choices);
         dialog.setTitle("Component Selection Dialog");
         dialog.setHeaderText("Select which type of text component to add");
         dialog.setContentText("Choose a type:");
 
+        
+        DialogPane dialogPane = dialog.getDialogPane();
+        dialogPane.getStylesheets().add(
+           getClass().getResource(STYLE_SHEET_UI).toExternalForm());
+        
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
             componentChoice = result.get();
@@ -142,6 +156,11 @@ public class ComponentEditController {
     dialog.setTitle("Heading Input Dialog");
     dialog.setHeaderText("Heading Dialog");
     dialog.setContentText("Enter the heading:");
+    
+    DialogPane dialogPane = dialog.getDialogPane();
+    dialogPane.getStylesheets().add(
+    getClass().getResource(STYLE_SHEET_UI).toExternalForm());
+        
     Optional<String> result = dialog.showAndWait();
     if (result.isPresent())
        currentComponent.headingComponent(result.get());
@@ -156,8 +175,10 @@ public class ComponentEditController {
         dialog.setTitle("Paragraph Component");
         dialog.setHeaderText("Enter the parameters for this paragraph");
         dialog.setResizable(true);
-        dialog.getDialogPane().setPrefSize(480, 320);
-        
+        dialog.getDialogPane().setPrefSize(980, 320);
+                DialogPane dialogPane = dialog.getDialogPane();
+        dialogPane.getStylesheets().add(
+           getClass().getResource(STYLE_SHEET_UI).toExternalForm());
         ObservableList<String> options = 
         FXCollections.observableArrayList(
             "Font 1",
@@ -175,6 +196,7 @@ public class ComponentEditController {
         
         BorderPane wrapper = new BorderPane();
         FlowPane body = new FlowPane();
+        BorderPane hyperLinkPane = new BorderPane();
         GridPane grid = new GridPane();
 
         grid.setHgap(10);
@@ -186,8 +208,45 @@ public class ComponentEditController {
         grid.add(new Label("Font:"), 0, 0);
         grid.add(comboBox, 1, 0);
         
+        Button addToList = new Button();
+        Button removeFromList = new Button();
+        addToList.setText("Add Hyperlink");
+        removeFromList.setText("Remove Hyperlink");
+        TextField listConents = new TextField();
+        
+        ListView<String> list = new ListView<String>();
+        ObservableList<String> items =FXCollections.observableArrayList ();
+        list.setItems(items);
+        list.setPrefWidth(320);
+        list.setPrefHeight(300);
+        addToList.setDisable(true);
+        removeFromList.setDisable(true);
+        
+        wrapper.addEventFilter(MouseEvent.MOUSE_RELEASED, (MouseEvent mouseEvent) -> {
+            if(paragraphText.getSelectedText().length()>0){
+                addToList.setDisable(false);
+            }else{
+                addToList.setDisable(true);
+            }
+        });
+
+        
+        addToList.setOnAction(e -> {
+            items.add(paragraphText.getSelectedText());
+            String hyperlink = getHyperlinkDialogue();
+            removeFromList.setDisable(false);
+        });
+        removeFromList.setOnAction(e -> {
+            list.getItems().remove(list.getSelectionModel().getSelectedItem());
+            if(list.getItems().size()==0)
+                removeFromList.setDisable(true);
+        });
+        hyperLinkPane.setTop(new FlowPane(addToList,removeFromList));
+        hyperLinkPane.setCenter(list);
+        //hyperLinkPane.setBottom(removeFromList);
         wrapper.setTop(grid);
         wrapper.setCenter(body);
+         wrapper.setRight(hyperLinkPane);
         
         
         body.getChildren().add(new Label("Body Text:"));
@@ -216,7 +275,9 @@ public class ComponentEditController {
         dialog.setHeaderText("Enter the parameters for this list");
         dialog.setResizable(false);
         dialog.getDialogPane().setPrefSize(400, 320);
-        
+                DialogPane dialogPane = dialog.getDialogPane();
+        dialogPane.getStylesheets().add(
+           getClass().getResource(STYLE_SHEET_UI).toExternalForm());
         BorderPane wrapper = new BorderPane();
         FlowPane body = new FlowPane();
         FlowPane grid = new FlowPane();
@@ -244,13 +305,17 @@ public class ComponentEditController {
         list.setItems(items);
         list.setPrefWidth(420);
         list.setPrefHeight(200);
+        removeFromList.setDisable(true);
        body.getChildren().add(list);
         addToList.setOnAction(e -> {
             items.add(listConents.getText());
             listConents.setText("");
+            removeFromList.setDisable(false);
         });
         removeFromList.setOnAction(e -> {
             list.getItems().remove(list.getSelectionModel().getSelectedItem());
+            if(list.getItems().size()==0)
+                removeFromList.setDisable(true);
         });
         wrapper.setTop(grid);
         wrapper.setCenter(body);
@@ -273,5 +338,23 @@ public class ComponentEditController {
             return null;
         });
         Optional<Component> result = dialog.showAndWait();
+    }
+
+    private String getHyperlinkDialogue() {
+    TextInputDialog dialog = new TextInputDialog("www.google.com");
+    dialog.getDialogPane().setPrefSize(400, 320);
+     DialogPane dialogPane = dialog.getDialogPane();
+     dialogPane.getStylesheets().add(
+    getClass().getResource(STYLE_SHEET_UI).toExternalForm());
+    dialog.setTitle("Hyperlink Dialog");
+    dialog.setHeaderText("Enter a Hyperlink for your selected text.");
+    dialog.setContentText("HTTP Address:");
+
+    // Traditional way to get the response value.
+    Optional<String> result = dialog.showAndWait();
+    if (result.isPresent()){
+        return result.get();
+    }
+    return null;
     }
 }
