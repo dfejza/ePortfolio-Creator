@@ -19,10 +19,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
@@ -153,6 +156,8 @@ public class EPortfolioView {
     private String bannerImage;
     private String studentName;
     public Label bannerImageText;
+    private ComboBox pageFontChoice;
+    private TextField pageFontSize;
     
      public EPortfolioView(EPortfolioFileManager initFileManager, EPortfolioSiteExporter initSiteExporter) {
         // FIRST HOLD ONTO THE FILE MANAGER
@@ -202,6 +207,18 @@ public class EPortfolioView {
         studentNameField = new TextField();
         pageTitle = new TextField();
         pageFooter = new TextField();
+        ObservableList<String> options = 
+        FXCollections.observableArrayList(
+            "Font 1",
+            "Font 2",
+            "Font 3",
+            "Font 4",
+            "Font 5"
+        );
+        pageFontChoice = new ComboBox(options);
+        pageFontSize = new TextField();
+        pageFontSize.setText("12");
+        pageFontChoice.getSelectionModel().selectFirst();
         //bannerImage = new ImageView();
         selectBannerImageButton = new Button();
         selectBannerImageButton.setText("Select Banner Image");
@@ -211,6 +228,10 @@ public class EPortfolioView {
         pageContainerPageSettings.add(pageTitle,1,1);
         pageContainerPageSettings.add(new Label("Page Footer:"),2,1);
         pageContainerPageSettings.add(pageFooter,3,1);
+        pageContainerPageSettings.add(new Label("Page Font:"),4,1);
+        pageContainerPageSettings.add(pageFontChoice,5,1);
+        pageContainerPageSettings.add(new Label("Page Font Size:"),6,1);
+        pageContainerPageSettings.add(pageFontSize,7,1);
         //pageContainerPageSettings.add(new Label("Banner Image:"),0,3);
         pageContainerPageSettings.add(selectBannerImageButton,0,3);
         pageContainerPageSettings.add(bannerImageText,1,3);
@@ -355,6 +376,13 @@ public class EPortfolioView {
                       Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
                   }
 	});
+              pageFontSize.textProperty().addListener(e -> {
+                  pages.getSelectedpageObject().setPageFontSize(pageFontSize.getText());
+                  //reloadPages();
+              });
+              pageFontChoice.valueProperty().addListener(e -> {
+                  pages.getSelectedpageObject().setPageFontChoice(pageFontChoice.getSelectionModel().getSelectedIndex());
+              });
     }
     // Creates the intended layout schemes of major panes. This is meant to be called AFTER all the children panels are constructed and 
     // before the main window is constructed.
@@ -497,7 +525,8 @@ public class EPortfolioView {
         pageFooter.setText(pages.getSelectedpageObject().getPageFooter());
         bannerImageText.setText(bannerImage);
         studentNameField.setText(studentName);
-        
+        pageFontChoice.getSelectionModel().select(pages.getSelectedpageObject().getPageFontChoice());
+        pageFontSize.setText(pages.getSelectedpageObject().getPageFontSize());
         //bannerImage.setImage(pages.getSelectedpageObject().getBannerImage());
     }
 
