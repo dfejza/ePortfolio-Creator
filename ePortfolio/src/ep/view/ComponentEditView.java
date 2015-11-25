@@ -43,7 +43,7 @@ public class ComponentEditView extends VBox{
     // PROVIDES RESPONSES FOR IMAGE SELECTION
     ImageSelectionController imageController;
     
-    public ComponentEditView(EPortfolioView initUi, Component initComponent) {
+    public ComponentEditView(EPortfolioView initUi, Component initComponent) throws MalformedURLException {
 	// KEEP THIS FOR LATER
 	ui = initUi;
 	
@@ -98,7 +98,7 @@ public class ComponentEditView extends VBox{
      */
     public void updateSlideImage() throws MalformedURLException {
 	//String imagePath = slide.getImagePath() + SLASH + slide.getImageFileName();
-                  String imagePath = "C:/temp";
+                  String imagePath = component.getImagePath();
 	File file = new File(imagePath);
         
 	//try {
@@ -108,11 +108,9 @@ public class ComponentEditView extends VBox{
 	    imageSelectionView.setImage(slideImage);
 	    
 	    // AND RESIZE IT
-	    double scaledWidth = 33333333;
-	    double perc = scaledWidth / slideImage.getWidth();
-	    double scaledHeight = slideImage.getHeight() * perc;
-	    imageSelectionView.setFitWidth(scaledWidth);
-	    imageSelectionView.setFitHeight(scaledHeight);
+	    imageSelectionView.setFitWidth(component.getWidth());
+	    imageSelectionView.setFitHeight(component.getHeight());
+                    
             /*	} catch (Exception e) {
             ErrorHandler eH = new ErrorHandler(null);
             eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
@@ -129,9 +127,11 @@ public class ComponentEditView extends VBox{
             getChildren().add(text);
     }
 
-    private void drawImageComp() {
-        //imageSelectionView = new ImageView();
-        //updateSlideImage();
+    private void drawImageComp() throws MalformedURLException {
+        imageSelectionView = new ImageView();
+        updateSlideImage();
+        getChildren().add(imageSelectionView);
+        getChildren().add(new Text(component.getText()));
     }
 
     private void drawVideoComp() {

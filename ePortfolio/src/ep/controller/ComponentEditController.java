@@ -78,8 +78,11 @@ public class ComponentEditController {
     }
 
     public void processAddImageComponent() {
-        imagesel.processSelectImage();
-        imagesel.askImageParameters();
+        currentComponent = new Component();
+        imagesel.processSelectImage(currentComponent);
+        imagesel.askImageParameters(currentComponent);
+        ui.getPages().getSelectedpageObject().addComponent(currentComponent);
+        ui.reloadCurrentPage();
         //imagesel.getImageCaption();
         //imagesel.getImageHeight();
         //imagesel.getImageWidth();

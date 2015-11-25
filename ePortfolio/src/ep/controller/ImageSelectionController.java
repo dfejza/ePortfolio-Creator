@@ -24,7 +24,7 @@ import javafx.util.Callback;
  */
 public class ImageSelectionController {
     EPortfolioView ui;
-    ImageParameters imageParameters;
+    
     
     /**
      * Default contstructor doesn't need to initialize anything
@@ -43,7 +43,7 @@ public class ImageSelectionController {
      * will appear after selection.
      */
     //public void processSelectImage(Component componentToEdit) {
-    public void processSelectImage() {
+    public void processSelectImage(Component component) {
 	FileChooser imageFileChooser = new FileChooser();
 	
 	// SET THE STARTING DIRECTORY
@@ -60,14 +60,17 @@ public class ImageSelectionController {
 	if (file != null) {
 	    String path = file.getPath().substring(0, file.getPath().indexOf(file.getName()));
 	    String fileName = file.getName();
+                      component.imageComponent(path + "/" + fileName);
 	    /*slideToEdit.setImage(path, fileName);
 	    view.updateSlideImage();
 	    ui.updateFileToolbarControls(false);*/
-	}
+	}else{
+                    component.imageComponent(null);
+        }
     }
     
-    public void askImageParameters(){
-        Dialog<ImageParameters> dialog = new Dialog<>();
+    public void askImageParameters(Component currentComponent){
+        Dialog<Component> dialog = new Dialog<>();
         dialog.setTitle("Image Parameters");
         dialog.setHeaderText("Enter the parameters for this image");
 
@@ -102,40 +105,26 @@ public class ImageSelectionController {
         ButtonType buttonTypeOk = new ButtonType("Okay", ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
 
-        dialog.setResultConverter(new Callback<ButtonType, ImageParameters>() {
+        dialog.setResultConverter(new Callback<ButtonType, Component>() {
             @Override
-            public ImageParameters call(ButtonType b) {
+            public Component call(ButtonType b) {
 
                 if (b == buttonTypeOk) {
                     int radioSelection;
                     if(left.isSelected()) radioSelection = 1;
                     else if(right.isSelected()) radioSelection = 2;
                     else radioSelection = 3;
-                    return new ImageParameters(caption.getText(), displayHeight.getText(), displayWidth.getText(), radioSelection);
+                    
+                    currentComponent.setParam(displayHeight.getText(), displayWidth.getText(),caption.getText(),radioSelection);
                 }
 
                 return null;
             }
         });
         
-        Optional<ImageParameters> result = dialog.showAndWait();
-        if (result.isPresent()){
-            this.imageParameters = result.get();
-        }
+        Optional<Component> result = dialog.showAndWait();
     }
     
-    public String getImageCaption(){
-        return imageParameters.caption;
-    }
-    public int getImageHeight(){
-        return imageParameters.height;
-    }
-   public int getImageWidth(){
-        return imageParameters.width;
-    }
-   public int getAllighnment(){
-        return imageParameters.allighnment;
-    }
 
     void processBannerImage() throws MalformedURLException {
         FileChooser imageFileChooser = new FileChooser();
@@ -163,21 +152,5 @@ public class ImageSelectionController {
             ui.bannerImageText.setText("No Banner Image");
         }
     }
-    
-    
-    private class ImageParameters{
-        String caption;
-        int height;
-        int width;
-        int allighnment;
-        
-        private ImageParameters(String text, String text0, String text1, int radioSelection) {
-            this.caption = text;
-            this.height = Integer.parseInt(text0);
-            this.width = Integer.parseInt(text1);
-            this.allighnment = radioSelection;
-        }
-        
-    }
-    
+
 }

@@ -159,6 +159,7 @@ public class EPortfolioView {
     public Label bannerImageText;
     private ComboBox pageFontChoice;
     private TextField pageFontSize;
+    private ScrollPane slidesEditorScrollPane;
     
      public EPortfolioView(EPortfolioFileManager initFileManager, EPortfolioSiteExporter initSiteExporter) {
         // FIRST HOLD ONTO THE FILE MANAGER
@@ -350,6 +351,11 @@ public class EPortfolioView {
                             pages.setSelectedpageObject(pages.getPages().get(temp));
                             redrawCurrentPageText();
                             t1.setText(pages.getSelectedpageObject().getPageTitle());
+                            try {
+                                reloadCurrentPage();
+                            } catch (MalformedURLException ex) {
+                                Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                     });
     }
@@ -493,7 +499,7 @@ public class EPortfolioView {
         return pages;
     }
     
-    public void reloadPages(){
+    public void reloadPages() throws MalformedURLException{
         int temp = pageSelectionPane.getSelectionModel().getSelectedIndex();
         pages.setSelectedPage(temp);
         if(pages.getPages().size()>0){
@@ -507,13 +513,17 @@ public class EPortfolioView {
             Tab tab = new Tab();
             tab.setText(page.getPageTitle());
             VBox vbox = new VBox();
-            tab.setContent(vbox);
+            slidesEditorScrollPane = new ScrollPane(vbox);
+            tab.setContent(slidesEditorScrollPane);
             pageSelectionPane.getTabs().add(tab);
         }
+        
         pageSelectionPane.getSelectionModel().select(temp);
+        reloadCurrentPage() ;
     }
     
-    public void reloadComponents(VBox vbox){
+    public void reloadComponents(ScrollPane test) throws MalformedURLException{
+        VBox vbox = (VBox) test.getContent();
         vbox.getChildren().clear();
         for (Component component : pages.getSelectedpageObject().getComponents()) {
             ComponentEditView componentEditor = new ComponentEditView(this, component);
@@ -521,13 +531,6 @@ public class EPortfolioView {
             }
             //ComponentsEditView slideEditor = new ComponentsEditView(this, slide);
         }
-
-    /*    private void updatePagesTitle() {
-    int i = 0;
-    pageSelectionPane.getTabs().stream().forEach((tab) -> {
-    tab.setText(pages.getIndexedPage(i).getPageTitle());
-    });
-    }*/
 
     private void redrawCurrentPageText() {
         pageTitle.setText(pages.getSelectedpageObject().getPageTitle());
@@ -545,8 +548,8 @@ public class EPortfolioView {
         bannerImage = bannerImageText.getText();
     }
 
-    public void reloadCurrentPage() {
-        reloadComponents((VBox) pageSelectionPane.getSelectionModel().getSelectedItem().getContent());
+    public void reloadCurrentPage() throws MalformedURLException {
+        reloadComponents((ScrollPane) pageSelectionPane.getSelectionModel().getSelectedItem().getContent());
     }
    
 }

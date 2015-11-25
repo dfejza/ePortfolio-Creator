@@ -104,6 +104,11 @@
 }
 .workspace {
     -fx-background-color: #66CFCF;
+    -fx-background: #66CFCF;
+}
+.scroll-pane > .viewport {
+    -fx-background-color: #66CFCF;
+    -fx-background: #66CFCF;
 }
 
 .slides_editor_pane {
