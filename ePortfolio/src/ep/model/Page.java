@@ -68,5 +68,13 @@ public class Page {
         this.pageFontSize = txt;
     }
     
+    public void addComponent(Component comp){
+        components.add(comp);
+        numComponents++;
+    }
     
+  public ObservableList<Component> getComponents() {
+	return components;
+    }
+  
 }

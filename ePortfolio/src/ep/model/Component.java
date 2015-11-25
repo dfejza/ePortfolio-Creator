@@ -49,10 +49,21 @@ public class Component {
         text = bodytxt;
         font = fontChoice;
     }
+    
+    public String getText(){
+        return text;
+    }
 
     public void listComponent(String[] listElements, int elementCount) {
         type = 6;
         listData = new String[elementCount];
         listData = listElements;
+    }
+    public int getComponentType(){
+        return type;
+    }
+
+    public String[] getListData() {
+        return listData;
     }
 }

@@ -10,6 +10,7 @@ import ep.controller.FileController;
 import ep.controller.PagesEditController;
 import ep.file.EPortfolioFileManager;
 import ep.file.EPortfolioSiteExporter;
+import ep.model.Component;
 import ep.model.Page;
 import ep.model.PagesModel;
 import java.io.File;
@@ -194,7 +195,6 @@ public class EPortfolioView {
         pageContainerPageSettings = new GridPane();
         pageSelectionPane = new TabPane();
         pageSelectionPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
-        PageContainerVBox = new VBox();
         
         pageContainer.setTop(pageContainerPageSettings);
         pageContainer.setCenter(pageSelectionPane);
@@ -512,6 +512,15 @@ public class EPortfolioView {
         }
         pageSelectionPane.getSelectionModel().select(temp);
     }
+    
+    public void reloadComponents(VBox vbox){
+        vbox.getChildren().clear();
+        for (Component component : pages.getSelectedpageObject().getComponents()) {
+            ComponentEditView componentEditor = new ComponentEditView(this, component);
+            vbox.getChildren().add(componentEditor);
+            }
+            //ComponentsEditView slideEditor = new ComponentsEditView(this, slide);
+        }
 
     /*    private void updatePagesTitle() {
     int i = 0;
@@ -536,6 +545,8 @@ public class EPortfolioView {
         bannerImage = bannerImageText.getText();
     }
 
-
-    
+    public void reloadCurrentPage() {
+        reloadComponents((VBox) pageSelectionPane.getSelectionModel().getSelectedItem().getContent());
+    }
+   
 }

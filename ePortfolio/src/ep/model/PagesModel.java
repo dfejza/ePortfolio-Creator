@@ -38,6 +38,8 @@ public class PagesModel {
    public void addPage(){
         Page pageToAdd = new Page();
         pageToAdd.setPageTitle(pageToAdd.getPageTitle());
+        if(pages.size()==0)
+            setSelectedpageObject(pageToAdd);
         pages.add(pageToAdd);
    }
    

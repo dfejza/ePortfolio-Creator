@@ -59,13 +59,19 @@ public class ComponentEditController {
         
         if(componentChoice.compareTo("Heading")==0){
             drawHeadingCreate();
-            saveComponent();
+            //saveComponent();
+            ui.getPages().getSelectedpageObject().addComponent(currentComponent);
+            ui.reloadCurrentPage();
         }else if(componentChoice.compareTo("Paragraph")==0){
             drawParagraphCreate();
-            saveComponent();
+            //saveComponent();
+            ui.getPages().getSelectedpageObject().addComponent(currentComponent);
+            ui.reloadCurrentPage();
         }else if (componentChoice.compareTo("List")==0){
             drawListCreate();
             //saveComponent();
+            ui.getPages().getSelectedpageObject().addComponent(currentComponent);
+            ui.reloadCurrentPage();
         }else{
             
         }
