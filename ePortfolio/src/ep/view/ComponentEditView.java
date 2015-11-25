@@ -11,12 +11,18 @@ import java.awt.Font;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
@@ -34,6 +40,7 @@ public class ComponentEditView extends VBox{
     
     // DISPLAYS THE IMAGE FOR THIS SLIDE
     ImageView imageSelectionView;
+    MediaView mediaView;
     
     // CONTROLS FOR EDITING THE CAPTION
     VBox captionVBox;
@@ -43,53 +50,57 @@ public class ComponentEditView extends VBox{
     // PROVIDES RESPONSES FOR IMAGE SELECTION
     ImageSelectionController imageController;
     
-    public ComponentEditView(EPortfolioView initUi, Component initComponent) throws MalformedURLException {
-	// KEEP THIS FOR LATER
-	ui = initUi;
-	
-	// FIRST SELECT THE CSS STYLE CLASS FOR THIS CONTAINER
-	this.getStyleClass().add("component_outline");
-	
-	// KEEP THE SLIDE FOR LATER
-	component = initComponent;
-                  int type = component.getComponentType();
-                  if(type==1) drawBodyComp();
-                  if(type==2) drawImageComp();
-                  if(type==3) drawVideoComp();
-                  if(type==4) drawSlideShowComp();
-                  //if(type==5) Hyperlink IGNORECASE?();
-                  if(type==6) drawListComp();
-                  if(type==9) drawHeaderComp();
-                   
-	// MAKE SURE WE ARE DISPLAYING THE PROPER IMAGE
-
-                  /*
-                  // SETUP THE CAPTION CONTROLS
-                  captionVBox = new VBox();
-                  captionLabel = new Label(props.getProperty(LanguagePropertyType.LABEL_CAPTION));
-                  captionTextField = new TextField();
-                  captionTextField.setText(slide.getCaption());
-                  captionVBox.getChildren().add(captionLabel);
-                  captionVBox.getChildren().add(captionTextField);
-                  
-                  // LAY EVERYTHING OUT INSIDE THIS COMPONENT
-                  getChildren().add(imageSelectionView);
-                  getChildren().add(captionVBox);
-                  
-                  // SETUP THE EVENT HANDLERS
-                  imageController = new ImageSelectionController(ui);
-                  imageSelectionView.setOnMousePressed(e -> {
-                  imageController.processSelectImage(slide, this);
-                  });
-                  captionTextField.textProperty().addListener(e -> {
-                  String text = captionTextField.getText();
-                  slide.setCaption(text);
-                  ui.updateFileToolbarControls(false);
-                  });*/
-	
-	// CHOOSE THE STYLE
-	//captionLabel.getStyleClass().add(CSS_CLASS_CAPTION_PROMPT);
-	//captionTextField.getStyleClass().add(CSS_CLASS_CAPTION_TEXT_FIELD);
+    public ComponentEditView(EPortfolioView initUi, Component initComponent) {
+        try {
+            // KEEP THIS FOR LATER
+            ui = initUi;
+            
+            // FIRST SELECT THE CSS STYLE CLASS FOR THIS CONTAINER
+            this.getStyleClass().add("component_outline");
+            
+            // KEEP THE SLIDE FOR LATER
+            component = initComponent;
+            int type = component.getComponentType();
+            if(type==1) drawBodyComp();
+            if(type==2) drawImageComp();
+            if(type==3) drawVideoComp();
+            if(type==4) drawSlideShowComp();
+            //if(type==5) Hyperlink IGNORECASE?();
+            if(type==6) drawListComp();
+            if(type==9) drawHeaderComp();
+            
+            // MAKE SURE WE ARE DISPLAYING THE PROPER IMAGE
+            
+            /*
+            // SETUP THE CAPTION CONTROLS
+            captionVBox = new VBox();
+            captionLabel = new Label(props.getProperty(LanguagePropertyType.LABEL_CAPTION));
+            captionTextField = new TextField();
+            captionTextField.setText(slide.getCaption());
+            captionVBox.getChildren().add(captionLabel);
+            captionVBox.getChildren().add(captionTextField);
+            
+            // LAY EVERYTHING OUT INSIDE THIS COMPONENT
+            getChildren().add(imageSelectionView);
+            getChildren().add(captionVBox);
+            
+            // SETUP THE EVENT HANDLERS
+            imageController = new ImageSelectionController(ui);
+            imageSelectionView.setOnMousePressed(e -> {
+            imageController.processSelectImage(slide, this);
+            });
+            captionTextField.textProperty().addListener(e -> {
+            String text = captionTextField.getText();
+            slide.setCaption(text);
+            ui.updateFileToolbarControls(false);
+            });*/
+            
+            // CHOOSE THE STYLE
+            //captionLabel.getStyleClass().add(CSS_CLASS_CAPTION_PROMPT);
+            //captionTextField.getStyleClass().add(CSS_CLASS_CAPTION_TEXT_FIELD);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ComponentEditView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**
@@ -116,6 +127,25 @@ public class ComponentEditView extends VBox{
             eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
             }*/
     }   
+    
+        public void updateVideo() {
+	//String imagePath = slide.getImagePath() + SLASH + slide.getImageFileName();
+                  String imagePath = component.getImagePath();
+                  Media media = new Media(imagePath);
+                    // Create the player and set to play automatically.
+                    MediaPlayer mediaPlayer = new MediaPlayer(media);
+                    mediaPlayer.setAutoPlay(false);
+                         // Create the view and add it to the Scene.
+                    mediaView = new MediaView(mediaPlayer);
+	    // AND RESIZE IT
+	    mediaView.setFitWidth(component.getWidth());
+	    mediaView.setFitHeight(component.getHeight());
+                    
+            /*	} catch (Exception e) {
+            ErrorHandler eH = new ErrorHandler(null);
+            eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
+            }*/
+    }   
 
     private void drawBodyComp() {
             text = new Text();
@@ -135,7 +165,10 @@ public class ComponentEditView extends VBox{
     }
 
     private void drawVideoComp() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        mediaView = new MediaView();
+        updateVideo();
+        getChildren().add(mediaView);
+        getChildren().add(new Text(component.getText()));
     }
 
     private void drawSlideShowComp() {

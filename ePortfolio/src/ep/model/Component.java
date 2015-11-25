@@ -34,7 +34,6 @@ public class Component {
         font = null;
         text = null;
         imageLoc = null;
-        videoLoc = null;
         width = null;
         height = null;
         justification = 1;
@@ -95,5 +94,16 @@ public class Component {
 
     public double getHeight() {
         return Double.parseDouble(height);
+    }
+
+    public void videoComponent(String string) {
+        type = 3;
+        imageLoc = string;
+    }
+
+    public void setParam(String height, String width, String caption) {
+        this.width = width;
+        this.height = height;
+        this.text = caption;
     }
 }

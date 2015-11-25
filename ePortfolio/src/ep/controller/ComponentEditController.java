@@ -98,8 +98,11 @@ public class ComponentEditController {
     }
 
     public void processAddVideoComponent() {
-        videoSel.processSelectVideo();
-        videoSel.askVideoParameters();
+        currentComponent = new Component();
+        videoSel.processSelectVideo(currentComponent);
+        videoSel.askVideoParameters(currentComponent);
+        ui.getPages().getSelectedpageObject().addComponent(currentComponent);
+        ui.reloadCurrentPage();
         //videoSel.getVideoCaption();
         //videoSel.getVideoHeight();
         //videoSel.getVideoWidth();

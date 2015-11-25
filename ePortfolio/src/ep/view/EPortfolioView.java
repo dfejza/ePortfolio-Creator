@@ -351,11 +351,7 @@ public class EPortfolioView {
                             pages.setSelectedpageObject(pages.getPages().get(temp));
                             redrawCurrentPageText();
                             t1.setText(pages.getSelectedpageObject().getPageTitle());
-                            try {
-                                reloadCurrentPage();
-                            } catch (MalformedURLException ex) {
-                                Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+                            reloadCurrentPage();
                         }
                     });
     }
@@ -499,7 +495,7 @@ public class EPortfolioView {
         return pages;
     }
     
-    public void reloadPages() throws MalformedURLException{
+    public void reloadPages(){
         int temp = pageSelectionPane.getSelectionModel().getSelectedIndex();
         pages.setSelectedPage(temp);
         if(pages.getPages().size()>0){
@@ -548,8 +544,12 @@ public class EPortfolioView {
         bannerImage = bannerImageText.getText();
     }
 
-    public void reloadCurrentPage() throws MalformedURLException {
-        reloadComponents((ScrollPane) pageSelectionPane.getSelectionModel().getSelectedItem().getContent());
+    public void reloadCurrentPage() {
+        try {
+            reloadComponents((ScrollPane) pageSelectionPane.getSelectionModel().getSelectedItem().getContent());
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
    
 }

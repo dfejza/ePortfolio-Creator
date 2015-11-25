@@ -5,6 +5,7 @@
  */
 package ep.controller;
 
+import ep.model.Component;
 import ep.view.EPortfolioView;
 import java.io.File;
 import java.util.Optional;
@@ -25,7 +26,6 @@ import javafx.util.Callback;
  */
 public class VideoSelectionController {
     EPortfolioView ui;
-    private VideoParameters videoParameters;
     
     /**
      * Default contstructor doesn't need to initialize anything
@@ -39,7 +39,7 @@ public class VideoSelectionController {
      * select an video.
      */
     //public void processSelectImage(Component componentToEdit) {
-    public void processSelectVideo() {
+    public void processSelectVideo(Component currentComponent) {
 	FileChooser imageFileChooser = new FileChooser();
 	
 	// SET THE STARTING DIRECTORY
@@ -54,16 +54,16 @@ public class VideoSelectionController {
 	// LET'S OPEN THE FILE CHOOSER
 	File file = imageFileChooser.showOpenDialog(null);
 	if (file != null) {
-	    String path = file.getPath().substring(0, file.getPath().indexOf(file.getName()));
-	    String fileName = file.getName();
-	    /*slideToEdit.setImage(path, fileName);
-	    view.updateSlideImage();
-	    ui.updateFileToolbarControls(false);*/
-	}
+	    //String path = file.getPath().substring(0, file.getPath().indexOf(file.getName()));
+	    //String fileName = file.getName();
+                      currentComponent.videoComponent(file.toURI().toString());
+	}else{
+                    currentComponent.videoComponent(null);
+        }
     }
     
-    public void askVideoParameters(){
-        Dialog<VideoParameters> dialog = new Dialog<>();
+    public void askVideoParameters(Component currentComponent){
+        Dialog<Component> dialog = new Dialog<>();
         dialog.setTitle("Video Parameters");
         dialog.setHeaderText("Enter the parameters for this video");
         dialog.setContentText("Please enter your name:");
@@ -90,47 +90,18 @@ public class VideoSelectionController {
         ButtonType buttonTypeOk = new ButtonType("Okay", ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
 
-        dialog.setResultConverter(new Callback<ButtonType, VideoParameters>() {
+        dialog.setResultConverter(new Callback<ButtonType, Component>() {
             @Override
-            public VideoParameters call(ButtonType b) {
+            public Component call(ButtonType b) {
 
                 if (b == buttonTypeOk) {
-
-                    return new VideoParameters(caption.getText(), displayHeight.getText(), displayWidth.getText());
+                    currentComponent.setParam(displayHeight.getText(), displayWidth.getText(), caption.getText());
                 }
-
                 return null;
             }
         });
         
-        Optional<VideoParameters> result = dialog.showAndWait();
-        if (result.isPresent()){
-            this.videoParameters = result.get();
-        }
+        Optional<Component> result = dialog.showAndWait();
     }
-    
-    public String getVideoCaption(){
-        return videoParameters.caption;
-    }
-    public int getVideoHeight(){
-        return videoParameters.height;
-    }
-   public int getVideoWidth(){
-        return videoParameters.width;
-    }
-    
-    
-    private class VideoParameters{
-        String caption;
-        int height;
-        int width;
-        
-        private VideoParameters(String text, String text0, String text1) {
-            this.caption = text;
-            this.height = Integer.parseInt(text0);
-            this.width = Integer.parseInt(text1);
-        }
-        
-    }
-    
+
 }
