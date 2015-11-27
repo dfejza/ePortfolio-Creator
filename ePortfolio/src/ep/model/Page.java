@@ -22,6 +22,7 @@ public class Page {
     private ObservableList<Component> components;
     private int pageFontChoice;
     private String pageFontSize;
+    private Component selectedComponent;
     
 
     public Page() {
@@ -73,8 +74,18 @@ public class Page {
         numComponents++;
     }
     
+    public Component getSelectedComponent(){
+        return selectedComponent;
+    }
+    public void setSelectedComponent(Component comp){
+        this.selectedComponent = comp;
+    }
   public ObservableList<Component> getComponents() {
 	return components;
+    }
+
+    public boolean isSelectedComponent(Component component) {
+	return selectedComponent == component;
     }
   
 }

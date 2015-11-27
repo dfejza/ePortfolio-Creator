@@ -134,11 +134,17 @@
     -fx-border-color: #3EEEEE;
 }
 //COMPONENT CONTROLS
-.component_outline{
+.selected_comp{
     -fx-border-width: 2;
     -fx-border-radius: 15 15 15 15;
     -fx-background-radius: 15 15 15 15;
 -fx-border-style: dashed;
+}
+.not_selected_comp{
+
+}
+
+.component_outline{
 }
 .HEADER_FONT{
     -fx-font-size: 22pt;

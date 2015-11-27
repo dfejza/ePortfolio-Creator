@@ -351,7 +351,10 @@ public class EPortfolioView {
                             pages.setSelectedpageObject(pages.getPages().get(temp));
                             redrawCurrentPageText();
                             t1.setText(pages.getSelectedpageObject().getPageTitle());
+                            setWorkspaceButtons(false);
                             reloadCurrentPage();
+                        }else{
+                            setWorkspaceButtons(true);
                         }
                     });
     }
@@ -418,12 +421,12 @@ public class EPortfolioView {
 
     private void initPageEditorWorkspaceToolbar(){
         pageEditorWorkspaceToolbar = new FlowPane();
-        addTextComponentButton = initChildButton(pageEditorWorkspaceToolbar, "workspace/addtext.png",	"Add text component",    "vertical_toolbar_button", false);
-        addImageComponentButton = initChildButton(pageEditorWorkspaceToolbar, "workspace/addimage.png",	"Add image component",	    "vertical_toolbar_button", false);
-        addVideoComponentButton = initChildButton(pageEditorWorkspaceToolbar, "workspace/addvideo.png",	"Add video component",    "vertical_toolbar_button", false);
-        addSlideshowComponentButton = initChildButton(pageEditorWorkspaceToolbar, "workspace/addslideshow.png",	"Add a slideshow",    "vertical_toolbar_button", false);
-        editComponentButton = initChildButton(pageEditorWorkspaceToolbar, "workspace/editcomponent.png",	"Edit selected component",    "vertical_toolbar_button", false);
-        removeComponentButton = initChildButton(pageEditorWorkspaceToolbar,  "workspace/remove.png",	"Remove selected component",    "vertical_toolbar_button", false);
+        addTextComponentButton = initChildButton(pageEditorWorkspaceToolbar, "workspace/addtext.png",	"Add text component",    "vertical_toolbar_button", true);
+        addImageComponentButton = initChildButton(pageEditorWorkspaceToolbar, "workspace/addimage.png",	"Add image component",	    "vertical_toolbar_button", true);
+        addVideoComponentButton = initChildButton(pageEditorWorkspaceToolbar, "workspace/addvideo.png",	"Add video component",    "vertical_toolbar_button", true);
+        addSlideshowComponentButton = initChildButton(pageEditorWorkspaceToolbar, "workspace/addslideshow.png",	"Add a slideshow",    "vertical_toolbar_button", true);
+        editComponentButton = initChildButton(pageEditorWorkspaceToolbar, "workspace/editcomponent.png",	"Edit selected component",    "vertical_toolbar_button", true);
+        removeComponentButton = initChildButton(pageEditorWorkspaceToolbar,  "workspace/remove.png",	"Remove selected component",    "vertical_toolbar_button", true);
         
         Separator separator = new Separator();
         separator.setMaxWidth(80);
@@ -522,8 +525,21 @@ public class EPortfolioView {
         VBox vbox = (VBox) test.getContent();
         vbox.getChildren().clear();
         for (Component component : pages.getSelectedpageObject().getComponents()) {
-            ComponentEditView componentEditor = new ComponentEditView(this, component);
+            ComponentEditView componentEditor = new ComponentEditView(this, component);            
+            if (pages.getSelectedpageObject().isSelectedComponent(component))
+		componentEditor.getStyleClass().add("selected_comp");
+	    else
+		componentEditor.getStyleClass().add("not_selected_comp");
+
             vbox.getChildren().add(componentEditor);
+	    componentEditor.setOnMousePressed(e -> {
+		pages.getSelectedpageObject().setSelectedComponent(component);
+                try {
+                    this.reloadComponents(test);
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+	    });
             }
             //ComponentsEditView slideEditor = new ComponentsEditView(this, slide);
         }
@@ -550,6 +566,13 @@ public class EPortfolioView {
         } catch (MalformedURLException ex) {
             Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void setWorkspaceButtons(boolean b) {
+        addTextComponentButton.setDisable(b);
+        addImageComponentButton.setDisable(b);
+        addVideoComponentButton.setDisable(b);
+        addSlideshowComponentButton.setDisable(b);
     }
    
 }
