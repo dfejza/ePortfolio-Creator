@@ -19,7 +19,7 @@ import javafx.util.Callback;
 /**
  * This controller provides a controller for when the user chooses to
  * select an image for the slide show.
- * 
+ *
  * @author McKilla Gorilla & _____________
  */
 public class ImageSelectionController {
@@ -29,43 +29,43 @@ public class ImageSelectionController {
     /**
      * Default contstructor doesn't need to initialize anything
      */
-    public ImageSelectionController(EPortfolioView initUi) {   
-	ui = initUi;
+    public ImageSelectionController(EPortfolioView initUi) {
+        ui = initUi;
     }
     
     /**
      * This function provides the response to the user's request to
      * select an image.
-     * 
+     *
      * @param slideToEdit - Slide for which the user is selecting an image.
-     * 
+     *
      * @param view The user interface control group where the image
      * will appear after selection.
      */
     //public void processSelectImage(Component componentToEdit) {
     public void processSelectImage(Component component) {
-	FileChooser imageFileChooser = new FileChooser();
-	
-	// SET THE STARTING DIRECTORY
-	imageFileChooser.setInitialDirectory(new File("./images/"));
-	
-	// LET'S ONLY SEE IMAGE FILES
-	FileChooser.ExtensionFilter jpgFilter = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
-	FileChooser.ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
-	FileChooser.ExtensionFilter gifFilter = new FileChooser.ExtensionFilter("GIF files (*.gif)", "*.GIF");
-	imageFileChooser.getExtensionFilters().addAll(jpgFilter, pngFilter, gifFilter);
-	
-	// LET'S OPEN THE FILE CHOOSER
-	File file = imageFileChooser.showOpenDialog(null);
-	if (file != null) {
-	    String path = file.getPath().substring(0, file.getPath().indexOf(file.getName()));
-	    String fileName = file.getName();
-                      component.imageComponent(path + "/" + fileName);
-	    /*slideToEdit.setImage(path, fileName);
-	    view.updateSlideImage();
-	    ui.updateFileToolbarControls(false);*/
-	}else{
-                    component.imageComponent(null);
+        FileChooser imageFileChooser = new FileChooser();
+        
+        // SET THE STARTING DIRECTORY
+        imageFileChooser.setInitialDirectory(new File("./images/"));
+        
+        // LET'S ONLY SEE IMAGE FILES
+        FileChooser.ExtensionFilter jpgFilter = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+        FileChooser.ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+        FileChooser.ExtensionFilter gifFilter = new FileChooser.ExtensionFilter("GIF files (*.gif)", "*.GIF");
+        imageFileChooser.getExtensionFilters().addAll(jpgFilter, pngFilter, gifFilter);
+        
+        // LET'S OPEN THE FILE CHOOSER
+        File file = imageFileChooser.showOpenDialog(null);
+        if (file != null) {
+            String path = file.getPath().substring(0, file.getPath().indexOf(file.getName()));
+            String fileName = file.getName();
+            component.imageComponent(path + "/" + fileName);
+            /*slideToEdit.setImage(path, fileName);
+            view.updateSlideImage();
+            ui.updateFileToolbarControls(false);*/
+        }else{
+            component.imageComponent(null);
         }
     }
     
@@ -73,12 +73,12 @@ public class ImageSelectionController {
         Dialog<Component> dialog = new Dialog<>();
         dialog.setTitle("Image Parameters");
         dialog.setHeaderText("Enter the parameters for this image");
-
+        
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(20, 150, 10, 10));
-
+        
         TextField caption = new TextField();
         TextField displayWidth = new TextField();
         TextField displayHeight = new TextField();
@@ -104,11 +104,11 @@ public class ImageSelectionController {
         dialog.getDialogPane().setContent(grid);
         ButtonType buttonTypeOk = new ButtonType("Okay", ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
-
+        
         dialog.setResultConverter(new Callback<ButtonType, Component>() {
             @Override
             public Component call(ButtonType b) {
-
+                
                 if (b == buttonTypeOk) {
                     int radioSelection;
                     if(left.isSelected()) radioSelection = 1;
@@ -117,7 +117,7 @@ public class ImageSelectionController {
                     
                     currentComponent.setParam(displayHeight.getText(), displayWidth.getText(),caption.getText(),radioSelection);
                 }
-
+                
                 return null;
             }
         });
@@ -125,19 +125,19 @@ public class ImageSelectionController {
         Optional<Component> result = dialog.showAndWait();
     }
     
-
+    
     void processBannerImage() throws MalformedURLException {
         FileChooser imageFileChooser = new FileChooser();
-
+        
         // SET THE STARTING DIRECTORY
         imageFileChooser.setInitialDirectory(new File("./images/"));
-
+        
         // LET'S ONLY SEE IMAGE FILES
         FileChooser.ExtensionFilter jpgFilter = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
         FileChooser.ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
         FileChooser.ExtensionFilter gifFilter = new FileChooser.ExtensionFilter("GIF files (*.gif)", "*.GIF");
         imageFileChooser.getExtensionFilters().addAll(jpgFilter, pngFilter, gifFilter);
-
+        
         // LET'S OPEN THE FILE CHOOSER
         File file = imageFileChooser.showOpenDialog(null);
         if (file != null) {
@@ -152,5 +152,5 @@ public class ImageSelectionController {
             ui.bannerImageText.setText("No Banner Image");
         }
     }
-
+    
 }

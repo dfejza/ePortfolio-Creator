@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package ep.model;
 
 import ep.model.ssm.SlideShow;
@@ -70,7 +70,7 @@ public class Component {
     public String getText(){
         return text;
     }
-
+    
     public void listComponent(String[] listElements, int elementCount) {
         type = 6;
         listData = new String[elementCount];
@@ -79,31 +79,35 @@ public class Component {
     public int getComponentType(){
         return type;
     }
-
+    
     public String[] getListData() {
         return listData;
     }
-
+    
     public String getImagePath() {
         return imageLoc;
     }
-
+    
     public double getWidth() {
         return Double.parseDouble(width);
     }
-
+    
     public double getHeight() {
         return Double.parseDouble(height);
     }
-
+    
     public void videoComponent(String string) {
         type = 3;
         imageLoc = string;
     }
-
+    
     public void setParam(String height, String width, String caption) {
         this.width = width;
         this.height = height;
         this.text = caption;
+    }
+    
+    public int fetchComponentType() {
+        return type;
     }
 }

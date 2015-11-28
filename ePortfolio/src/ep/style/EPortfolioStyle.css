@@ -46,10 +46,10 @@
 .horizontal_toolbar_pane {
     -fx-alignment: center;
     -fx-hgap:2;
-        -fx-border-color: transparent transparent black transparent;
+    -fx-border-color: transparent transparent black transparent;
 }
 .horizontal_toolbar_pane_top {
-     -fx-background-color: #33CCCC;
+    -fx-background-color: #33CCCC;
     -fx-hgap:2;
     -fx-vgap:5;
 }
@@ -74,14 +74,14 @@
 }
 
 .vertical_toolbar_button:hover {
-   -fx-background-color: linear-gradient(#f2f2f2, #f2f2f2);
-   -fx-background-insets: 0 0 -1 0, 0, 1, 2;
-   -fx-background-radius: 3px, 3px, 2px, 1px;
+    -fx-background-color: linear-gradient(#f2f2f2, #f2f2f2);
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3px, 3px, 2px, 1px;
 }
 .horizontal_toolbar_button:hover {
-   -fx-background-color: linear-gradient(#f2f2f2, #f2f2f2);
-   -fx-background-insets: 0 0 -1 0, 0, 1, 2;
-   -fx-background-radius: 3px, 3px, 2px, 1px;
+    -fx-background-color: linear-gradient(#f2f2f2, #f2f2f2);
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3px, 3px, 2px, 1px;
 }
 
 .horizontal_toolbar_button {
@@ -100,7 +100,7 @@
     
 }
 .tab-pane *.tab-header-background {
-
+    
 }
 .workspace {
     -fx-background-color: #66CFCF;
@@ -138,10 +138,10 @@
     -fx-border-width: 2;
     -fx-border-radius: 15 15 15 15;
     -fx-background-radius: 15 15 15 15;
--fx-border-style: dashed;
+    -fx-border-style: dashed;
 }
 .not_selected_comp{
-
+    
 }
 
 .component_outline{

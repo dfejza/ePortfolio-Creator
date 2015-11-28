@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package ep;
 
 import ep.file.EPortfolioFileManager;
@@ -26,7 +26,7 @@ import javafx.stage.Stage;
  */
 public class EPortfolio extends Application {
     
-     // THIS WILL PERFORM READING AND WRITING OF METADATA
+    // THIS WILL PERFORM READING AND WRITING OF METADATA
     EPortfolioFileManager fileManager = new EPortfolioFileManager();
     
     // THIS WILL EXPORT THE WEB SITES
@@ -52,7 +52,7 @@ public class EPortfolio extends Application {
         String appTitle = "ePortfolio Maker";
         ui.startUI(primaryStage, appTitle);
     }
-
+    
     /**
      * @param args the command line arguments
      */

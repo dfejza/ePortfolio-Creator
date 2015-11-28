@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package ep.model;
 
 import javafx.collections.FXCollections;
@@ -24,7 +24,7 @@ public class Page {
     private String pageFontSize;
     private Component selectedComponent;
     
-
+    
     public Page() {
         pageTitle = "New Page Title";
         pageFooter = "New Page Footer";
@@ -35,20 +35,21 @@ public class Page {
         cssFont= "temp";
         numComponents = 0;
         components = FXCollections.observableArrayList();
+        selectedComponent = null;
     }
-
+    
     public String getPageTitle() {
         return pageTitle;
     }
-
+    
     public void setPageTitle(String string) {
         this.pageTitle = string;
     }
-
+    
     public String getPageFooter() {
         return pageFooter;
     }
-
+    
     public void setPageFooter(String text) {
         this.pageFooter = text;
     }
@@ -77,15 +78,21 @@ public class Page {
     public Component getSelectedComponent(){
         return selectedComponent;
     }
+    
+    public void removeSelectedComponent(){
+        components.remove(selectedComponent);
+        selectedComponent = null;
+    }
+    
     public void setSelectedComponent(Component comp){
         this.selectedComponent = comp;
     }
-  public ObservableList<Component> getComponents() {
-	return components;
+    public ObservableList<Component> getComponents() {
+        return components;
     }
-
+    
     public boolean isSelectedComponent(Component component) {
-	return selectedComponent == component;
+        return selectedComponent == component;
     }
-  
+    
 }

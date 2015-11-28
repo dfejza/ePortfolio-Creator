@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package ep.controller;
 
 import ep.file.EPortfolioFileManager;
@@ -14,13 +14,13 @@ import ep.view.EPortfolioView;
  * @author linti
  */
 public class FileController {
-        // WE WANT TO KEEP TRACK OF WHEN SOMETHING HAS NOT BEEN SAVED
+    // WE WANT TO KEEP TRACK OF WHEN SOMETHING HAS NOT BEEN SAVED
     private boolean saved;
-        // THE APP UI
+    // THE APP UI
     private EPortfolioView ui;
-        // THIS GUY KNOWS HOW TO READ AND WRITE SLIDE SHOW DATA
+    // THIS GUY KNOWS HOW TO READ AND WRITE SLIDE SHOW DATA
     private EPortfolioFileManager EPIO;
-        // THIS ONE EXPORTS OUR SITE
+    // THIS ONE EXPORTS OUR SITE
     private EPortfolioSiteExporter siteExporter;
     
     

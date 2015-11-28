@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package ep.view;
 
 import ep.controller.ComponentEditController;
@@ -18,11 +18,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -41,7 +39,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -53,7 +50,7 @@ import javafx.stage.Stage;
  * @author linti
  */
 public class EPortfolioView {
-        // THIS IS THE MAIN APPLICATION UI WINDOW AND ITS SCENE GRAPH
+    // THIS IS THE MAIN APPLICATION UI WINDOW AND ITS SCENE GRAPH
     Stage primaryStage;
     Scene primaryScene;
     
@@ -70,7 +67,7 @@ public class EPortfolioView {
     public static String ICON_SAVE_SLIDE_SHOW = "Save.png";
     public static String ICON_VIEW_SLIDE_SHOW = "View.png";
     public static String ICON_EXIT = "Exit.png";
-        public static String ICON_ADD_SLIDE = "Add.png";
+    public static String ICON_ADD_SLIDE = "Add.png";
     public static String ICON_REMOVE_SLIDE = "Remove.png";
     
     
@@ -93,7 +90,7 @@ public class EPortfolioView {
     Tab selectPageEditorWorkspaceTab;
     Tab selectSiteViewerWorkspace;
     
-        // this is to control the pages
+    // this is to control the pages
     TabPane pageSelectionPane;
     
     // This pane holds both FileToolbarPan and Tab Pane, and is ment to be in the top portion of epPane.
@@ -128,19 +125,19 @@ public class EPortfolioView {
     // This pane holds the siteToolbarPane and the current page being viewed. Only meant to be displayed in the page editor view.
     // SiteToolbarPane should be to the left, and pageVBox should be center.
     BorderPane epPaneCenterSegment_Content;
-  
+    
     // THIS IS FOR SAVING AND LOADING SLIDE SHOWS
-     EPortfolioFileManager fileManager;
+    EPortfolioFileManager fileManager;
     
     // THIS IS FOR EXPORTING THE SLIDESHOW SITE
-     EPortfolioSiteExporter siteExporter;
-     
-
+    EPortfolioSiteExporter siteExporter;
+    
+    
     // THIS CLASS WILL HANDLE ALL ERRORS FOR THIS PROGRAM
     //private ErrorHandler errorHandler;
     // THIS IS THE SLIDE SHOW WE'RE WORKING WITH
     PagesModel pages;
-
+    
     // THIS CONTROLLER WILL ROUTE THE PROPER RESPONSES
     // ASSOCIATED WITH THE FILE TOOLBAR
     private FileController fileController;
@@ -161,16 +158,16 @@ public class EPortfolioView {
     private TextField pageFontSize;
     private ScrollPane slidesEditorScrollPane;
     
-     public EPortfolioView(EPortfolioFileManager initFileManager, EPortfolioSiteExporter initSiteExporter) {
+    public EPortfolioView(EPortfolioFileManager initFileManager, EPortfolioSiteExporter initSiteExporter) {
         // FIRST HOLD ONTO THE FILE MANAGER
         fileManager = initFileManager;
-
+        
         // AND THE SITE EXPORTER
         siteExporter = initSiteExporter;
-
+        
         // MAKE THE DATA MANAGING MODEL
         pages = new PagesModel(this);
-
+        
         bannerImageText = new Label();
         // WE'LL USE THIS ERROR HANDLER WHEN SOMETHING GOES WRONG
         //errorHandler = new ErrorHandler(this);
@@ -208,14 +205,14 @@ public class EPortfolioView {
         studentNameField = new TextField();
         pageTitle = new TextField();
         pageFooter = new TextField();
-        ObservableList<String> options = 
-        FXCollections.observableArrayList(
-            "Font 1",
-            "Font 2",
-            "Font 3",
-            "Font 4",
-            "Font 5"
-        );
+        ObservableList<String> options =
+                FXCollections.observableArrayList(
+                        "Font 1",
+                        "Font 2",
+                        "Font 3",
+                        "Font 4",
+                        "Font 5"
+                );
         pageFontChoice = new ComboBox(options);
         pageFontSize = new TextField();
         pageFontSize.setText("12");
@@ -247,149 +244,149 @@ public class EPortfolioView {
         workspaceModeToolbar.getStyleClass().add("tab-pane");
         epPaneTopSegment_Toolbars.getStyleClass().add("tab-pane");
     }
-
+    
     private void initWindow(String windowTitle) {
-	// SET THE WINDOW TITLE
-	primaryStage.setTitle(windowTitle);
-
-	// GET THE SIZE OF THE SCREEN
-	Screen screen = Screen.getPrimary();
-	Rectangle2D bounds = screen.getVisualBounds();
-
-	// AND USE IT TO SIZE THE WINDOW
-	primaryStage.setX(bounds.getMinX());
-	primaryStage.setY(bounds.getMinY());
-	//primaryStage.setWidth(bounds.getWidth());
-	//primaryStage.setHeight(bounds.getHeight());
-        	primaryStage.setWidth(1920);
-	primaryStage.setHeight(1080);
-
+        // SET THE WINDOW TITLE
+        primaryStage.setTitle(windowTitle);
+        
+        // GET THE SIZE OF THE SCREEN
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+        
+        // AND USE IT TO SIZE THE WINDOW
+        primaryStage.setX(bounds.getMinX());
+        primaryStage.setY(bounds.getMinY());
+        //primaryStage.setWidth(bounds.getWidth());
+        //primaryStage.setHeight(bounds.getHeight());
+        primaryStage.setWidth(1920);
+        primaryStage.setHeight(1080);
+        
         // SETUP THE UI, NOTE WE'LL ADD THE WORKSPACE LATER
-	epPane = new BorderPane();
-	//epPane.getStyleClass().add(CSS_CLASS_WORKSPACE);
-	epPane.setTop(epPaneTopSegment_Toolbars);
-                  epPane.setCenter(workspaceModeToolbar);
-	primaryScene = new Scene(epPane);
-	
+        epPane = new BorderPane();
+        //epPane.getStyleClass().add(CSS_CLASS_WORKSPACE);
+        epPane.setTop(epPaneTopSegment_Toolbars);
+        epPane.setCenter(workspaceModeToolbar);
+        primaryScene = new Scene(epPane);
+        
         // NOW TIE THE SCENE TO THE WINDOW, SELECT THE STYLESHEET
-                 primaryStage.setTitle("ePortfolio Generator");
-	// WE'LL USE TO STYLIZE OUR GUI CONTROLS, AND OPEN THE WINDOW
-	primaryScene.getStylesheets().add(STYLE_SHEET_UI);
-                epPane.getStyleClass().add("workspace");
-	primaryStage.setScene(primaryScene);
-	primaryStage.show();
+        primaryStage.setTitle("ePortfolio Generator");
+        // WE'LL USE TO STYLIZE OUR GUI CONTROLS, AND OPEN THE WINDOW
+        primaryScene.getStylesheets().add(STYLE_SHEET_UI);
+        epPane.getStyleClass().add("workspace");
+        primaryStage.setScene(primaryScene);
+        primaryStage.show();
     }
-     
-        private void initEventHandlers() {
-            
-	// FIRST THE FILE CONTROLS
-	fileController = new FileController(this, fileManager);
+    
+    private void initEventHandlers() {
         
-	newEPButton.setOnAction(e -> {
-	    fileController.handleNewEPRequest();
-	});
-	loadEPButton.setOnAction(e -> {
-	    fileController.handleLoadEPRequest();
-	});
-	saveEPButton.setOnAction(e -> {
-	    fileController.handleSaveEPRequest();
-	});
-        	saveAsEPButton.setOnAction(e -> {
-	    fileController.handleSaveAsEPRequest();
-	});
-	exportEPButton.setOnAction(e -> {
-	    fileController.handleViewEPRequest();
-	});
-	exitButton.setOnAction(e -> {
-	    fileController.handleExitRequest();
-	});
+        // FIRST THE FILE CONTROLS
+        fileController = new FileController(this, fileManager);
         
-	
-	// PAGE CONTROLS
-	pagesEditController = new PagesEditController(this);
-	addPageButton.setOnAction(e -> {
-	    pagesEditController.processAddPageRequest();
-	});
-	removePageButton.setOnAction(e -> {
-	    pagesEditController.processRemovePageRequest();
-	});
-	/*selectPageButton.setOnAction(e -> {
-	    pagesEditController.processSelectPageRequest();
-	});*/
+        newEPButton.setOnAction(e -> {
+            fileController.handleNewEPRequest();
+        });
+        loadEPButton.setOnAction(e -> {
+            fileController.handleLoadEPRequest();
+        });
+        saveEPButton.setOnAction(e -> {
+            fileController.handleSaveEPRequest();
+        });
+        saveAsEPButton.setOnAction(e -> {
+            fileController.handleSaveAsEPRequest();
+        });
+        exportEPButton.setOnAction(e -> {
+            fileController.handleViewEPRequest();
+        });
+        exitButton.setOnAction(e -> {
+            fileController.handleExitRequest();
+        });
         
-                  componentEditController = new ComponentEditController(this);
-                  // WORKSPACE CONTROLS
-	addTextComponentButton.setOnAction(e -> {
-	    componentEditController.processAddTextComponent();
-	});
-        	addImageComponentButton.setOnAction(e -> {
-	    componentEditController.processAddImageComponent();
-	});
-                	addVideoComponentButton.setOnAction(e -> {
-	    componentEditController.processAddVideoComponent();
-	});
-                  addSlideshowComponentButton.setOnAction(e -> {
-	    componentEditController.processAddSlideshowComponent();
-	});
-                  editComponentButton.setOnAction(e -> {
-	    componentEditController.processEditComponent();
-	});
-                  removeComponentButton.setOnAction(e -> {
-	    componentEditController.processRemoveComponent();
-	});
-                  selectLayoutButton.setOnAction(e -> {
-	    componentEditController.selectLayout();
-	});
-                  selectColorButton.setOnAction(e -> {
-	    componentEditController.selectColor();
-	});
-
-                  //pagetabpane listener
-                    pageSelectionPane.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tab> ov, Tab t, Tab t1) -> {
-                        int temp = pageSelectionPane.getSelectionModel().getSelectedIndex();
-                        if(temp>=0){
-                            pages.setSelectedpageObject(pages.getPages().get(temp));
-                            redrawCurrentPageText();
-                            t1.setText(pages.getSelectedpageObject().getPageTitle());
-                            setWorkspaceButtons(false);
-                            reloadCurrentPage();
-                        }else{
-                            setWorkspaceButtons(true);
-                        }
-                    });
+        
+        // PAGE CONTROLS
+        pagesEditController = new PagesEditController(this);
+        addPageButton.setOnAction(e -> {
+            pagesEditController.processAddPageRequest();
+        });
+        removePageButton.setOnAction(e -> {
+            pagesEditController.processRemovePageRequest();
+        });
+        /*selectPageButton.setOnAction(e -> {
+        pagesEditController.processSelectPageRequest();
+        });*/
+        
+        componentEditController = new ComponentEditController(this);
+        // WORKSPACE CONTROLS
+        addTextComponentButton.setOnAction(e -> {
+            componentEditController.processAddTextComponent();
+        });
+        addImageComponentButton.setOnAction(e -> {
+            componentEditController.processAddImageComponent();
+        });
+        addVideoComponentButton.setOnAction(e -> {
+            componentEditController.processAddVideoComponent();
+        });
+        addSlideshowComponentButton.setOnAction(e -> {
+            componentEditController.processAddSlideshowComponent();
+        });
+        editComponentButton.setOnAction(e -> {
+            componentEditController.processEditComponent();
+        });
+        removeComponentButton.setOnAction(e -> {
+            componentEditController.processRemoveComponent();
+        });
+        selectLayoutButton.setOnAction(e -> {
+            componentEditController.selectLayout();
+        });
+        selectColorButton.setOnAction(e -> {
+            componentEditController.selectColor();
+        });
+        
+        //pagetabpane listener
+        pageSelectionPane.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tab> ov, Tab t, Tab t1) -> {
+            int temp = pageSelectionPane.getSelectionModel().getSelectedIndex();
+            if(temp>=0){
+                pages.setSelectedpageObject(pages.getPages().get(temp));
+                redrawCurrentPageText();
+                t1.setText(pages.getSelectedpageObject().getPageTitle());
+                setWorkspaceButtons(false);
+                reloadCurrentPage();
+            }else{
+                setWorkspaceButtons(true);
+            }
+        });
     }
-        public void initPageInputsListeners() {
-            //pagetitle,footer,studentname and imageview listeners
-              pageTitle.textProperty().addListener(e -> {
-                  pages.getSelectedpageObject().setPageTitle(pageTitle.getText());
-                  pageSelectionPane.getSelectionModel().getSelectedItem().setText(pageTitle.getText());
-                  //reloadPages();
-              });
-              pageFooter.textProperty().addListener(e -> {
-                  pages.getSelectedpageObject().setPageFooter(pageFooter.getText());
-                  //reloadPages();
-              });
-                    studentNameField.textProperty().addListener(e -> {
-                        studentName = studentNameField.getText();
-                        //reloadPages();
-                    });
-              
-                selectBannerImageButton.setOnAction(e -> {
-                  try {
-                      componentEditController.selectBannerImage();
-                  } catch (MalformedURLException ex) {
-                      Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
-                  }
-	});
-              pageFontSize.textProperty().addListener(e -> {
-                  pages.getSelectedpageObject().setPageFontSize(pageFontSize.getText());
-                  //reloadPages();
-              });
-              pageFontChoice.valueProperty().addListener(e -> {
-                  pages.getSelectedpageObject().setPageFontChoice(pageFontChoice.getSelectionModel().getSelectedIndex());
-              });
+    public void initPageInputsListeners() {
+        //pagetitle,footer,studentname and imageview listeners
+        pageTitle.textProperty().addListener(e -> {
+            pages.getSelectedpageObject().setPageTitle(pageTitle.getText());
+            pageSelectionPane.getSelectionModel().getSelectedItem().setText(pageTitle.getText());
+            //reloadPages();
+        });
+        pageFooter.textProperty().addListener(e -> {
+            pages.getSelectedpageObject().setPageFooter(pageFooter.getText());
+            //reloadPages();
+        });
+        studentNameField.textProperty().addListener(e -> {
+            studentName = studentNameField.getText();
+            //reloadPages();
+        });
+        
+        selectBannerImageButton.setOnAction(e -> {
+            try {
+                componentEditController.selectBannerImage();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        pageFontSize.textProperty().addListener(e -> {
+            pages.getSelectedpageObject().setPageFontSize(pageFontSize.getText());
+            //reloadPages();
+        });
+        pageFontChoice.valueProperty().addListener(e -> {
+            pages.getSelectedpageObject().setPageFontChoice(pageFontChoice.getSelectionModel().getSelectedIndex());
+        });
     }
-    // Creates the intended layout schemes of major panes. This is meant to be called AFTER all the children panels are constructed and 
+    // Creates the intended layout schemes of major panes. This is meant to be called AFTER all the children panels are constructed and
     // before the main window is constructed.
     private void setLayoutHierarchy(){
         epPaneTopSegment_Toolbars = new BorderPane();
@@ -416,9 +413,9 @@ public class EPortfolioView {
         siteToolbarPane = new FlowPane();
         addPageButton = initChildButton(siteToolbarPane, "page/add.png",	"Add page",    "horizontal_toolbar_button", false);
         removePageButton = initChildButton(siteToolbarPane, "page/remove.png",	"Remove page",	    "horizontal_toolbar_button", true);
-       // selectPageButton = initChildButton(siteToolbarPane, "page/select.png",	"Select page",    "horizontal_toolbar_button", true);
+        // selectPageButton = initChildButton(siteToolbarPane, "page/select.png",	"Select page",    "horizontal_toolbar_button", true);
     }
-
+    
     private void initPageEditorWorkspaceToolbar(){
         pageEditorWorkspaceToolbar = new FlowPane();
         addTextComponentButton = initChildButton(pageEditorWorkspaceToolbar, "workspace/addtext.png",	"Add text component",    "vertical_toolbar_button", true);
@@ -452,40 +449,40 @@ public class EPortfolioView {
     
     public Button initChildButton(Pane toolbar, String iconFileName, String tooltip, String cssClass, boolean disabled) {
         
-	String imagePath = "file:" + PATH_ICONS + iconFileName;
-	Image buttonImage = new Image(imagePath) {};
-	Button button = new Button();
-	button.getStyleClass().add(cssClass);
-	button.setDisable(disabled);
-	button.setGraphic(new ImageView(buttonImage));
-	Tooltip buttonTooltip = new Tooltip(tooltip);
-	button.setTooltip(buttonTooltip);
-	toolbar.getChildren().add(button);
-	return button;
+        String imagePath = "file:" + PATH_ICONS + iconFileName;
+        Image buttonImage = new Image(imagePath) {};
+        Button button = new Button();
+        button.getStyleClass().add(cssClass);
+        button.setDisable(disabled);
+        button.setGraphic(new ImageView(buttonImage));
+        Tooltip buttonTooltip = new Tooltip(tooltip);
+        button.setTooltip(buttonTooltip);
+        toolbar.getChildren().add(button);
+        return button;
     }
     
-        public void webView() throws MalformedURLException {
-	// SETUP THE UI
-	webView = new WebView();
-	//scrollPane = new ScrollPane(webView);
-	
-	// GET THE URL
-	String indexPath = "./sites/dummy/index.html";
-	File indexFile = new File(indexPath);
-	URL indexURL = indexFile.toURI().toURL();
-	
-	// SETUP THE WEB ENGINE AND LOAD THE URL
-	webEngine = webView.getEngine();
-	webEngine.load(indexURL.toExternalForm());
-	webEngine.setJavaScriptEnabled(true);
-	
-	// SET THE WINDOW TITLE
-	//this.setTitle(slides.getTitle());
-
-	// NOW PUT STUFF IN THE STAGE'S SCENE
-	//Scene scene = new Scene(webView, 1100, 650);
-	//setScene(scene);
-	//this.showAndWait();
+    public void webView() throws MalformedURLException {
+        // SETUP THE UI
+        webView = new WebView();
+        //scrollPane = new ScrollPane(webView);
+        
+        // GET THE URL
+        String indexPath = "./sites/dummy/index.html";
+        File indexFile = new File(indexPath);
+        URL indexURL = indexFile.toURI().toURL();
+        
+        // SETUP THE WEB ENGINE AND LOAD THE URL
+        webEngine = webView.getEngine();
+        webEngine.load(indexURL.toExternalForm());
+        webEngine.setJavaScriptEnabled(true);
+        
+        // SET THE WINDOW TITLE
+        //this.setTitle(slides.getTitle());
+        
+        // NOW PUT STUFF IN THE STAGE'S SCENE
+        //Scene scene = new Scene(webView, 1100, 650);
+        //setScene(scene);
+        //this.showAndWait();
     }
     
     // Initialize the UI for a new session
@@ -493,7 +490,7 @@ public class EPortfolioView {
         workspaceModeToolbar.getTabs().add(selectPageEditorWorkspaceTab);
         workspaceModeToolbar.getTabs().add(selectSiteViewerWorkspace);
     }
-
+    
     public PagesModel getPages() {
         return pages;
     }
@@ -525,25 +522,32 @@ public class EPortfolioView {
         VBox vbox = (VBox) test.getContent();
         vbox.getChildren().clear();
         for (Component component : pages.getSelectedpageObject().getComponents()) {
-            ComponentEditView componentEditor = new ComponentEditView(this, component);            
+            ComponentEditView componentEditor = new ComponentEditView(this, component);
             if (pages.getSelectedpageObject().isSelectedComponent(component))
-		componentEditor.getStyleClass().add("selected_comp");
-	    else
-		componentEditor.getStyleClass().add("not_selected_comp");
-
+                componentEditor.getStyleClass().add("selected_comp");
+            else
+                componentEditor.getStyleClass().add("not_selected_comp");
+            
             vbox.getChildren().add(componentEditor);
-	    componentEditor.setOnMousePressed(e -> {
-		pages.getSelectedpageObject().setSelectedComponent(component);
+            componentEditor.setOnMousePressed(e -> {
+                pages.getSelectedpageObject().setSelectedComponent(component);
                 try {
+                    if(pages.getSelectedpageObject().isSelectedComponent(null)){
+                        removeComponentButton.setDisable(true);
+                        editComponentButton.setDisable(true);
+                    }else{
+                        removeComponentButton.setDisable(false);
+                        editComponentButton.setDisable(false);
+                    }
                     this.reloadComponents(test);
                 } catch (MalformedURLException ex) {
                     Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
                 }
-	    });
-            }
-            //ComponentsEditView slideEditor = new ComponentsEditView(this, slide);
+            });
         }
-
+        //ComponentsEditView slideEditor = new ComponentsEditView(this, slide);
+    }
+    
     private void redrawCurrentPageText() {
         pageTitle.setText(pages.getSelectedpageObject().getPageTitle());
         pageFooter.setText(pages.getSelectedpageObject().getPageFooter());
@@ -553,13 +557,13 @@ public class EPortfolioView {
         pageFontSize.setText(pages.getSelectedpageObject().getPageFontSize());
         //bannerImage.setImage(pages.getSelectedpageObject().getBannerImage());
     }
-
+    
     public void setBannerImage(File file) throws MalformedURLException {
         URL fileURL = file.toURI().toURL();
         Image slideImage = new Image(fileURL.toExternalForm());
         bannerImage = bannerImageText.getText();
     }
-
+    
     public void reloadCurrentPage() {
         try {
             reloadComponents((ScrollPane) pageSelectionPane.getSelectionModel().getSelectedItem().getContent());
@@ -567,12 +571,17 @@ public class EPortfolioView {
             Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     private void setWorkspaceButtons(boolean b) {
         addTextComponentButton.setDisable(b);
         addImageComponentButton.setDisable(b);
         addVideoComponentButton.setDisable(b);
         addSlideshowComponentButton.setDisable(b);
     }
-   
+    
+    public void disableEditButton() {
+        editComponentButton.setDisable(true);
+        removeComponentButton.setDisable(true);
+    }
+    
 }

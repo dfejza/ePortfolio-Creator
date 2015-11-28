@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package ep.controller;
 
 import ep.model.Component;
@@ -30,8 +30,8 @@ public class VideoSelectionController {
     /**
      * Default contstructor doesn't need to initialize anything
      */
-    public VideoSelectionController(EPortfolioView initUi) {   
-	ui = initUi;
+    public VideoSelectionController(EPortfolioView initUi) {
+        ui = initUi;
     }
     
     /**
@@ -40,25 +40,25 @@ public class VideoSelectionController {
      */
     //public void processSelectImage(Component componentToEdit) {
     public void processSelectVideo(Component currentComponent) {
-	FileChooser imageFileChooser = new FileChooser();
-	
-	// SET THE STARTING DIRECTORY
-	imageFileChooser.setInitialDirectory(new File("./videos/"));
-	
-	// LET'S ONLY SEE IMAGE FILES
-	FileChooser.ExtensionFilter jpgFilter = new FileChooser.ExtensionFilter("MP4 files (*.mp4)", "*.MP4");
-	FileChooser.ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("WebM files (*.webm)", "*.WEBM");
-	FileChooser.ExtensionFilter gifFilter = new FileChooser.ExtensionFilter("Ogg files (*.ogg)", "*.OGG");
-	imageFileChooser.getExtensionFilters().addAll(jpgFilter, pngFilter, gifFilter);
-	
-	// LET'S OPEN THE FILE CHOOSER
-	File file = imageFileChooser.showOpenDialog(null);
-	if (file != null) {
-	    //String path = file.getPath().substring(0, file.getPath().indexOf(file.getName()));
-	    //String fileName = file.getName();
-                      currentComponent.videoComponent(file.toURI().toString());
-	}else{
-                    currentComponent.videoComponent(null);
+        FileChooser imageFileChooser = new FileChooser();
+        
+        // SET THE STARTING DIRECTORY
+        imageFileChooser.setInitialDirectory(new File("./videos/"));
+        
+        // LET'S ONLY SEE IMAGE FILES
+        FileChooser.ExtensionFilter jpgFilter = new FileChooser.ExtensionFilter("MP4 files (*.mp4)", "*.MP4");
+        FileChooser.ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("WebM files (*.webm)", "*.WEBM");
+        FileChooser.ExtensionFilter gifFilter = new FileChooser.ExtensionFilter("Ogg files (*.ogg)", "*.OGG");
+        imageFileChooser.getExtensionFilters().addAll(jpgFilter, pngFilter, gifFilter);
+        
+        // LET'S OPEN THE FILE CHOOSER
+        File file = imageFileChooser.showOpenDialog(null);
+        if (file != null) {
+            //String path = file.getPath().substring(0, file.getPath().indexOf(file.getName()));
+            //String fileName = file.getName();
+            currentComponent.videoComponent(file.toURI().toString());
+        }else{
+            currentComponent.videoComponent(null);
         }
     }
     
@@ -67,13 +67,13 @@ public class VideoSelectionController {
         dialog.setTitle("Video Parameters");
         dialog.setHeaderText("Enter the parameters for this video");
         dialog.setContentText("Please enter your name:");
-
+        
         // Create the username and password labels and fields.
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(20, 150, 10, 10));
-
+        
         TextField caption = new TextField();
         TextField displayWidth = new TextField();
         TextField displayHeight = new TextField();
@@ -89,11 +89,11 @@ public class VideoSelectionController {
         dialog.getDialogPane().setContent(grid);
         ButtonType buttonTypeOk = new ButtonType("Okay", ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
-
+        
         dialog.setResultConverter(new Callback<ButtonType, Component>() {
             @Override
             public Component call(ButtonType b) {
-
+                
                 if (b == buttonTypeOk) {
                     currentComponent.setParam(displayHeight.getText(), displayWidth.getText(), caption.getText());
                 }
@@ -103,5 +103,5 @@ public class VideoSelectionController {
         
         Optional<Component> result = dialog.showAndWait();
     }
-
+    
 }

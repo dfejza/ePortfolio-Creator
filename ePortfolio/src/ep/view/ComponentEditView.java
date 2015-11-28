@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package ep.view;
 
 import ep.controller.ImageSelectionController;
@@ -108,76 +108,76 @@ public class ComponentEditView extends VBox{
      * update the image displayed.
      */
     public void updateSlideImage() throws MalformedURLException {
-	//String imagePath = slide.getImagePath() + SLASH + slide.getImageFileName();
-                  String imagePath = component.getImagePath();
-	File file = new File(imagePath);
+        //String imagePath = slide.getImagePath() + SLASH + slide.getImageFileName();
+        String imagePath = component.getImagePath();
+        File file = new File(imagePath);
         
-	//try {
-	    // GET AND SET THE IMAGE
-	    URL fileURL = file.toURI().toURL();
-	    Image slideImage = new Image(fileURL.toExternalForm());
-	    imageSelectionView.setImage(slideImage);
-	    
-	    // AND RESIZE IT
-	    imageSelectionView.setFitWidth(component.getWidth());
-	    imageSelectionView.setFitHeight(component.getHeight());
-                    
-            /*	} catch (Exception e) {
-            ErrorHandler eH = new ErrorHandler(null);
-            eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
-            }*/
-    }   
-    
-        public void updateVideo() {
-	//String imagePath = slide.getImagePath() + SLASH + slide.getImageFileName();
-                  String imagePath = component.getImagePath();
-                  Media media = new Media(imagePath);
-                    // Create the player and set to play automatically.
-                    MediaPlayer mediaPlayer = new MediaPlayer(media);
-                    mediaPlayer.setAutoPlay(false);
-                         // Create the view and add it to the Scene.
-                    mediaView = new MediaView(mediaPlayer);
-	    // AND RESIZE IT
-	    mediaView.setFitWidth(component.getWidth());
-	    mediaView.setFitHeight(component.getHeight());
-                    
-            /*	} catch (Exception e) {
-            ErrorHandler eH = new ErrorHandler(null);
-            eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
-            }*/
-    }   
-
-    private void drawBodyComp() {
-            text = new Text();
-            text.setWrappingWidth(400);
-            text.setTextAlignment(TextAlignment.LEFT);           
-            text.setText(component.getText());
-
-            // LAY EVERYTHING OUT INSIDE THIS COMPONENT
-            getChildren().add(text);
+        //try {
+        // GET AND SET THE IMAGE
+        URL fileURL = file.toURI().toURL();
+        Image slideImage = new Image(fileURL.toExternalForm());
+        imageSelectionView.setImage(slideImage);
+        
+        // AND RESIZE IT
+        imageSelectionView.setFitWidth(component.getWidth());
+        imageSelectionView.setFitHeight(component.getHeight());
+        
+        /*	} catch (Exception e) {
+        ErrorHandler eH = new ErrorHandler(null);
+        eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
+        }*/
     }
-
+    
+    public void updateVideo() {
+        //String imagePath = slide.getImagePath() + SLASH + slide.getImageFileName();
+        String imagePath = component.getImagePath();
+        Media media = new Media(imagePath);
+        // Create the player and set to play automatically.
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(false);
+        // Create the view and add it to the Scene.
+        mediaView = new MediaView(mediaPlayer);
+        // AND RESIZE IT
+        mediaView.setFitWidth(component.getWidth());
+        mediaView.setFitHeight(component.getHeight());
+        
+        /*	} catch (Exception e) {
+        ErrorHandler eH = new ErrorHandler(null);
+        eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
+        }*/
+    }
+    
+    private void drawBodyComp() {
+        text = new Text();
+        text.setWrappingWidth(400);
+        text.setTextAlignment(TextAlignment.LEFT);
+        text.setText(component.getText());
+        
+        // LAY EVERYTHING OUT INSIDE THIS COMPONENT
+        getChildren().add(text);
+    }
+    
     private void drawImageComp() throws MalformedURLException {
         imageSelectionView = new ImageView();
         updateSlideImage();
         getChildren().add(imageSelectionView);
         getChildren().add(new Text(component.getText()));
     }
-
+    
     private void drawVideoComp() {
         mediaView = new MediaView();
         updateVideo();
         getChildren().add(mediaView);
         getChildren().add(new Text(component.getText()));
     }
-
+    
     private void drawSlideShowComp() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     private void drawListComp() {
-            String[] listData = component.getListData();
-            String line = "";
+        String[] listData = component.getListData();
+        String line = "";
         for (String listData1 : listData) {
             getChildren().add(new Text(("- "+listData1)));
         }
@@ -185,14 +185,14 @@ public class ComponentEditView extends VBox{
         // LAY EVERYTHING OUT INSIDE THIS COMPONENT
         //getChildren().add(text);
     }
-
+    
     private void drawHeaderComp() {
-                  text = new Text();
-                  text.setWrappingWidth(600);
-                  text.setTextAlignment(TextAlignment.CENTER);           
-                  text.setText(component.getText());
-                  text.getStyleClass().add("HEADER_FONT");
-                  // LAY EVERYTHING OUT INSIDE THIS COMPONENT
-                  getChildren().add(text);
+        text = new Text();
+        text.setWrappingWidth(600);
+        text.setTextAlignment(TextAlignment.CENTER);
+        text.setText(component.getText());
+        text.getStyleClass().add("HEADER_FONT");
+        // LAY EVERYTHING OUT INSIDE THIS COMPONENT
+        getChildren().add(text);
     }
 }
