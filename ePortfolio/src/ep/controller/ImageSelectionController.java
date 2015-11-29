@@ -12,6 +12,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
@@ -79,12 +80,29 @@ public class ImageSelectionController {
         grid.setVgap(10);
         grid.setPadding(new Insets(20, 150, 10, 10));
         
-        TextField caption = new TextField();
-        TextField displayWidth = new TextField();
-        TextField displayHeight = new TextField();
+        TextField caption = new TextField(currentComponent.getText());
+        TextField displayWidth = new TextField(Double.toString(currentComponent.getWidth()));
+        TextField displayHeight = new TextField(Double.toString(currentComponent.getHeight()));
         RadioButton neither = new RadioButton();
         RadioButton left = new RadioButton();
         RadioButton right = new RadioButton();
+        final ToggleGroup group = new ToggleGroup();
+        neither.setToggleGroup(group);
+        left.setToggleGroup(group);
+        right.setToggleGroup(group);
+        switch(currentComponent.getJust()){
+            case 1:
+                left.setSelected(true);
+                break;
+            case 2:
+                right.setSelected(true);
+                break;
+            case 3:
+                neither.setSelected(true);
+                break;
+            default:
+                break;
+        }
         caption.setPromptText("Enter caption for image here");
         displayHeight.setPromptText("800");
         displayWidth.setPromptText("600");

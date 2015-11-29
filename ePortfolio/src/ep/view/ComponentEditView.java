@@ -7,13 +7,17 @@ package ep.view;
 
 import ep.controller.ImageSelectionController;
 import ep.model.Component;
+import ep.model.ssm.Slide;
+import ep.model.ssm.SlideShowModel;
 import java.awt.Font;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -46,6 +50,8 @@ public class ComponentEditView extends VBox{
     VBox captionVBox;
     Text text;
     TextField captionTextField;
+    int index;
+    String imagePath;
     
     // PROVIDES RESPONSES FOR IMAGE SELECTION
     ImageSelectionController imageController;
@@ -54,6 +60,7 @@ public class ComponentEditView extends VBox{
         try {
             // KEEP THIS FOR LATER
             ui = initUi;
+            index = 0;
             
             // FIRST SELECT THE CSS STYLE CLASS FOR THIS CONTAINER
             this.getStyleClass().add("component_outline");
@@ -69,35 +76,6 @@ public class ComponentEditView extends VBox{
             if(type==6) drawListComp();
             if(type==9) drawHeaderComp();
             
-            // MAKE SURE WE ARE DISPLAYING THE PROPER IMAGE
-            
-            /*
-            // SETUP THE CAPTION CONTROLS
-            captionVBox = new VBox();
-            captionLabel = new Label(props.getProperty(LanguagePropertyType.LABEL_CAPTION));
-            captionTextField = new TextField();
-            captionTextField.setText(slide.getCaption());
-            captionVBox.getChildren().add(captionLabel);
-            captionVBox.getChildren().add(captionTextField);
-            
-            // LAY EVERYTHING OUT INSIDE THIS COMPONENT
-            getChildren().add(imageSelectionView);
-            getChildren().add(captionVBox);
-            
-            // SETUP THE EVENT HANDLERS
-            imageController = new ImageSelectionController(ui);
-            imageSelectionView.setOnMousePressed(e -> {
-            imageController.processSelectImage(slide, this);
-            });
-            captionTextField.textProperty().addListener(e -> {
-            String text = captionTextField.getText();
-            slide.setCaption(text);
-            ui.updateFileToolbarControls(false);
-            });*/
-            
-            // CHOOSE THE STYLE
-            //captionLabel.getStyleClass().add(CSS_CLASS_CAPTION_PROMPT);
-            //captionTextField.getStyleClass().add(CSS_CLASS_CAPTION_TEXT_FIELD);
         } catch (MalformedURLException ex) {
             Logger.getLogger(ComponentEditView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -172,7 +150,78 @@ public class ComponentEditView extends VBox{
     }
     
     private void drawSlideShowComp() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        SlideShowModel ss = component.getSS();
+        ObservableList<Slide> slides = ss.getSlides();
+        imageSelectionView = new ImageView();
+        imagePath = slides.get(index).getImagePath() + "/" + slides.get(0).getImageFileName();
+        File file = new File(imagePath);
+        URL fileURL = null;
+        try {
+            fileURL = file.toURI().toURL();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ComponentEditView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Image slideImage = new Image(fileURL.toExternalForm());
+        imageSelectionView.setImage(slideImage);
+        imageSelectionView.setFitWidth(800);
+        imageSelectionView.setFitHeight(600);
+        getChildren().add(imageSelectionView);
+        Text caption = new Text(imagePath);
+        getChildren().add(caption);
+        caption.setText(slides.get(index).getCaption());
+        
+        // YES, NO, AND CANCEL BUTTONS
+        Button prev = new Button();
+        prev.setText("Previous Image");
+        Button next = new Button();
+        next.setText("Next Image");
+        
+        // NOW ORGANIZE OUR BUTTONS
+        HBox buttonBox = new HBox();
+        buttonBox.getChildren().add(prev);
+        buttonBox.getChildren().add(next);
+        
+        getChildren().add(buttonBox);
+        
+        next.setOnAction(e -> {
+            index++;
+            if(index>=slides.size()){
+                index=0;
+            }
+            imagePath = slides.get(index).getImagePath() + "/" + slides.get(index).getImageFileName();
+            File fileTemp = new File(imagePath);
+            URL fileURLTemp = null;
+            try {
+                fileURLTemp = fileTemp.toURI().toURL();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ComponentEditView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Image slideImageTemp = new Image(fileURLTemp.toExternalForm());
+            
+            imageSelectionView.setImage(slideImageTemp);
+            caption.setText(slides.get(index).getCaption());
+        });
+        
+        prev.setOnAction(e -> {
+            index--;
+            if(index==-1){
+                index=slides.size()-1;
+            }
+            imagePath = slides.get(index).getImagePath() + "/" + slides.get(index).getImageFileName();
+            File fileTemp = new File(imagePath);
+            URL fileURLTemp = null;
+            try {
+                fileURLTemp = fileTemp.toURI().toURL();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ComponentEditView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Image slideImageTemp = new Image(fileURLTemp.toExternalForm());
+            
+            imageSelectionView.setImage(slideImageTemp);
+            caption.setText(slides.get(index).getCaption());
+        });
+        
+        
     }
     
     private void drawListComp() {

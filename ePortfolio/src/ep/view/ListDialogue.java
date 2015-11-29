@@ -100,4 +100,81 @@ public class ListDialogue {
         Optional<Component> result = dialog.showAndWait();
         return currentComponent;
     }
+    
+    public void editListCreate(Component currentComponent) {
+        Dialog<Component> dialog = new Dialog<>();
+        dialog.setTitle("List Component");
+        dialog.setHeaderText("Enter the parameters for this list");
+        dialog.setResizable(false);
+        dialog.getDialogPane().setPrefSize(400, 320);
+        DialogPane dialogPane = dialog.getDialogPane();
+        dialogPane.getStylesheets().add(
+                getClass().getResource(STYLE_SHEET_UI).toExternalForm());
+        BorderPane wrapper = new BorderPane();
+        FlowPane body = new FlowPane();
+        FlowPane grid = new FlowPane();
+        
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(10, 1, 10, 1));
+        body.setHgap(10);
+        body.setVgap(10);
+        
+        TextField listConents = new TextField();
+        listConents.setPromptText("Enter list item here!");
+        listConents.setPrefWidth(360);
+        Button addToList = new Button();
+        Button removeFromList = new Button();
+        addToList.setText("Add To List");
+        removeFromList.setText("Remove Selected");
+        grid.getChildren().add(new Label("List Text:"));
+        grid.getChildren().add(listConents);
+        grid.getChildren().add(addToList);
+        grid.getChildren().add(removeFromList);
+        
+        ListView<String> list = new ListView<String>();
+        ObservableList<String> items =FXCollections.observableArrayList ();
+        
+        String[] listData = currentComponent.getListData();
+        for (String listData1 : listData) {
+            items.add(listData1);
+        }
+        
+        list.setItems(items);
+        list.setPrefWidth(420);
+        list.setPrefHeight(200);
+        removeFromList.setDisable(false);
+        body.getChildren().add(list);
+        addToList.setOnAction(e -> {
+            items.add(listConents.getText());
+            listConents.setText("");
+            removeFromList.setDisable(false);
+        });
+        removeFromList.setOnAction(e -> {
+            list.getItems().remove(list.getSelectionModel().getSelectedItem());
+            if(list.getItems().size()==0)
+                removeFromList.setDisable(true);
+        });
+        wrapper.setTop(grid);
+        wrapper.setCenter(body);
+        
+        
+        
+        dialog.getDialogPane().setContent(wrapper);
+        ButtonType buttonTypeOk = new ButtonType("Okay", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
+        
+        dialog.setResultConverter((ButtonType b) -> {
+            if (b == buttonTypeOk) {
+                int elementCount = items.size();
+                String[] listElements = new String[elementCount];
+                for(int i = 0; i<elementCount;i++){
+                    listElements[i] = items.get((i));
+                }
+                currentComponent.listComponent(listElements,elementCount);
+            }
+            return null;
+        });
+        Optional<Component> result = dialog.showAndWait();
+    }
 }

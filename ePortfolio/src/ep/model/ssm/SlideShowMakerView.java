@@ -5,7 +5,10 @@
 */
 package ep.model.ssm;
 
+import ep.controller.ComponentEditController;
+import ep.model.Component;
 import ep.model.ssm.SlideShowModel;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,6 +20,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -50,6 +55,7 @@ public class SlideShowMakerView {
     Button removeSlideButton;
     Button moveSlideUpButton;
     Button moveSlideDownButton;
+    Button okayButton;
     
     // FOR THE SLIDE SHOW TITLE
     FlowPane titlePane;
@@ -125,17 +131,20 @@ public class SlideShowMakerView {
     public static String    LABEL_SLIDE_SHOW_TITLE = "slide_show_title";
     public static String    LABEL_LANGUAGE_SELECTION_PROMPT = "Select a Language:";
     public static String    OK_BUTTON_TEXT = "OK";
-    
+    Component currentComponent;
+    ComponentEditController componentController;
     /**
      * Default constructor, it initializes the GUI for use, but does not yet
      * load all the language-dependent controls, that needs to be done via the
      * startUI method after the user has selected a language.
+     * @param currentComponent
      */
     /*    public SlideShowMakerView(SlideShowFileManager initFileManager,
     SlideShowSiteExporter initSiteExporter) {*/
-    public SlideShowMakerView() {
-        // MAKE THE DATA MANAGING MODEL
+    public SlideShowMakerView(Component currentComponent, ComponentEditController aThis) {
         slideShow = new SlideShowModel(this);
+        this.currentComponent = currentComponent;
+        this.componentController = aThis;
     }
     
     // ACCESSOR METHODS
@@ -160,8 +169,14 @@ public class SlideShowMakerView {
         // TO THE WINDOW YET
         initWorkspace();
         
+        
         // NOW SETUP THE EVENT HANDLERS
         initEventHandlers();
+        
+        if(currentComponent.getComponentType()==4){
+            slideShow = currentComponent.getSS();
+            reloadSlideShowPane();
+        }
         
         // AND FINALLY START UP THE WINDOW (WITHOUT THE WORKSPACE)
         // KEEP THE WINDOW FOR LATER
@@ -188,9 +203,16 @@ public class SlideShowMakerView {
         slidesEditorScrollPane.setFitToHeight(true);
         initTitleControls();
         
+        // Init the OKAY button
+        okayButton = new Button();
+        okayButton.setText("Save Slide Show");
+        StackPane buttonbox = new StackPane(okayButton);
+        buttonbox.setAlignment(okayButton, Pos.BOTTOM_RIGHT);
+        
         // NOW PUT THESE TWO IN THE WORKSPACE
         workspace.setTop(slideEditToolbar);
         workspace.setCenter(slidesEditorScrollPane);
+        workspace.setBottom(buttonbox);
         
         // SETUP ALL THE STYLE CLASSES
         workspace.getStyleClass().add(CSS_CLASS_WORKSPACE);
@@ -213,6 +235,9 @@ public class SlideShowMakerView {
         });
         moveSlideDownButton.setOnAction(e -> {
             editController.processMoveSlideDownRequest();
+        });
+        okayButton.setOnAction(e -> {
+            exportTheStuff();
         });
     }
     
@@ -321,6 +346,21 @@ public class SlideShowMakerView {
             slidesEditorPane.getChildren().add(titlePane);
         titleTextField.setText(slideShow.getTitle());
     }
+
+    private void exportTheStuff() {
+        int type = 1;
+        if(currentComponent.getComponentType() == 4){
+            type = 2;
+        }
+        currentComponent.slideShowComponent(slideShow);
+        if(type==1){
+            componentController.reloadComponents();
+        }else{
+            componentController.reload();
+        }
+            
+        primaryStage.close();
+    }
     
     
     /**
@@ -347,6 +387,7 @@ public class SlideShowMakerView {
         public void processAddSlideRequest() {
             SlideShowModel slideShow = ui.getSlideShow();
             slideShow.addSlide(DEFAULT_SLIDE_IMAGE, PATH_SLIDE_SHOW_IMAGES, "DEFAULT CAPTION");
+            ui.reloadSlideShowPane();
         }
         
         /**
@@ -366,6 +407,7 @@ public class SlideShowMakerView {
         public void processMoveSlideUpRequest() {
             SlideShowModel slideShow = ui.getSlideShow();
             slideShow.moveSelectedSlideUp();
+            ui.reloadSlideShowPane();
         }
         
         /**
@@ -375,6 +417,7 @@ public class SlideShowMakerView {
         public void processMoveSlideDownRequest() {
             SlideShowModel slideShow = ui.getSlideShow();
             slideShow.moveSelectedSlideDown();
+            ui.reloadSlideShowPane();
         }
     }
 }

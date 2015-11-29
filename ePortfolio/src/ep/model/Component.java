@@ -6,6 +6,7 @@
 package ep.model;
 
 import ep.model.ssm.SlideShow;
+import ep.model.ssm.SlideShowModel;
 import javafx.scene.control.ListView;
 
 /**
@@ -23,7 +24,7 @@ public class Component {
     private String hyperlinkAddress;
     private int hyperlinkComponentInject;
     private String[] listData;
-    private SlideShow slideShow;
+    private SlideShowModel slideShow;
     private String width;
     private String height;
     private String caption;
@@ -31,11 +32,11 @@ public class Component {
     
     public Component(){
         type = 0;
-        font = null;
-        text = null;
+        font = "Font 1";
+        text = "Enter text here.";
         imageLoc = null;
-        width = null;
-        height = null;
+        width = "1024.0";
+        height = "768.0";
         justification = 1;
         hyperlinkStartChar = 0;
         hyperlinkEndChar = 0;
@@ -60,11 +61,22 @@ public class Component {
         this.text = caption;
         this.justification = just;
     }
+    public int getJust(){
+        return justification;
+    }
     
     public void bodyComponent(String bodytxt, String fontChoice){
-        type = 1;
-        text = bodytxt;
-        font = fontChoice;
+        this.type = 1;
+        this.text = bodytxt;
+        this.font = fontChoice;
+    }
+    public void slideShowComponent(SlideShowModel ss){
+        this.type = 4;
+        this.slideShow = ss;
+    }
+    
+    public String getFontType(){
+        return font;
     }
     
     public String getText(){
@@ -109,5 +121,9 @@ public class Component {
     
     public int fetchComponentType() {
         return type;
+    }
+
+    public SlideShowModel getSS() {
+        return slideShow;
     }
 }

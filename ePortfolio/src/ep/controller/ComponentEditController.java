@@ -66,11 +66,13 @@ public class ComponentEditController {
     }
     
     public void processAddSlideshowComponent() {
-        SlideShowMakerView ssmui = new SlideShowMakerView();
+        currentComponent = new Component();
+        SlideShowMakerView ssmui = new SlideShowMakerView(currentComponent,this);
         Stage stage = new Stage();
         stage.initStyle(StageStyle.UTILITY);
-        String appTitle = "Slide Show Creater";
+        String appTitle = "Slide Show Creator";
         ssmui.startUI(stage, appTitle);
+        
     }
     
     public void processAddVideoComponent() {
@@ -81,9 +83,51 @@ public class ComponentEditController {
         ui.reloadCurrentPage();
     }
     
+    public void reloadComponents(){
+        ui.getPages().getSelectedpageObject().addComponent(currentComponent);
+        ui.reloadCurrentPage();
+    }
+    public void reload(){
+        ui.reloadCurrentPage();
+    }
+    
     public void processEditComponent() {
         int type = 0;
-        type = ui.getPages().getSelectedpageObject().getSelectedComponent().fetchComponentType();
+        Component editedComponet = ui.getPages().getSelectedpageObject().getSelectedComponent();
+        type = editedComponet.fetchComponentType();
+        switch (type) {
+            case 1:
+                //body
+                pDialogue.editParagraphCreate(currentComponent);
+                break;
+            case 2:
+                imagesel.processSelectImage(currentComponent);
+                imagesel.askImageParameters(currentComponent);
+                break;
+            case 3:
+                videoSel.processSelectVideo(currentComponent);
+                videoSel.askVideoParameters(currentComponent);
+                break;
+            case 4:
+                SlideShowMakerView ssmui = new SlideShowMakerView(currentComponent,this);
+                Stage stage = new Stage();
+                stage.initStyle(StageStyle.UTILITY);
+                String appTitle = "Slide Show Creator";
+                ssmui.startUI(stage, appTitle);
+                break;
+            case 6:
+                //list
+                lDialogue.editListCreate(currentComponent);
+                break;
+            case 9:
+                //header
+                hDialogue.editHeadingCreate(currentComponent);
+                break;
+            default:
+                break;
+        }
+        
+        ui.reloadCurrentPage();
         
     }
     

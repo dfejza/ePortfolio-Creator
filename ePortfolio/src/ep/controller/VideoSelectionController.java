@@ -74,9 +74,9 @@ public class VideoSelectionController {
         grid.setVgap(10);
         grid.setPadding(new Insets(20, 150, 10, 10));
         
-        TextField caption = new TextField();
-        TextField displayWidth = new TextField();
-        TextField displayHeight = new TextField();
+        TextField caption = new TextField(currentComponent.getText());
+        TextField displayWidth = new TextField(Double.toString(currentComponent.getWidth()));
+        TextField displayHeight = new TextField(Double.toString(currentComponent.getHeight()));
         caption.setPromptText("Enter caption for video here");
         displayHeight.setPromptText("800");
         displayWidth.setPromptText("600");

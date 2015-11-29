@@ -35,4 +35,20 @@ public class HeadingDialogue {
         }
         return currentComponent;
     }
+    
+        public void editHeadingCreate(Component currentComponent) {
+        TextInputDialog dialog = new TextInputDialog(currentComponent.getText());
+        dialog.setTitle("Heading Input Dialog");
+        dialog.setHeaderText("Heading Dialog");
+        dialog.setContentText("Enter the heading:");
+        
+        DialogPane dialogPane = dialog.getDialogPane();
+        dialogPane.getStylesheets().add(
+                getClass().getResource(STYLE_SHEET_UI).toExternalForm());
+        
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()){
+            currentComponent.headingComponent(result.get());
+        }
+    }
 }
