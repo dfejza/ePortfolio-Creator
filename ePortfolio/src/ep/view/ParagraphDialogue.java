@@ -44,11 +44,11 @@ public class ParagraphDialogue {
                 getClass().getResource(STYLE_SHEET_UI).toExternalForm());
         ObservableList<String> options =
                 FXCollections.observableArrayList(
-                        "Font 1",
-                        "Font 2",
-                        "Font 3",
-                        "Font 4",
-                        "Font 5"
+                        "Alegreya Sans",
+                        "Lato",
+                        "Indie Flower",
+                        "Titillium Web",
+                        "Sigmar One"
                 );
         final ComboBox comboBox = new ComboBox(options);
         comboBox.getSelectionModel().selectFirst();

@@ -153,6 +153,8 @@ public class EPortfolioView {
     private TextField pageTitle;
     private String bannerImage;
     private String studentName;
+    private String colorTheme;
+    private String layoutTheme;
     public Label bannerImageText;
     private ComboBox pageFontChoice;
     private TextField pageFontSize;
@@ -207,11 +209,11 @@ public class EPortfolioView {
         pageFooter = new TextField();
         ObservableList<String> options =
                 FXCollections.observableArrayList(
-                        "Font 1",
-                        "Font 2",
-                        "Font 3",
-                        "Font 4",
-                        "Font 5"
+                        "Alegreya Sans",
+                        "Lato",
+                        "Indie Flower",
+                        "Titillium Web",
+                        "Sigmar One"
                 );
         pageFontChoice = new ComboBox(options);
         pageFontSize = new TextField();
@@ -582,6 +584,14 @@ public class EPortfolioView {
     public void disableEditButton() {
         editComponentButton.setDisable(true);
         removeComponentButton.setDisable(true);
+    }
+
+    public void setLayout(String layoutChoice) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setColortheme(String colorTheme) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

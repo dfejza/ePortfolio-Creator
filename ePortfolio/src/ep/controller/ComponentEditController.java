@@ -12,6 +12,7 @@ import ep.view.EPortfolioView;
 import ep.view.HeadingDialogue;
 import ep.view.ListDialogue;
 import ep.view.ParagraphDialogue;
+import ep.view.StyleSelect;
 import java.net.MalformedURLException;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -30,6 +31,7 @@ public class ComponentEditController {
     private final ListDialogue lDialogue;
     private final ParagraphDialogue pDialogue;
     private final EPortfolioView ui;
+    private final StyleSelect styleSelect;
     private Component currentComponent;
     private String componentChoice;
     
@@ -140,11 +142,13 @@ public class ComponentEditController {
     }
     
     public void selectLayout() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String layoutChoice = styleSelect.selectedLayout();
+        ui.setLayout(layoutChoice);
     }
     
     public void selectColor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String colorTheme = styleSelect.selectedColorTheme();
+        ui.setColortheme(colorTheme);
     }
     
     
@@ -156,6 +160,7 @@ public class ComponentEditController {
         lDialogue = new ListDialogue();
         pDialogue = new ParagraphDialogue();
         cSelect = new ComponentSelect();
+        styleSelect = new StyleSelect();
         
     }
     
