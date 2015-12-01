@@ -20,7 +20,8 @@ public class Page {
     private String cssFont;
     int numComponents;
     private ObservableList<Component> components;
-    private int pageFontChoice;
+    private int pageFontIDX;
+    private String pageFontChoice;
     private String pageFontSize;
     private Component selectedComponent;
     
@@ -29,10 +30,11 @@ public class Page {
         pageTitle = "New Page Title";
         pageFooter = "New Page Footer";
         pageFontSize = "12";
-        pageFontChoice = 0;
-        cssLayout = "temp";
+        pageFontIDX = 0;
+        pageFontChoice = "font1.css";
+        /*        cssLayout = "temp";
         cssColor= "temp";
-        cssFont= "temp";
+        cssFont= "temp";*/
         numComponents = 0;
         components = FXCollections.observableArrayList();
         selectedComponent = null;
@@ -55,11 +57,31 @@ public class Page {
     }
     
     public int getPageFontChoice(){
-        return pageFontChoice;
+        return pageFontIDX;
     }
     
     public void setPageFontChoice(int txt){
-        this.pageFontChoice = txt;
+        this.pageFontIDX = txt;
+        switch(txt){
+            case 0:
+                pageFontChoice = "font1.css";
+                break;
+            case 1:
+                pageFontChoice = "font2.css";
+                break;
+            case 2:
+                pageFontChoice = "font3.css";
+                break;
+            case 3:
+                pageFontChoice = "font4.css";
+                break;
+            case 4:
+                pageFontChoice = "font5.css";
+                break;
+            default:
+                pageFontChoice = "font1.css";
+                break;
+        }
     }
     
     public String getPageFontSize(){

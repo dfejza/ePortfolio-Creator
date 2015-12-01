@@ -183,6 +183,7 @@ public class EPortfolioView {
         webView();
         initTabBar();
         initPaneCSS();
+        initStrings();
         
         initEventHandlers();
         
@@ -587,11 +588,18 @@ public class EPortfolioView {
     }
 
     public void setLayout(String layoutChoice) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.layoutTheme = layoutChoice;
     }
 
     public void setColortheme(String colorTheme) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.colorTheme = colorTheme;
+    }
+
+    private void initStrings() {
+        bannerImage = "";
+        studentName = "";
+        colorTheme = "color1.css";
+        layoutTheme = "layout1.css";
     }
     
 }

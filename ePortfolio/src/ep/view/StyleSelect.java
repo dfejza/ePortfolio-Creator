@@ -5,26 +5,15 @@
  */
 package ep.view;
 
-import static ep.controller.ComponentEditController.STYLE_SHEET_UI;
-import ep.model.Component;
-import static ep.view.EPortfolioView.PATH_ICONS;
 import java.util.Optional;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -34,7 +23,7 @@ import javafx.scene.layout.VBox;
 public class StyleSelect {
     String selection;
         public String selectedLayout() {
-        selection = "style1.png";
+        selection = "style1.css";
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Layout Selection");
         dialog.setHeaderText("Layout Selection");
@@ -56,23 +45,23 @@ public class StyleSelect {
         
         
         button1.setOnAction((ActionEvent e) -> {
-            selection = "style1.png";
+            selection = "layout1.css";
             dialog.setResult(selection);
         });
         button2.setOnAction((ActionEvent e) -> {
-            selection = "style2.png";
+            selection = "layout2.css";
             dialog.setResult(selection);
         });
         button3.setOnAction((ActionEvent e) -> {
-            selection = "style3.png";
+            selection = "layout3.css";
             dialog.setResult(selection);
         });
         button4.setOnAction((ActionEvent e) -> {
-            selection = "style4.png";
+            selection = "layout4.css";
             dialog.setResult(selection);
         });
         button5.setOnAction((ActionEvent e) -> {
-            selection = "style5.png";
+            selection = "layout5.css";
             dialog.setResult(selection);
         });
         
@@ -82,7 +71,7 @@ public class StyleSelect {
     }
         
         public String selectedColorTheme() {
-        selection = "color1.png";
+        selection = "color1.css";
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Layout Selection");
         dialog.setHeaderText("Layout Selection");
@@ -104,23 +93,23 @@ public class StyleSelect {
         
         
         button1.setOnAction((ActionEvent e) -> {
-            selection = "color1.png";
+            selection = "color1.css";
             dialog.setResult(selection);
         });
         button2.setOnAction((ActionEvent e) -> {
-            selection = "color2.png";
+            selection = "color2.css";
             dialog.setResult(selection);
         });
         button3.setOnAction((ActionEvent e) -> {
-            selection = "color3.png";
+            selection = "color3.css";
             dialog.setResult(selection);
         });
         button4.setOnAction((ActionEvent e) -> {
-            selection = "color4.png";
+            selection = "color4.css";
             dialog.setResult(selection);
         });
         button5.setOnAction((ActionEvent e) -> {
-            selection = "color5.png";
+            selection = "color5.css";
             dialog.setResult(selection);
         });
         
