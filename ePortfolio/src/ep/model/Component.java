@@ -8,6 +8,7 @@ package ep.model;
 import ep.model.ssm.SlideShow;
 import ep.model.ssm.SlideShowModel;
 import javafx.scene.control.ListView;
+import javax.json.JsonValue;
 
 /**
  *
@@ -34,13 +35,13 @@ public class Component {
         type = 0;
         font = "Font 1";
         text = "Enter text here.";
-        imageLoc = null;
+        imageLoc = "null";
         width = "1024.0";
         height = "768.0";
         justification = 1;
         hyperlinkStartChar = 0;
         hyperlinkEndChar = 0;
-        hyperlinkAddress = null;
+        hyperlinkAddress = "null";
         hyperlinkComponentInject = 0;
         listData = null;
         slideShow = null;
@@ -125,5 +126,9 @@ public class Component {
 
     public SlideShowModel getSS() {
         return slideShow;
+    }
+
+    public int getAllign() {
+        return justification;
     }
 }

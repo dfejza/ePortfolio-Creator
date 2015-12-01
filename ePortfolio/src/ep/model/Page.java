@@ -7,6 +7,7 @@ package ep.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javax.json.JsonValue;
 
 /**
  *
@@ -24,11 +25,13 @@ public class Page {
     private String pageFontChoice;
     private String pageFontSize;
     private Component selectedComponent;
+    private String pageHeader;
     
     
     public Page() {
         pageTitle = "New Page Title";
         pageFooter = "New Page Footer";
+        pageHeader = "New Page Header";
         pageFontSize = "12";
         pageFontIDX = 0;
         pageFontChoice = "font1.css";
@@ -117,4 +120,14 @@ public class Page {
         return selectedComponent == component;
     }
     
+    public String getCSSFontChoice(){
+        return pageFontChoice;
+    }
+
+    public String getPageHeader() {
+        return pageHeader;
+    }
+    public void setPageHeader(String text) {
+        this.pageHeader = text;
+    }
 }

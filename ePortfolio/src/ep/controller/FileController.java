@@ -38,6 +38,9 @@ public class FileController {
         
     }
     public boolean handleSaveEPRequest() {
+        //SOMETHING TO ASK FOR DIRECTORY?
+        String dir = "";
+        EPIO.saveSlideShow(ui);
         return false;
     }
     public boolean handleSaveAsEPRequest() {

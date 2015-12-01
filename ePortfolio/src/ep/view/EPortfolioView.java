@@ -44,6 +44,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javax.json.JsonValue;
 
 /**
  *
@@ -150,6 +151,7 @@ public class EPortfolioView {
     private WebEngine webEngine;
     private TextField studentNameField;
     private TextField pageFooter;
+    private TextField pageHeader;
     private TextField pageTitle;
     private String bannerImage;
     private String studentName;
@@ -208,6 +210,7 @@ public class EPortfolioView {
         studentNameField = new TextField();
         pageTitle = new TextField();
         pageFooter = new TextField();
+        pageHeader = new TextField();
         ObservableList<String> options =
                 FXCollections.observableArrayList(
                         "Alegreya Sans",
@@ -227,12 +230,14 @@ public class EPortfolioView {
         pageContainerPageSettings.add(studentNameField,1,0);
         pageContainerPageSettings.add(new Label("Page Title:"),0,1);
         pageContainerPageSettings.add(pageTitle,1,1);
-        pageContainerPageSettings.add(new Label("Page Footer:"),2,1);
-        pageContainerPageSettings.add(pageFooter,3,1);
-        pageContainerPageSettings.add(new Label("Page Font:"),4,1);
-        pageContainerPageSettings.add(pageFontChoice,5,1);
-        pageContainerPageSettings.add(new Label("Page Font Size:"),6,1);
-        pageContainerPageSettings.add(pageFontSize,7,1);
+        pageContainerPageSettings.add(new Label("Page Header:"),2,1);
+        pageContainerPageSettings.add(pageHeader,3,1);
+        pageContainerPageSettings.add(new Label("Page Footer:"),4,1);
+        pageContainerPageSettings.add(pageFooter,5,1);
+        pageContainerPageSettings.add(new Label("Page Font:"),6,1);
+        pageContainerPageSettings.add(pageFontChoice,7,1);
+        pageContainerPageSettings.add(new Label("Page Font Size:"),8,1);
+        pageContainerPageSettings.add(pageFontSize,9,1);
         //pageContainerPageSettings.add(new Label("Banner Image:"),0,3);
         pageContainerPageSettings.add(selectBannerImageButton,0,3);
         pageContainerPageSettings.add(bannerImageText,1,3);
@@ -369,6 +374,10 @@ public class EPortfolioView {
             pages.getSelectedpageObject().setPageFooter(pageFooter.getText());
             //reloadPages();
         });
+        pageHeader.textProperty().addListener(e -> {
+            pages.getSelectedpageObject().setPageHeader(pageHeader.getText());
+            //reloadPages();
+        });
         studentNameField.textProperty().addListener(e -> {
             studentName = studentNameField.getText();
             //reloadPages();
@@ -406,7 +415,7 @@ public class EPortfolioView {
         fileToolbarPane = new FlowPane();
         newEPButton = initChildButton(fileToolbarPane, ICON_NEW_SLIDE_SHOW,	"New ePortfolio",	    "horizontal_toolbar_button", false);
         loadEPButton = initChildButton(fileToolbarPane, ICON_LOAD_SLIDE_SHOW,	"Load ePortfolio",    "horizontal_toolbar_button", false);
-        saveEPButton = initChildButton(fileToolbarPane, ICON_SAVE_SLIDE_SHOW,	"Save ePortfolio",    "horizontal_toolbar_button", true);
+        saveEPButton = initChildButton(fileToolbarPane, ICON_SAVE_SLIDE_SHOW,	"Save ePortfolio",    "horizontal_toolbar_button", false);
         saveAsEPButton = initChildButton(fileToolbarPane, ICON_SAVE_SLIDE_SHOW,	"Save ePortfolio As...",    "horizontal_toolbar_button", true);
         exportEPButton = initChildButton(fileToolbarPane, ICON_VIEW_SLIDE_SHOW,	"Generate ePortfolio site",    "horizontal_toolbar_button", true);
         exitButton = initChildButton(fileToolbarPane, ICON_EXIT, "Exit Application", "horizontal_toolbar_button", false);
@@ -554,6 +563,7 @@ public class EPortfolioView {
     private void redrawCurrentPageText() {
         pageTitle.setText(pages.getSelectedpageObject().getPageTitle());
         pageFooter.setText(pages.getSelectedpageObject().getPageFooter());
+        pageHeader.setText(pages.getSelectedpageObject().getPageHeader());
         bannerImageText.setText(bannerImage);
         studentNameField.setText(studentName);
         pageFontChoice.getSelectionModel().select(pages.getSelectedpageObject().getPageFontChoice());
@@ -601,5 +611,20 @@ public class EPortfolioView {
         colorTheme = "color1.css";
         layoutTheme = "layout1.css";
     }
-    
+
+    public String getCSSLayout() {
+        return layoutTheme;
+    }
+
+    public String getCSSColor() {
+        return colorTheme;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public String getBannerImageLoc() {
+        return bannerImage;
+    }
 }
