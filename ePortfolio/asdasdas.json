@@ -1,0 +1,147 @@
+
+{
+    "cssLayout":"layout2.css",
+    "cssColor":"color4.css",
+    "student_name":"asdasdas",
+    "bannerImageLoc":"C:\\Netbeans Projects\\ePortfolio\\images\\slide_show_images\\GreatPlainsNebraska.jpg",
+    "page":[
+        {
+            "cssFont":"font1.css",
+            "pageTitle":"New Page Title",
+            "pageHeader":"New Page Header",
+            "pageFooter":"New Page Footer",
+            "component":[
+                {
+                    "type":9,
+                    "text":"Heading Goes Here",
+                    "imageLoc":"null",
+                    "videoLoc":"null",
+                    "hyperlinkStartChar":"null",
+                    "hyperlinkEndChar":"null",
+                    "hyperlinkAddress":"null",
+                    "hyperlinkComponentInject":1,
+                    "slideShow":[
+                    ]
+                },
+                {
+                    "type":2,
+                    "text":"Enter text here.",
+                    "imageLoc":"C:\\Netbeans Projects\\ePortfolio\\images\\slide_show_images\\/BadlandsSouthDakota.jpg",
+                    "videoLoc":"C:\\Netbeans Projects\\ePortfolio\\images\\slide_show_images\\/BadlandsSouthDakota.jpg",
+                    "hyperlinkStartChar":"null",
+                    "hyperlinkEndChar":"null",
+                    "hyperlinkAddress":"null",
+                    "hyperlinkComponentInject":1,
+                    "slideShow":[
+                    ]
+                },
+                {
+                    "type":4,
+                    "text":"Enter text here.",
+                    "imageLoc":"null",
+                    "videoLoc":"null",
+                    "hyperlinkStartChar":"null",
+                    "hyperlinkEndChar":"null",
+                    "hyperlinkAddress":"null",
+                    "hyperlinkComponentInject":1,
+                    "slideShow":[
+                        {
+                            "image_file_name":"YosemiteCalifornia.jpg",
+                            "image_path":"C:\\Netbeans Projects\\ePortfolio\\images\\slide_show_images\\",
+                            "caption":"sad"
+                        },
+                        {
+                            "image_file_name":"GreatPlainsNebraska.jpg",
+                            "image_path":"C:\\Netbeans Projects\\ePortfolio\\images\\slide_show_images\\",
+                            "caption":"sad22"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "cssFont":"font1.css",
+            "pageTitle":"New Page Title",
+            "pageHeader":"New Page Header",
+            "pageFooter":"New Page Footer",
+            "component":[
+                {
+                    "type":9,
+                    "text":"Heading Goes Here",
+                    "imageLoc":"null",
+                    "videoLoc":"null",
+                    "hyperlinkStartChar":"null",
+                    "hyperlinkEndChar":"null",
+                    "hyperlinkAddress":"null",
+                    "hyperlinkComponentInject":1,
+                    "slideShow":[
+                    ]
+                },
+                {
+                    "type":3,
+                    "text":"Enter text here.",
+                    "imageLoc":"file:/C:/Netbeans%20Projects/ePortfolio/videos/morningInsperation.mp4",
+                    "videoLoc":"file:/C:/Netbeans%20Projects/ePortfolio/videos/morningInsperation.mp4",
+                    "hyperlinkStartChar":"null",
+                    "hyperlinkEndChar":"null",
+                    "hyperlinkAddress":"null",
+                    "hyperlinkComponentInject":1,
+                    "slideShow":[
+                    ]
+                }
+            ]
+        },
+        {
+            "cssFont":"font1.css",
+            "pageTitle":"New Page Title",
+            "pageHeader":"New Page Header",
+            "pageFooter":"New Page Footer",
+            "component":[
+            ]
+        },
+        {
+            "cssFont":"font1.css",
+            "pageTitle":"New Page Title",
+            "pageHeader":"New Page Header",
+            "pageFooter":"New Page Footer",
+            "component":[
+            ]
+        },
+        {
+            "cssFont":"font1.css",
+            "pageTitle":"New Page Title",
+            "pageHeader":"New Page Header",
+            "pageFooter":"New Page Footer",
+            "component":[
+            ]
+        },
+        {
+            "cssFont":"font1.css",
+            "pageTitle":"New Page Title",
+            "pageHeader":"New Page Header",
+            "pageFooter":"New Page Footer",
+            "component":[
+            ]
+        },
+        {
+            "cssFont":"font4.css",
+            "pageTitle":"TITLE LOL",
+            "pageHeader":"HEADER",
+            "pageFooter":"FOOTER",
+            "component":[
+                {
+                    "type":1,
+                    "text":"asdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa das\n\tasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa dasasdasdsa das\n",
+                    "imageLoc":"null",
+                    "videoLoc":"null",
+                    "hyperlinkStartChar":"null",
+                    "hyperlinkEndChar":"null",
+                    "hyperlinkAddress":"null",
+                    "hyperlinkComponentInject":1,
+                    "slideShow":[
+                    ]
+                }
+            ]
+        }
+    ]
+}

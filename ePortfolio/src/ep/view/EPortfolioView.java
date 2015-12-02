@@ -44,7 +44,6 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javax.json.JsonValue;
 
 /**
  *

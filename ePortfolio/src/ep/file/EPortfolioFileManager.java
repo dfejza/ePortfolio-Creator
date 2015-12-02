@@ -7,7 +7,9 @@ package ep.file;
 
 import ep.model.Component;
 import ep.model.Page;
+import ep.model.ssm.Slide;
 import ep.view.EPortfolioView;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -58,6 +60,9 @@ public class EPortfolioFileManager {
     public static String JSON_COMP_SLIDESHOW_NUMIMAGES = "numOfImages";
     public static String JSON_COMP_SLIDESHOW_CAPTION = "caption";
     public static String JSON_COMP_SLIDESHOW_IMAGE = "image";
+    public static String JSON_IMAGE_FILE_NAME = "image_file_name";
+    public static String JSON_IMAGE_PATH = "image_path";
+    public static String JSON_CAPTION = "caption";
     
     
     public static String JSON_COMP_LISTDATA = "listData";
@@ -66,7 +71,7 @@ public class EPortfolioFileManager {
     public static String SLASH = "/";
     private EPortfolioView ui;
     
-    public void saveSlideShow(EPortfolioView initUI) {
+    public void saveSlideShow(EPortfolioView initUI) throws FileNotFoundException {
         this.ui = initUI;
         StringWriter sw = new StringWriter();
         
@@ -79,14 +84,6 @@ public class EPortfolioFileManager {
                                     .add(JSON_BANNER, ui.getBannerImageLoc())
                                     .add(JSON_PAGES, slidesJsonArray)
 		.build();
-        /*	// BUILD THE SLIDES ARRAY
-        JsonArray slidesJsonArray = makeSlidesJsonArray(slideShowToSave.getSlides());
-        
-        // NOW BUILD THE COURSE USING EVERYTHING WE'VE ALREADY MADE
-        JsonObject slideShowJsonObject = Json.createObjectBuilder()
-        .add(JSON_TITLE, slideShowToSave.getTitle())
-        .add(JSON_SLIDES, slidesJsonArray)
-        .build();
         
         Map<String, Object> properties = new HashMap<>(1);
         properties.put(JsonGenerator.PRETTY_PRINTING, true);
@@ -97,8 +94,8 @@ public class EPortfolioFileManager {
         jsonWriter.close();
         
         // INIT THE WRITER
-        String slideShowTitle = "" + slideShowToSave.getTitle();
-        //String jsonFilePath = PATH_SLIDE_SHOWS + SLASH + slideShowTitle + JSON_EXT;
+        String slideShowTitle = "" + ui.getStudentName();
+        String jsonFilePath = "./" + slideShowTitle + JSON_EXT;
         OutputStream os = new FileOutputStream(jsonFilePath);
         JsonWriter jsonFileWriter = Json.createWriter(os);
         jsonFileWriter.writeObject(slideShowJsonObject);
@@ -106,7 +103,7 @@ public class EPortfolioFileManager {
         PrintWriter pw = new PrintWriter(jsonFilePath);
         pw.write(prettyPrinted);
         pw.close();
-        System.out.println(prettyPrinted);*/
+        System.out.println(prettyPrinted);
     }
 
     private JsonArray makePagesJsonArray(List<Page> pages) {
@@ -146,7 +143,22 @@ public class EPortfolioFileManager {
     private JsonObject saturateJSONComp(Component comp) {
                    //create the JSON component array before adding it do the object
                   //JsonArray componentJsonArray = makeSlideJsonComponent((List<Component>) page.getComponents());
-                        
+                  int compType = comp.getComponentType();
+                  JsonArray slidesJsonArray;
+                  if(compType==4){
+                        slidesJsonArray = makeSlidesJsonArray(comp.getSS().getSlides());
+                  }else{
+                        slidesJsonArray = Json.createArrayBuilder().build();
+                  }
+                  
+                  JsonArray listJsonArray;
+                  if(compType==6){
+                        listJsonArray = makeListJsonArray(comp.getListData());
+                  }else{
+                        listJsonArray = Json.createArrayBuilder().build();
+                  }
+                  
+                  
 	JsonObject jso = Json.createObjectBuilder()
 		.add(JSON_COMP_TYPE, comp.getComponentType())
                 		.add(JSON_COMP_TEXT, comp.getText())
@@ -158,9 +170,37 @@ public class EPortfolioFileManager {
 		.add(JSON_COMP_WIDTH,comp.getWidth() )
                                     .add(JSON_COMP_HEIGHT,comp.getHeight()  )
                                     .add(JSON_COMP_ALLIGHNMENT,comp.getAllign() )
-                                    //.add(JSON_COMP_SLIDESHOW, SLIDESHOWARRAY)
-                                    //.add(JSON_COMP_LISTDATA, LISTARRAY)
+                                    .add(JSON_COMP_SLIDESHOW, slidesJsonArray)
+                                    .add(JSON_COMP_LISTDATA, listJsonArray)
 		.build();
 	return jso;
+    }
+    
+    private JsonArray makeSlidesJsonArray(List<Slide> slides) {
+	JsonArrayBuilder jsb = Json.createArrayBuilder();
+	for (Slide slide : slides) {
+	    JsonObject jso = makeSlideJsonObject(slide);
+	    jsb.add(jso);
+	}
+	JsonArray jA = jsb.build();
+	return jA;
+    }
+    
+    private JsonObject makeSlideJsonObject(Slide slide) {
+	JsonObject jso = Json.createObjectBuilder()
+		.add(JSON_IMAGE_FILE_NAME, slide.getImageFileName())
+		.add(JSON_IMAGE_PATH, slide.getImagePath())
+		.add(JSON_CAPTION, slide.getCaption())
+		.build();
+	return jso;
+    }
+
+    private JsonArray makeListJsonArray(String[] listData) {
+	JsonArrayBuilder jsb = Json.createArrayBuilder();
+	for (String ld : listData) {
+	    jsb.add(ld);
+	}
+	JsonArray jA = jsb.build();
+	return jA;
     }
 }
