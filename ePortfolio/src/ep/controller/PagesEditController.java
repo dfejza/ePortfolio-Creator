@@ -5,8 +5,10 @@
 */
 package ep.controller;
 
+import ep.model.Component;
 import ep.model.PagesModel;
 import ep.view.EPortfolioView;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -39,5 +41,11 @@ public class PagesEditController {
     }
     public void processSelectPageRequest(){
         
+    }
+
+    public void JSONAddPageRequest(String cssFont, String pageTitle, String pageHeader, String pageFooter,int pageFont, ObservableList<Component> components) {
+            PagesModel pages = ui.getPages();
+            pages.addPage(cssFont,pageTitle,pageHeader,pageFooter,pageFont,components);
+            ui.reloadPages();
     }
 }

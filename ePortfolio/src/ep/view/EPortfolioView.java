@@ -14,6 +14,8 @@ import ep.model.Component;
 import ep.model.Page;
 import ep.model.PagesModel;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -44,6 +46,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 /**
  *
@@ -293,10 +296,18 @@ public class EPortfolioView {
             fileController.handleNewEPRequest();
         });
         loadEPButton.setOnAction(e -> {
-            fileController.handleLoadEPRequest();
+            try {
+                fileController.handleLoadEPRequest();
+            } catch (IOException ex) {
+                Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         saveEPButton.setOnAction(e -> {
-            fileController.handleSaveEPRequest();
+            try {
+                fileController.handleSaveEPRequest();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         saveAsEPButton.setOnAction(e -> {
             fileController.handleSaveAsEPRequest();
@@ -625,5 +636,25 @@ public class EPortfolioView {
 
     public String getBannerImageLoc() {
         return bannerImage;
+    }
+    
+    public void setBannerImageString(String txt){
+        this.bannerImage = txt;
+    }
+
+    public void setStudentName(String asdas) {
+        this.studentName = asdas;
+    }
+    
+    public void addPage(String cssFont, String pageTitle, String pageHeader, String pageFooter,int pageFont,ObservableList<Component> components ){
+        pagesEditController.JSONAddPageRequest(cssFont,pageTitle,pageHeader,pageFooter,pageFont,components);
+    }
+
+    public Stage getWindow() {
+	return primaryStage;
+    }
+
+    public void reset() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

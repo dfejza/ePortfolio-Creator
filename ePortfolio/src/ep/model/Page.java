@@ -130,4 +130,13 @@ public class Page {
     public void setPageHeader(String text) {
         this.pageHeader = text;
     }
+
+    void setPageFontChoiceString(String pageFont) {
+        //int temp = Character.getNumericValue(pageFont.charAt(pageFont.length()));
+        this.pageFontChoice = pageFont;
+    }
+
+    void reloadComponents(ObservableList<Component> components) {
+        this.components = components;
+    }
 }

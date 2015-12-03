@@ -47,6 +47,23 @@ public class Component {
         slideShow = null;
     }
     
+    public Component(int type, String font, String text, String imageLoc, int width, int height, int justification, int hsc,
+            int hec, String hladd, int hlci, String[] listdata, SlideShowModel slideshow){
+        this.type = type;
+        this.font = font;
+        this.text = text;
+        this.imageLoc = imageLoc;
+        this.width = Integer.toString(width);
+        this.height = Integer.toString(height);
+        this.justification = justification;
+        this.hyperlinkStartChar = hsc;
+        this.hyperlinkEndChar = hec;
+        this.hyperlinkAddress = hladd;
+        this.hyperlinkComponentInject = hlci;
+        this.listData = listdata;
+        this.slideShow = slideshow;
+    }
+    
     public void headingComponent(String headingtxt){
         type = 9;
         text = headingtxt;
@@ -130,5 +147,61 @@ public class Component {
 
     public int getAllign() {
         return justification;
+    }
+
+    /**
+     * @return the hyperlinkStartChar
+     */
+    public int getHyperlinkStartChar() {
+        return hyperlinkStartChar;
+    }
+
+    /**
+     * @param hyperlinkStartChar the hyperlinkStartChar to set
+     */
+    public void setHyperlinkStartChar(int hyperlinkStartChar) {
+        this.hyperlinkStartChar = hyperlinkStartChar;
+    }
+
+    /**
+     * @return the hyperlinkEndChar
+     */
+    public int getHyperlinkEndChar() {
+        return hyperlinkEndChar;
+    }
+
+    /**
+     * @param hyperlinkEndChar the hyperlinkEndChar to set
+     */
+    public void setHyperlinkEndChar(int hyperlinkEndChar) {
+        this.hyperlinkEndChar = hyperlinkEndChar;
+    }
+
+    /**
+     * @return the hyperlinkAddress
+     */
+    public String getHyperlinkAddress() {
+        return hyperlinkAddress;
+    }
+
+    /**
+     * @param hyperlinkAddress the hyperlinkAddress to set
+     */
+    public void setHyperlinkAddress(String hyperlinkAddress) {
+        this.hyperlinkAddress = hyperlinkAddress;
+    }
+
+    /**
+     * @return the hyperlinkComponentInject
+     */
+    public int getHyperlinkComponentInject() {
+        return hyperlinkComponentInject;
+    }
+
+    /**
+     * @param hyperlinkComponentInject the hyperlinkComponentInject to set
+     */
+    public void setHyperlinkComponentInject(int hyperlinkComponentInject) {
+        this.hyperlinkComponentInject = hyperlinkComponentInject;
     }
 }

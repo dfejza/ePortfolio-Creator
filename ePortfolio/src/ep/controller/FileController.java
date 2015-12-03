@@ -8,6 +8,10 @@ package ep.controller;
 import ep.file.EPortfolioFileManager;
 import ep.file.EPortfolioSiteExporter;
 import ep.view.EPortfolioView;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import javafx.stage.FileChooser;
 
 /**
  *
@@ -34,10 +38,11 @@ public class FileController {
     public void handleNewEPRequest() {
         ui.startNewSession();
     }
-    public void handleLoadEPRequest() {
+    public void handleLoadEPRequest() throws IOException {
+        EPIO.loadSlideShow(ui, promptToOpen());
         
     }
-    public boolean handleSaveEPRequest() {
+    public boolean handleSaveEPRequest() throws FileNotFoundException {
         //SOMETHING TO ASK FOR DIRECTORY?
         String dir = "";
         EPIO.saveSlideShow(ui);
@@ -53,4 +58,13 @@ public class FileController {
         
     }
     
+    
+    
+     private String promptToOpen() {
+        // AND NOW ASK THE USER FOR THE COURSE TO OPEN
+        FileChooser slideShowFileChooser = new FileChooser();
+        slideShowFileChooser.setInitialDirectory(new File("./"));
+        File selectedFile = slideShowFileChooser.showOpenDialog(ui.getWindow());
+        return selectedFile.getPath();
+    }
 }

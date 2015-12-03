@@ -100,18 +100,18 @@ public class ComponentEditController {
         switch (type) {
             case 1:
                 //body
-                pDialogue.editParagraphCreate(currentComponent);
+                pDialogue.editParagraphCreate(editedComponet);
                 break;
             case 2:
-                imagesel.processSelectImage(currentComponent);
-                imagesel.askImageParameters(currentComponent);
+                imagesel.processSelectImage(editedComponet);
+                imagesel.askImageParameters(editedComponet);
                 break;
             case 3:
-                videoSel.processSelectVideo(currentComponent);
-                videoSel.askVideoParameters(currentComponent);
+                videoSel.processSelectVideo(editedComponet);
+                videoSel.askVideoParameters(editedComponet);
                 break;
             case 4:
-                SlideShowMakerView ssmui = new SlideShowMakerView(currentComponent,this);
+                SlideShowMakerView ssmui = new SlideShowMakerView(editedComponet,this);
                 Stage stage = new Stage();
                 stage.initStyle(StageStyle.UTILITY);
                 String appTitle = "Slide Show Creator";
@@ -119,11 +119,11 @@ public class ComponentEditController {
                 break;
             case 6:
                 //list
-                lDialogue.editListCreate(currentComponent);
+                lDialogue.editListCreate(editedComponet);
                 break;
             case 9:
                 //header
-                hDialogue.editHeadingCreate(currentComponent);
+                hDialogue.editHeadingCreate(editedComponet);
                 break;
             default:
                 break;

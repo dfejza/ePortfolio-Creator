@@ -72,4 +72,14 @@ public class PagesModel {
     public void removePage() {
         pages.remove(selectedPageObject);
     }
+
+    public void addPage(String cssFont, String pageTitle, String pageHeader, String pageFooter, int pageFont,ObservableList<Component> components) {
+        Page pageToAdd = new Page();
+        pageToAdd.setPageTitle(pageTitle);
+        pageToAdd.setPageHeader(pageHeader);
+        pageToAdd.setPageFooter(pageFooter);
+        pageToAdd.setPageFontChoice(pageFont);
+        pageToAdd.reloadComponents(components);
+        pages.add(pageToAdd);
+    }
 }

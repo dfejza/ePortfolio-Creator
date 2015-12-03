@@ -24,6 +24,11 @@ public class SlideShowModel {
         slides = FXCollections.observableArrayList();
         reset();
     }
+
+    public SlideShowModel() {
+        slides = FXCollections.observableArrayList();
+        reset();
+    }
     
     // ACCESSOR METHODS
     public boolean isSlideSelected() {
@@ -78,6 +83,13 @@ public class SlideShowModel {
         Slide slideToAdd = new Slide(initImageFileName, initImagePath, initCaption);
         slides.add(slideToAdd);
         ui.reloadSlideShowPane();
+    }
+    
+    public void addJSonSlide(   String initImageFileName,
+            String initImagePath,
+            String initCaption) {
+        Slide slideToAdd = new Slide(initImageFileName, initImagePath, initCaption);
+        slides.add(slideToAdd);
     }
     
     /**
