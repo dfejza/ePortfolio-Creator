@@ -5,6 +5,7 @@
 */
 package ep.view;
 
+import com.sun.jndi.toolkit.url.Uri;
 import ep.controller.ImageSelectionController;
 import ep.model.Component;
 import ep.model.ssm.Slide;
@@ -109,7 +110,10 @@ public class ComponentEditView extends VBox{
     public void updateVideo() {
         //String imagePath = slide.getImagePath() + SLASH + slide.getImageFileName();
         String imagePath = component.getImagePath();
-        Media media = new Media(imagePath);
+        //file.toURI().toString()
+        File file = new File(imagePath);
+        
+        Media media = new Media(file.toURI().toString());
         // Create the player and set to play automatically.
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(false);

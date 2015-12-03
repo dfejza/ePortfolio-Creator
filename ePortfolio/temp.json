@@ -1,0 +1,144 @@
+
+{
+    "cssLayout":"layout1.css",
+    "cssColor":"color1.css",
+    "student_name":"this homework sucks",
+    "bannerImageLoc":"No Banner Image",
+    "page":[
+        {
+            "cssFont":"font1.css",
+            "pageTitle":"page 1",
+            "pageHeader":"New Page Header",
+            "pageFooter":"New Page Footer",
+            "pageFont":0,
+            "component":[
+                {
+                    "type":9,
+                    "text":"Heading Goes Here",
+                    "imageLoc":"null",
+                    "videoLoc":"null",
+                    "hyperlinkStartChar":0,
+                    "hyperlinkEndChar":0,
+                    "hyperlinkAddress":"null",
+                    "hyperlinkComponentInject":0,
+                    "compFont":"Font 1",
+                    "width":1024.0,
+                    "height":768.0,
+                    "allignment":1,
+                    "slideShow":[
+                    ],
+                    "listData":[
+                    ]
+                },
+                {
+                    "type":1,
+                    "text":"TEST",
+                    "imageLoc":"null",
+                    "videoLoc":"null",
+                    "hyperlinkStartChar":0,
+                    "hyperlinkEndChar":0,
+                    "hyperlinkAddress":"null",
+                    "hyperlinkComponentInject":0,
+                    "compFont":"Indie Flower",
+                    "width":1024.0,
+                    "height":768.0,
+                    "allignment":1,
+                    "slideShow":[
+                    ],
+                    "listData":[
+                    ]
+                },
+                {
+                    "type":6,
+                    "text":"Enter text here.",
+                    "imageLoc":"null",
+                    "videoLoc":"null",
+                    "hyperlinkStartChar":0,
+                    "hyperlinkEndChar":0,
+                    "hyperlinkAddress":"null",
+                    "hyperlinkComponentInject":0,
+                    "compFont":"Font 1",
+                    "width":1024.0,
+                    "height":768.0,
+                    "allignment":1,
+                    "slideShow":[
+                    ],
+                    "listData":[
+                        "sad",
+                        "2",
+                        "3"
+                    ]
+                },
+                {
+                    "type":3,
+                    "text":"Enter text here.",
+                    "imageLoc":"C:\\Netbeans Projects\\ePortfolio\\video\\morningInsperation.mp4",
+                    "videoLoc":"C:\\Netbeans Projects\\ePortfolio\\video\\morningInsperation.mp4",
+                    "hyperlinkStartChar":0,
+                    "hyperlinkEndChar":0,
+                    "hyperlinkAddress":"null",
+                    "hyperlinkComponentInject":0,
+                    "compFont":"Font 1",
+                    "width":1024.0,
+                    "height":768.0,
+                    "allignment":1,
+                    "slideShow":[
+                    ],
+                    "listData":[
+                    ]
+                }
+            ]
+        },
+        {
+            "cssFont":"font1.css",
+            "pageTitle":"page 2",
+            "pageHeader":"New Page Header",
+            "pageFooter":"New Page Footer",
+            "pageFont":0,
+            "component":[
+                {
+                    "type":4,
+                    "text":"Enter text here.",
+                    "imageLoc":"null",
+                    "videoLoc":"null",
+                    "hyperlinkStartChar":0,
+                    "hyperlinkEndChar":0,
+                    "hyperlinkAddress":"null",
+                    "hyperlinkComponentInject":0,
+                    "compFont":"Font 1",
+                    "width":1024.0,
+                    "height":768.0,
+                    "allignment":1,
+                    "slideShow":[
+                        {
+                            "image_file_name":"DefaultStartSlide.png",
+                            "image_path":"./images/slide_show_images/",
+                            "caption":"1"
+                        },
+                        {
+                            "image_file_name":"YosemiteCalifornia.jpg",
+                            "image_path":"C:\\Netbeans Projects\\ePortfolio\\images\\slide_show_images\\",
+                            "caption":"2"
+                        },
+                        {
+                            "image_file_name":"GreatPlainsNebraska.jpg",
+                            "image_path":"C:\\Netbeans Projects\\ePortfolio\\images\\slide_show_images\\",
+                            "caption":"3"
+                        }
+                    ],
+                    "listData":[
+                    ]
+                }
+            ]
+        },
+        {
+            "cssFont":"font1.css",
+            "pageTitle":"THISISONLYATEST",
+            "pageHeader":"New Page Header",
+            "pageFooter":"New Page Footer",
+            "pageFont":0,
+            "component":[
+            ]
+        }
+    ]
+}

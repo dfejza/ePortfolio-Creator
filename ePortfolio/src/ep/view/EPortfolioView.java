@@ -163,6 +163,8 @@ public class EPortfolioView {
     private ComboBox pageFontChoice;
     private TextField pageFontSize;
     private ScrollPane slidesEditorScrollPane;
+    private boolean workspaceInitialized;
+    private String jsonFilePath;
     
     public EPortfolioView(EPortfolioFileManager initFileManager, EPortfolioSiteExporter initSiteExporter) {
         // FIRST HOLD ONTO THE FILE MANAGER
@@ -177,6 +179,7 @@ public class EPortfolioView {
         bannerImageText = new Label();
         // WE'LL USE THIS ERROR HANDLER WHEN SOMETHING GOES WRONG
         //errorHandler = new ErrorHandler(this);
+        workspaceInitialized = false;
     }
     public void startUI(Stage initPrimaryStage, String windowTitle) throws MalformedURLException{
         initFileToolbar();
@@ -200,12 +203,12 @@ public class EPortfolioView {
         pageContainerPageSettings = new GridPane();
         pageSelectionPane = new TabPane();
         pageSelectionPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
-        
         pageContainer.setTop(pageContainerPageSettings);
         pageContainer.setCenter(pageSelectionPane);
     }
     
     public void initPageInputs(){
+                workspaceInitialized = true;
         bannerImageText.setText("No Banner Image");
         pageContainerPageSettings.setHgap(5.5);
         pageContainerPageSettings.setVgap(5.5);
@@ -310,7 +313,11 @@ public class EPortfolioView {
             }
         });
         saveAsEPButton.setOnAction(e -> {
-            fileController.handleSaveAsEPRequest();
+            try {
+                fileController.handleSaveAsEPRequest();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         exportEPButton.setOnAction(e -> {
             fileController.handleViewEPRequest();
@@ -426,8 +433,8 @@ public class EPortfolioView {
         newEPButton = initChildButton(fileToolbarPane, ICON_NEW_SLIDE_SHOW,	"New ePortfolio",	    "horizontal_toolbar_button", false);
         loadEPButton = initChildButton(fileToolbarPane, ICON_LOAD_SLIDE_SHOW,	"Load ePortfolio",    "horizontal_toolbar_button", false);
         saveEPButton = initChildButton(fileToolbarPane, ICON_SAVE_SLIDE_SHOW,	"Save ePortfolio",    "horizontal_toolbar_button", false);
-        saveAsEPButton = initChildButton(fileToolbarPane, ICON_SAVE_SLIDE_SHOW,	"Save ePortfolio As...",    "horizontal_toolbar_button", true);
-        exportEPButton = initChildButton(fileToolbarPane, ICON_VIEW_SLIDE_SHOW,	"Generate ePortfolio site",    "horizontal_toolbar_button", true);
+        saveAsEPButton = initChildButton(fileToolbarPane, ICON_SAVE_SLIDE_SHOW,	"Save ePortfolio As...",    "horizontal_toolbar_button", false);
+        exportEPButton = initChildButton(fileToolbarPane, ICON_VIEW_SLIDE_SHOW,	"Generate ePortfolio site",    "horizontal_toolbar_button", false);
         exitButton = initChildButton(fileToolbarPane, ICON_EXIT, "Exit Application", "horizontal_toolbar_button", false);
     }
     
@@ -616,7 +623,7 @@ public class EPortfolioView {
     }
 
     private void initStrings() {
-        bannerImage = "";
+        bannerImage = "No Banner Image";
         studentName = "";
         colorTheme = "color1.css";
         layoutTheme = "layout1.css";
@@ -656,5 +663,15 @@ public class EPortfolioView {
 
     public void reset() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    public boolean getworkspaceInitialized(){
+        return workspaceInitialized;
+    }
+
+    public void setJSONSavedPath(String jsonFilePath) {
+        this.jsonFilePath = jsonFilePath;
+    }
+    public String getJSONSavedPath(){
+        return jsonFilePath;
     }
 }

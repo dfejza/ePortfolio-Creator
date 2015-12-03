@@ -11,7 +11,10 @@ import ep.view.EPortfolioView;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
  *
@@ -33,6 +36,7 @@ public class FileController {
         saved = true;
         ui = initUI;
         this.EPIO = EPIO;
+        siteExporter = new EPortfolioSiteExporter();
         //siteExporter = initSiteExporter;
     }
     public void handleNewEPRequest() {
@@ -45,13 +49,27 @@ public class FileController {
     public boolean handleSaveEPRequest() throws FileNotFoundException {
         //SOMETHING TO ASK FOR DIRECTORY?
         String dir = "";
-        EPIO.saveSlideShow(ui);
+        EPIO.saveSlideShow(ui,null);
         return false;
     }
-    public boolean handleSaveAsEPRequest() {
+    public boolean handleSaveAsEPRequest() throws FileNotFoundException {
+        String dir = "";
+        dir = promptToSave();
+        EPIO.saveSlideShow(ui,dir);
         return false;
     }
     public void handleViewEPRequest() {
+        String dir = "./temp.json";
+        try {
+            EPIO.saveSlideShow(ui,dir);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            siteExporter.exportSite(ui);
+        } catch (IOException ex) {
+            Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     public void handleExitRequest() {
@@ -65,6 +83,16 @@ public class FileController {
         FileChooser slideShowFileChooser = new FileChooser();
         slideShowFileChooser.setInitialDirectory(new File("./"));
         File selectedFile = slideShowFileChooser.showOpenDialog(ui.getWindow());
+        return selectedFile.getPath();
+    }
+     
+     private String promptToSave() {
+        // AND NOW ASK THE USER FOR THE COURSE TO OPEN
+        FileChooser slideShowFileChooser = new FileChooser();
+        slideShowFileChooser.setInitialDirectory(new File("./"));
+        slideShowFileChooser.getExtensionFilters().addAll(new ExtensionFilter("JSON File", "*.json"));
+        slideShowFileChooser.setInitialFileName(ui.getStudentName() + ".json");
+        File selectedFile = slideShowFileChooser.showSaveDialog(ui.getWindow());
         return selectedFile.getPath();
     }
 }

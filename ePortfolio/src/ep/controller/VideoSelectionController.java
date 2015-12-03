@@ -43,7 +43,7 @@ public class VideoSelectionController {
         FileChooser imageFileChooser = new FileChooser();
         
         // SET THE STARTING DIRECTORY
-        imageFileChooser.setInitialDirectory(new File("./videos/"));
+        imageFileChooser.setInitialDirectory(new File("./"));
         
         // LET'S ONLY SEE IMAGE FILES
         FileChooser.ExtensionFilter jpgFilter = new FileChooser.ExtensionFilter("MP4 files (*.mp4)", "*.MP4");
@@ -56,7 +56,7 @@ public class VideoSelectionController {
         if (file != null) {
             //String path = file.getPath().substring(0, file.getPath().indexOf(file.getName()));
             //String fileName = file.getName();
-            currentComponent.videoComponent(file.toURI().toString());
+            currentComponent.videoComponent(file.toPath().toString());
         }else{
             currentComponent.videoComponent(null);
         }

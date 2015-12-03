@@ -1,0 +1,44 @@
+body, html {
+    background-color: #253237;
+}
+#navbar a
+{
+	display: inline;
+	padding: 10px 10px 10px 10px;
+	color: #fff;
+	text-decoration: none;
+}
+#navbar a
+{
+    
+}
+
+
+#navbar a:focus
+{
+    color: black;
+    background-color: white;
+}
+
+#navbar a:hover { 
+    text-shadow: 0.1em 0.1em 0.2em black;
+background-color:#C2DFE3;
+    color: black;
+}
+
+#content{
+    background-color:#550000;
+}
+
+
+#banner{
+    background-color:#5C6B73;
+}
+
+#content_body{
+    background-color:#9DB4C0
+}
+
+#bannerText{
+        background-color:#5C6B73;
+}
