@@ -187,7 +187,7 @@ public class EPortfolioView {
         initPageEditorWorkspaceToolbar();
         initWorkspace();
         setLayoutHierarchy();
-        webView();
+        //webView();
         initTabBar();
         initPaneCSS();
         initStrings();
@@ -379,6 +379,19 @@ public class EPortfolioView {
                 setWorkspaceButtons(true);
             }
         });
+        
+         workspaceModeToolbar.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Tab> ov, Tab t, Tab t1) -> {
+            int temp = workspaceModeToolbar.getSelectionModel().getSelectedIndex();
+            if(temp==1){
+                fileController.handleViewEPRequest();
+                                try {
+                webView();
+                } catch (MalformedURLException ex) {
+                Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                selectSiteViewerWorkspace.setContent(webView);
+            }
+        });
     }
     public void initPageInputsListeners() {
         //pagetitle,footer,studentname and imageview listeners
@@ -496,7 +509,7 @@ public class EPortfolioView {
         //scrollPane = new ScrollPane(webView);
         
         // GET THE URL
-        String indexPath = "./sites/dummy/index.html";
+        String indexPath = "./sites/" + getStudentName() + "/index.html";
         File indexFile = new File(indexPath);
         URL indexURL = indexFile.toURI().toURL();
         

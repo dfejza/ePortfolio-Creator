@@ -134,6 +134,23 @@ public class ComponentEditView extends VBox{
         text.setWrappingWidth(400);
         text.setTextAlignment(TextAlignment.LEFT);
         text.setText(component.getText());
+        /*        String type = component.getFontType();
+        if(type.compareTo("Alegreya Sans")==0){
+        text.setStyle("-fx-font-family: Alegreya Sans;");
+        getStylesheets().add("http://fonts.googleapis.com/css?family=Alegreya+Sans");
+        }else if(type.compareTo("Lato")==0){
+        text.setStyle("-fx-font-family: Lato;");
+        getStylesheets().add("http://fonts.googleapis.com/css?family=Lato&subset=latin");
+        }else if(type.compareTo("Indie Flower")==0){
+        text.setStyle("-fx-font-family: Indie Flower;");
+        getStylesheets().add("https://fonts.googleapis.com/css?family=Indie+Flower");
+        }else if(type.compareTo("Titillium Web")==0){
+        text.setStyle("-fx-font-family: Titillium Web;");
+        getStylesheets().add("https://fonts.googleapis.com/css?family=Titillium+Web");
+        }else if(type.compareTo("Sigmar One")==0){
+        text.setStyle("-fx-font-family: Sigmar One;");
+        getStylesheets().add("https://fonts.googleapis.com/css?family=Sigmar+One");
+        }*/
         
         // LAY EVERYTHING OUT INSIDE THIS COMPONENT
         getChildren().add(text);
