@@ -8,6 +8,7 @@ package ep.controller;
 import ep.file.EPortfolioFileManager;
 import ep.file.EPortfolioSiteExporter;
 import ep.view.EPortfolioView;
+import ep.view.YesNoCancelDialog;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -33,31 +34,44 @@ public class FileController {
     
     public FileController(EPortfolioView initUI, EPortfolioFileManager EPIO) {
         // NOTHING YET
-        saved = true;
+        saved = false;
         ui = initUI;
         this.EPIO = EPIO;
         siteExporter = new EPortfolioSiteExporter();
         //siteExporter = initSiteExporter;
     }
     public void handleNewEPRequest() {
-        ui.startNewSession();
+        if(!ui.getworkspaceInitialized()){
+            ui.startNewSession();
+        }else{
+            ui.getPages().reset();
+            ui.setBannerImageString("Select Banner Image");
+            ui.setStudentName("");
+            ui.reloadPages();
+        }
+        saved = false;
     }
     public void handleLoadEPRequest() throws IOException {
         EPIO.loadSlideShow(ui, promptToOpen());
-        
+        saved = true;
+        ui.disableSaveButtons();
     }
     public boolean handleSaveEPRequest() throws FileNotFoundException {
         //SOMETHING TO ASK FOR DIRECTORY?
         String dir = "";
         EPIO.saveSlideShow(ui,null);
+        saved = true;
+        ui.disableSaveButtons();
         return false;
     }
     public boolean handleSaveAsEPRequest() throws FileNotFoundException {
         String dir = "";
-        dir = promptToSave();
+        dir = promptToSaveFile();
         EPIO.saveSlideShow(ui,dir);
+        saved = true;
         return false;
     }
+    
     public void handleViewEPRequest() {
         String dir = "./temp.json";
         try {
@@ -70,23 +84,38 @@ public class FileController {
         } catch (IOException ex) {
             Logger.getLogger(FileController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
+    
     public void handleExitRequest() {
-        
+        try {
+            // WE MAY HAVE TO SAVE CURRENT WORK
+            boolean continueToExit = true;
+            if (!saved) {
+                // THE USER CAN OPT OUT HERE
+                continueToExit = promptToSave();
+            }
+            
+            // IF THE USER REALLY WANTS TO EXIT THE APP
+            if (continueToExit) {
+                // EXIT THE APPLICATION
+                System.exit(0);
+            }
+        } catch (IOException ioe) {
+            
+        }
     }
     
     
     
-     private String promptToOpen() {
+    private String promptToOpen() {
         // AND NOW ASK THE USER FOR THE COURSE TO OPEN
         FileChooser slideShowFileChooser = new FileChooser();
         slideShowFileChooser.setInitialDirectory(new File("./"));
         File selectedFile = slideShowFileChooser.showOpenDialog(ui.getWindow());
         return selectedFile.getPath();
     }
-     
-     private String promptToSave() {
+    
+    private String promptToSaveFile() {
         // AND NOW ASK THE USER FOR THE COURSE TO OPEN
         FileChooser slideShowFileChooser = new FileChooser();
         slideShowFileChooser.setInitialDirectory(new File("./"));
@@ -95,4 +124,37 @@ public class FileController {
         File selectedFile = slideShowFileChooser.showSaveDialog(ui.getWindow());
         return selectedFile.getPath();
     }
+    
+    public void markFileAsNotSaved() {
+        saved = false;
+        ui.enableSaveButtons();
+    }
+    public boolean isSaved() {
+        return saved;
+    }
+    
+    private boolean promptToSave() throws IOException {
+        // PROMPT THE USER TO SAVE UNSAVED WORK
+        YesNoCancelDialog yesNoCancelDialog = new YesNoCancelDialog(ui.getWindow());
+        yesNoCancelDialog.show("Would you like to save your work before exiting?");
+        
+        // AND NOW GET THE USER'S SELECTION
+        String selection = yesNoCancelDialog.getSelection();
+        boolean saveWork = selection.equals(YesNoCancelDialog.YES);
+        
+        // IF THE USER SAID YES, THEN SAVE BEFORE MOVING ON
+        if (saveWork) {
+            handleSaveAsEPRequest();
+        } // IF THE USER SAID CANCEL, THEN WE'LL TELL WHOEVER
+        // CALLED THIS THAT THE USER IS NOT INTERESTED ANYMORE
+        else if (!saveWork) {
+            return false;
+        }
+        
+        // IF THE USER SAID NO, WE JUST GO ON WITHOUT SAVING
+        // BUT FOR BOTH YES AND NO WE DO WHATEVER THE USER
+        // HAD IN MIND IN THE FIRST PLACE
+        return true;
+    }
+    
 }

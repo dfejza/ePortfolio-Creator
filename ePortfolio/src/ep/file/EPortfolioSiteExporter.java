@@ -16,6 +16,7 @@ import ep.model.ssm.Slide;
 import ep.view.EPortfolioView;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -60,8 +61,10 @@ public class EPortfolioSiteExporter {
         
         // FIRST DELETE THE OLD FILES IN CASE THINGS
         // LIKE THE PAGE FORMAT MAY HAVE CHANGED
-        if (siteDir.exists())
+        if (siteDir.exists()){
+            deleteDir(new File(homeSitePath + VIDEO_DIR));
             deleteDir(siteDir);
+        }
         
         // NOW MAKE THE HOME DIR
         siteDir.mkdirs();
@@ -113,7 +116,11 @@ public class EPortfolioSiteExporter {
                         Path p = Paths.get(test);
                         String file = p.getFileName().toString();
                         Path destImgPath = new File(homeSitePath + VIDEO_DIR + file).toPath();
+                        try{
                         Files.copy(srcImgPath, destImgPath);
+                        }catch(FileAlreadyExistsException e){
+                            
+                        }
                 }
                 if(comp.getComponentType()==2){
                         String test = comp.getImagePath();

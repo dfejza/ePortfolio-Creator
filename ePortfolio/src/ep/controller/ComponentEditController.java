@@ -95,6 +95,7 @@ public class ComponentEditController {
     
     public void processEditComponent() {
         int type = 0;
+        ui.markAsNotSaved();
         Component editedComponet = ui.getPages().getSelectedpageObject().getSelectedComponent();
         type = editedComponet.fetchComponentType();
         switch (type) {

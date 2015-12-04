@@ -46,7 +46,6 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 /**
  *
@@ -161,7 +160,6 @@ public class EPortfolioView {
     private String layoutTheme;
     public Label bannerImageText;
     private ComboBox pageFontChoice;
-    private TextField pageFontSize;
     private ScrollPane slidesEditorScrollPane;
     private boolean workspaceInitialized;
     private String jsonFilePath;
@@ -205,10 +203,13 @@ public class EPortfolioView {
         pageSelectionPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
         pageContainer.setTop(pageContainerPageSettings);
         pageContainer.setCenter(pageSelectionPane);
+        exportEPButton.setDisable(true);
     }
     
     public void initPageInputs(){
-                workspaceInitialized = true;
+                
+        if(!workspaceInitialized){
+            workspaceInitialized = true;
         bannerImageText.setText("No Banner Image");
         pageContainerPageSettings.setHgap(5.5);
         pageContainerPageSettings.setVgap(5.5);
@@ -225,8 +226,6 @@ public class EPortfolioView {
                         "Sigmar One"
                 );
         pageFontChoice = new ComboBox(options);
-        pageFontSize = new TextField();
-        pageFontSize.setText("12");
         pageFontChoice.getSelectionModel().selectFirst();
         //bannerImage = new ImageView();
         selectBannerImageButton = new Button();
@@ -241,11 +240,10 @@ public class EPortfolioView {
         pageContainerPageSettings.add(pageFooter,5,1);
         pageContainerPageSettings.add(new Label("Page Font:"),6,1);
         pageContainerPageSettings.add(pageFontChoice,7,1);
-        pageContainerPageSettings.add(new Label("Page Font Size:"),8,1);
-        pageContainerPageSettings.add(pageFontSize,9,1);
         //pageContainerPageSettings.add(new Label("Banner Image:"),0,3);
         pageContainerPageSettings.add(selectBannerImageButton,0,3);
         pageContainerPageSettings.add(bannerImageText,1,3);
+        }
     }
     
     private void initPaneCSS() {
@@ -304,6 +302,7 @@ public class EPortfolioView {
             } catch (IOException ex) {
                 Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
             }
+            enableExportButton();
         });
         saveEPButton.setOnAction(e -> {
             try {
@@ -331,9 +330,13 @@ public class EPortfolioView {
         pagesEditController = new PagesEditController(this);
         addPageButton.setOnAction(e -> {
             pagesEditController.processAddPageRequest();
+            fileController.markFileAsNotSaved();
+            enableExportButton();
+            enableNewButton();
         });
         removePageButton.setOnAction(e -> {
             pagesEditController.processRemovePageRequest();
+            fileController.markFileAsNotSaved();
         });
         /*selectPageButton.setOnAction(e -> {
         pagesEditController.processSelectPageRequest();
@@ -343,27 +346,35 @@ public class EPortfolioView {
         // WORKSPACE CONTROLS
         addTextComponentButton.setOnAction(e -> {
             componentEditController.processAddTextComponent();
+            fileController.markFileAsNotSaved();
         });
         addImageComponentButton.setOnAction(e -> {
             componentEditController.processAddImageComponent();
+            fileController.markFileAsNotSaved();
         });
         addVideoComponentButton.setOnAction(e -> {
             componentEditController.processAddVideoComponent();
+            fileController.markFileAsNotSaved();
         });
         addSlideshowComponentButton.setOnAction(e -> {
             componentEditController.processAddSlideshowComponent();
+            fileController.markFileAsNotSaved();
         });
         editComponentButton.setOnAction(e -> {
             componentEditController.processEditComponent();
+            fileController.markFileAsNotSaved();
         });
         removeComponentButton.setOnAction(e -> {
             componentEditController.processRemoveComponent();
+            fileController.markFileAsNotSaved();
         });
         selectLayoutButton.setOnAction(e -> {
             componentEditController.selectLayout();
+            fileController.markFileAsNotSaved();
         });
         selectColorButton.setOnAction(e -> {
             componentEditController.selectColor();
+            fileController.markFileAsNotSaved();
         });
         
         //pagetabpane listener
@@ -387,7 +398,7 @@ public class EPortfolioView {
                                 try {
                 webView();
                 } catch (MalformedURLException ex) {
-                Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 selectSiteViewerWorkspace.setContent(webView);
             }
@@ -398,34 +409,36 @@ public class EPortfolioView {
         pageTitle.textProperty().addListener(e -> {
             pages.getSelectedpageObject().setPageTitle(pageTitle.getText());
             pageSelectionPane.getSelectionModel().getSelectedItem().setText(pageTitle.getText());
+            fileController.markFileAsNotSaved();
             //reloadPages();
         });
         pageFooter.textProperty().addListener(e -> {
             pages.getSelectedpageObject().setPageFooter(pageFooter.getText());
+            fileController.markFileAsNotSaved();
             //reloadPages();
         });
         pageHeader.textProperty().addListener(e -> {
             pages.getSelectedpageObject().setPageHeader(pageHeader.getText());
+            fileController.markFileAsNotSaved();
             //reloadPages();
         });
         studentNameField.textProperty().addListener(e -> {
             studentName = studentNameField.getText();
+            fileController.markFileAsNotSaved();
             //reloadPages();
         });
         
         selectBannerImageButton.setOnAction(e -> {
             try {
                 componentEditController.selectBannerImage();
+                fileController.markFileAsNotSaved();
             } catch (MalformedURLException ex) {
                 Logger.getLogger(EPortfolioView.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        pageFontSize.textProperty().addListener(e -> {
-            pages.getSelectedpageObject().setPageFontSize(pageFontSize.getText());
-            //reloadPages();
-        });
         pageFontChoice.valueProperty().addListener(e -> {
             pages.getSelectedpageObject().setPageFontChoice(pageFontChoice.getSelectionModel().getSelectedIndex());
+            fileController.markFileAsNotSaved();
         });
     }
     // Creates the intended layout schemes of major panes. This is meant to be called AFTER all the children panels are constructed and
@@ -445,9 +458,9 @@ public class EPortfolioView {
         fileToolbarPane = new FlowPane();
         newEPButton = initChildButton(fileToolbarPane, ICON_NEW_SLIDE_SHOW,	"New ePortfolio",	    "horizontal_toolbar_button", false);
         loadEPButton = initChildButton(fileToolbarPane, ICON_LOAD_SLIDE_SHOW,	"Load ePortfolio",    "horizontal_toolbar_button", false);
-        saveEPButton = initChildButton(fileToolbarPane, ICON_SAVE_SLIDE_SHOW,	"Save ePortfolio",    "horizontal_toolbar_button", false);
-        saveAsEPButton = initChildButton(fileToolbarPane, ICON_SAVE_SLIDE_SHOW,	"Save ePortfolio As...",    "horizontal_toolbar_button", false);
-        exportEPButton = initChildButton(fileToolbarPane, ICON_VIEW_SLIDE_SHOW,	"Generate ePortfolio site",    "horizontal_toolbar_button", false);
+        saveEPButton = initChildButton(fileToolbarPane, ICON_SAVE_SLIDE_SHOW,	"Save ePortfolio",    "horizontal_toolbar_button", true);
+        saveAsEPButton = initChildButton(fileToolbarPane, ICON_SAVE_SLIDE_SHOW,	"Save ePortfolio As...",    "horizontal_toolbar_button", true);
+        exportEPButton = initChildButton(fileToolbarPane, ICON_VIEW_SLIDE_SHOW,	"Generate ePortfolio site",    "horizontal_toolbar_button", true);
         exitButton = initChildButton(fileToolbarPane, ICON_EXIT, "Exit Application", "horizontal_toolbar_button", false);
     }
     
@@ -516,15 +529,8 @@ public class EPortfolioView {
         // SETUP THE WEB ENGINE AND LOAD THE URL
         webEngine = webView.getEngine();
         webEngine.load(indexURL.toExternalForm());
+        webEngine.reload();
         webEngine.setJavaScriptEnabled(true);
-        
-        // SET THE WINDOW TITLE
-        //this.setTitle(slides.getTitle());
-        
-        // NOW PUT STUFF IN THE STAGE'S SCENE
-        //Scene scene = new Scene(webView, 1100, 650);
-        //setScene(scene);
-        //this.showAndWait();
     }
     
     // Initialize the UI for a new session
@@ -556,8 +562,11 @@ public class EPortfolioView {
             pageSelectionPane.getTabs().add(tab);
         }
         
-        pageSelectionPane.getSelectionModel().select(temp);
+        
+        if(pages.getPages().size()!=0){
+            pageSelectionPane.getSelectionModel().select(temp);
         reloadCurrentPage() ;
+        }
     }
     
     public void reloadComponents(ScrollPane test) throws MalformedURLException{
@@ -596,8 +605,7 @@ public class EPortfolioView {
         pageHeader.setText(pages.getSelectedpageObject().getPageHeader());
         bannerImageText.setText(bannerImage);
         studentNameField.setText(studentName);
-        pageFontChoice.getSelectionModel().select(pages.getSelectedpageObject().getPageFontChoice());
-        pageFontSize.setText(pages.getSelectedpageObject().getPageFontSize());
+        pageFontChoice.getSelectionModel().select(pages.getSelectedpageObject().getPageFontChoice());;
         //bannerImage.setImage(pages.getSelectedpageObject().getBannerImage());
     }
     
@@ -674,9 +682,6 @@ public class EPortfolioView {
 	return primaryStage;
     }
 
-    public void reset() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     public boolean getworkspaceInitialized(){
         return workspaceInitialized;
     }
@@ -686,5 +691,39 @@ public class EPortfolioView {
     }
     public String getJSONSavedPath(){
         return jsonFilePath;
+    }
+
+    public void markAsNotSaved() {
+        fileController.markFileAsNotSaved();
+    }
+
+    public void disableSaveButtons() {
+        saveEPButton.setDisable(true);
+        saveAsEPButton.setDisable(true);
+    }
+    
+    public void enableSaveButtons() {
+        saveEPButton.setDisable(false);
+        saveAsEPButton.setDisable(false);
+    }
+    
+    public void disableExportButton(){
+        exportEPButton.setDisable(true);
+    }
+    public void enableExportButton(){
+        exportEPButton.setDisable(false);
+    }
+    
+    public void disableNewButton(){
+        newEPButton.setDisable(true);
+    }
+    public void enableNewButton(){
+        newEPButton.setDisable(false);
+    }
+    
+    public void addPageSingle(){
+        pagesEditController.processAddPageRequest();
+        fileController.markFileAsNotSaved();
+        enableExportButton();
     }
 }
