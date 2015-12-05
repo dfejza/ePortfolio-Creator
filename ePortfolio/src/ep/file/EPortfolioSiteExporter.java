@@ -62,8 +62,7 @@ public class EPortfolioSiteExporter {
         // FIRST DELETE THE OLD FILES IN CASE THINGS
         // LIKE THE PAGE FORMAT MAY HAVE CHANGED
         if (siteDir.exists()){
-            deleteDir(new File(homeSitePath + VIDEO_DIR));
-            deleteDir(siteDir);
+            deleteDirectory(siteDir);
         }
         
         // NOW MAKE THE HOME DIR
@@ -96,12 +95,16 @@ public class EPortfolioSiteExporter {
         Files.copy(dataSrcPath, dataDestPath);
         
         //get banner image if exists
-        if(initUI.getBannerImageLoc().compareTo("No Banner image")!=0){
+        if(initUI.getBannerImageLoc().compareTo("No Banner Image")!=0){
             Path srcImgPath = new File(initUI.getBannerImageLoc()).toPath();
             Path p = Paths.get(initUI.getBannerImageLoc());
             String file = p.getFileName().toString();
             Path destImgPath = new File(homeSitePath + IMG_DIR + file).toPath();
-            Files.copy(srcImgPath, destImgPath);
+            try{
+                Files.copy(srcImgPath, destImgPath);
+            }catch(FileAlreadyExistsException e){
+                
+            }
         }
         
         // AND NOW ALL THE SLIDESHOW IMAGES
@@ -109,54 +112,62 @@ public class EPortfolioSiteExporter {
             Path htmlPathSRC = new File(BASE_DIR + "index.html").toPath();
             Path htmlPathDST = new File(homeSitePath + page.getPageTitle() + ".html").toPath();
             Files.copy(htmlPathSRC,htmlPathDST);
+            
             for (Component comp : page.getComponents()) {
                 if(comp.getComponentType()==3){
-                        String test = comp.getImagePath().replaceFirst("^(file:/)","");
-                        Path srcImgPath = new File(test).toPath();
-                        Path p = Paths.get(test);
-                        String file = p.getFileName().toString();
-                        Path destImgPath = new File(homeSitePath + VIDEO_DIR + file).toPath();
-                        try{
+                    String test = comp.getImagePath().replaceFirst("^(file:/)","");
+                    Path srcImgPath = new File(test).toPath();
+                    Path p = Paths.get(test);
+                    String file = p.getFileName().toString();
+                    Path destImgPath = new File(homeSitePath + VIDEO_DIR + file).toPath();
+                    try{
                         Files.copy(srcImgPath, destImgPath);
-                        }catch(FileAlreadyExistsException e){
-                            
-                        }
+                    }catch(FileAlreadyExistsException e){
+                        
+                    }
                 }
                 if(comp.getComponentType()==2){
-                        String test = comp.getImagePath();
-                        Path srcImgPath = new File(test).toPath();
-                        Path p = Paths.get(test);
-                        String file = p.getFileName().toString();
-                        Path destImgPath = new File(homeSitePath + IMG_DIR + file).toPath();
-                                                try{
+                    String test = comp.getImagePath();
+                    Path srcImgPath = new File(test).toPath();
+                    Path p = Paths.get(test);
+                    String file = p.getFileName().toString();
+                    Path destImgPath = new File(homeSitePath + IMG_DIR + file).toPath();
+                    try{
                         Files.copy(srcImgPath, destImgPath);
-                                                }catch(FileAlreadyExistsException e){
-                            
-                        }
+                    }catch(FileAlreadyExistsException e){
+                        
+                    }
                 }
                 //if slide show exists, copy
                 if(comp.getComponentType()==4){
                     for(Slide s : comp.getSS().getSlides()){
                         Path srcImgPath = new File(s.getImagePath() + SLASH + s.getImageFileName()).toPath();
                         Path destImgPath = new File(homeSitePath + IMG_DIR + s.getImageFileName()).toPath();
-                        Files.copy(srcImgPath, destImgPath);
+                        try{
+                            Files.copy(srcImgPath, destImgPath);
+                        }catch(FileAlreadyExistsException e){
+                            
+                        }
                     }
                 }
             }
         }
     }
     
-    public void deleteDir(File dir) {
-        File[] files = dir.listFiles();
-        for (File f : files) {
-            if (f.isDirectory()) {
-                deleteDir(f);
-                f.delete();
+    public static boolean deleteDirectory(File dir) {
+        if (dir.isDirectory()) {
+            File[] children = dir.listFiles();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDirectory(children[i]);
+                if (!success) {
+                    return false;
+                }
             }
-            else
-                f.delete();
         }
-        dir.delete();
+
+        // either file or an empty directory
+        System.out.println("removing file or directory : " + dir.getName());
+        return dir.delete();
     }
     
     public void copyAllFiles(String sourceFile, String destinationDir) throws IOException {

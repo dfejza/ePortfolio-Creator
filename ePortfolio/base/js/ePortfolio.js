@@ -30,7 +30,8 @@ var slides = new Array();
 var currentSlide;
 
 // MODIFY CURRENT PAGE's DOM IN THIS FOLLOWING FUNCTION
-function initPage() {    
+function initPage() {   
+    var slideshowbuttoncount = 0;
     numOfSlideshows = 0;
     //Get current page
     var fileName = location.href.split("/").slice(-1); 
@@ -199,12 +200,12 @@ function initPage() {
             document.getElementById("content_body").appendChild(elem);
             
             var slideshowimg = document.createElement("img");
-            slideshowimg.id = "ssi".concat(i);
+            slideshowimg.id = "ssi".concat(slideshowbuttoncount);
             slideshowimg.className = "SlideShowImage";
             slideshowimg.src = "./img/"+tempSlideShow[0].imgFile;
             document.getElementById("c".concat(i)).appendChild(slideshowimg);
             var caption = document.createElement("P");
-            caption.id = "ssc".concat(i);
+            caption.id = "ssc".concat(slideshowbuttoncount);
             caption.className = "SlideShowCaption";
             caption.innerHTML = tempSlideShow[0].caption;
             document.getElementById("content_body").appendChild(caption);
@@ -217,7 +218,7 @@ function initPage() {
             var btn = document.createElement("BUTTON");        // Create a <button> element
             btn.className = "SlideShowButtonPrev";
             var t = document.createTextNode("Previous");       // Create a text node
-            btn.id = "btnP"+i;
+            btn.id = "btnP"+slideshowbuttoncount;
             r = btn.id;
             btn.appendChild(t);                                // Append the text to <button>
             // Use an immediate function to dynamically create slideshows
@@ -225,7 +226,6 @@ function initPage() {
                 btn.onclick = function () {
                     var thenum = r.replace( /^\D+/g, ''); 
                     thenum = parseInt(thenum);
-                    
                     //increment slides
                     slides[thenum].currentSlide--;
                     if(slides[thenum].currentSlide==-1)
@@ -239,14 +239,13 @@ function initPage() {
             
             btn = document.createElement("BUTTON");        // Create a <button> element
             t = document.createTextNode("Next");       // Create a text node
-            btn.id = "btnN"+i;
+            btn.id = "btnN"+slideshowbuttoncount;
             btn.className = "SlideShowButtonNext";
             btn.appendChild(t);                                // Append the text to <button>
             (function(r){
                 btn.onclick = function () {
                     var thenum = r.replace( /^\D+/g, ''); 
                     thenum = parseInt(thenum);
-                    
                     //increment slides
                     slides[thenum].currentSlide++;
                     if(slides[thenum].currentSlide==slides[thenum].numOfImages)
@@ -259,6 +258,7 @@ function initPage() {
             document.getElementById("slideshow_controls".concat(i)).appendChild(btn);                    // Append <button>
             
             numOfSlideshows++;
+            slideshowbuttoncount = slideshowbuttoncount + 1;
             
         }else if(currentComponent.type == 5){
             var temp =  document.getElementById(currentComponent.hyperlinkComponentInject).innerHTML;
@@ -292,6 +292,7 @@ function initPage() {
             
         }else if(currentComponent.type == 9){
             var elem = document.createElement("H1");                       // Create a <p> element
+            elem.className = "header_class";
             var t = document.createTextNode(currentComponent.text);      // Create a text node
             elem.appendChild(t);
             elem.id = "c".concat(i);            // Create a ID for later use
