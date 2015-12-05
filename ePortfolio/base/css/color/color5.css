@@ -42,3 +42,16 @@ background-color:#FFDBC9;
 #bannerText{
         background-color:#FF681C;
 }
+
+#header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+#footer {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}

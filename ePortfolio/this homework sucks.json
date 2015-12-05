@@ -1,9 +1,9 @@
 
 {
-    "cssLayout":"layout1.css",
-    "cssColor":"color1.css",
+    "cssLayout":"layout2.css",
+    "cssColor":"color4.css",
     "student_name":"this homework sucks",
-    "bannerImageLoc":"No Banner Image",
+    "bannerImageLoc":"C:\\Netbeans Projects\\ePortfolio\\images\\green_banner.jpg",
     "page":[
         {
             "cssFont":"font1.css",
@@ -67,6 +67,24 @@
                         "sad",
                         "2",
                         "3"
+                    ]
+                },
+                {
+                    "type":3,
+                    "text":"Enter text here.",
+                    "imageLoc":"C:\\Netbeans Projects\\ePortfolio\\video\\morningInsperation.mp4",
+                    "videoLoc":"C:\\Netbeans Projects\\ePortfolio\\video\\morningInsperation.mp4",
+                    "hyperlinkStartChar":0,
+                    "hyperlinkEndChar":0,
+                    "hyperlinkAddress":"null",
+                    "hyperlinkComponentInject":0,
+                    "compFont":"Font 1",
+                    "width":1024.0,
+                    "height":768.0,
+                    "allignment":1,
+                    "slideShow":[
+                    ],
+                    "listData":[
                     ]
                 },
                 {
@@ -232,6 +250,42 @@
                     "width":1024.0,
                     "height":768.0,
                     "allignment":3,
+                    "slideShow":[
+                    ],
+                    "listData":[
+                    ]
+                },
+                {
+                    "type":9,
+                    "text":"Heading Goes Here",
+                    "imageLoc":"null",
+                    "videoLoc":"null",
+                    "hyperlinkStartChar":0,
+                    "hyperlinkEndChar":0,
+                    "hyperlinkAddress":"null",
+                    "hyperlinkComponentInject":0,
+                    "compFont":"Font 1",
+                    "width":1024.0,
+                    "height":768.0,
+                    "allignment":1,
+                    "slideShow":[
+                    ],
+                    "listData":[
+                    ]
+                },
+                {
+                    "type":2,
+                    "text":"Enter text here.",
+                    "imageLoc":"C:\\Netbeans Projects\\ePortfolio\\images\\icons\\color\\/color5.png",
+                    "videoLoc":"C:\\Netbeans Projects\\ePortfolio\\images\\icons\\color\\/color5.png",
+                    "hyperlinkStartChar":0,
+                    "hyperlinkEndChar":0,
+                    "hyperlinkAddress":"null",
+                    "hyperlinkComponentInject":0,
+                    "compFont":"Font 1",
+                    "width":124.0,
+                    "height":78.0,
+                    "allignment":1,
                     "slideShow":[
                     ],
                     "listData":[

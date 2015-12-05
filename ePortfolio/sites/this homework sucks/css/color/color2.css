@@ -43,3 +43,16 @@ background-color:rgb(255, 170, 170);
 #bannerText{
         background-color:#801515;
 }
+
+#header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+#footer {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}

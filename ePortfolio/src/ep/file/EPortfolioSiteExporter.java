@@ -96,7 +96,7 @@ public class EPortfolioSiteExporter {
         Files.copy(dataSrcPath, dataDestPath);
         
         //get banner image if exists
-        if(initUI.getBannerImageLoc().compareTo("No Banner image")==0){
+        if(initUI.getBannerImageLoc().compareTo("No Banner image")!=0){
             Path srcImgPath = new File(initUI.getBannerImageLoc()).toPath();
             Path p = Paths.get(initUI.getBannerImageLoc());
             String file = p.getFileName().toString();
@@ -128,7 +128,11 @@ public class EPortfolioSiteExporter {
                         Path p = Paths.get(test);
                         String file = p.getFileName().toString();
                         Path destImgPath = new File(homeSitePath + IMG_DIR + file).toPath();
+                                                try{
                         Files.copy(srcImgPath, destImgPath);
+                                                }catch(FileAlreadyExistsException e){
+                            
+                        }
                 }
                 //if slide show exists, copy
                 if(comp.getComponentType()==4){

@@ -42,3 +42,13 @@ background-color:#C2DFE3;
 #bannerText{
         background-color:#5C6B73;
 }
+
+#header {
+    background-color:black;
+    color:white;
+}
+#footer {
+    background-color:black;
+    color:white;
+    text-align:center;
+}

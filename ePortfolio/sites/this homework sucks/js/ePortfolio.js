@@ -52,7 +52,8 @@ function initPage() {
     document.getElementById("bannerText").innerHTML = studentName;
     
     if(bannerImageLoc!="No Banner Image"){
-        document.getElementById("bannerImgID").src = bannerImageLoc;
+        var imageName = bannerImageLoc.replace(/^.*[\\\/]/, '');
+        document.getElementById("bannerImgID").src = "./img/"+imageName;
     }else{
         document.getElementById("banner").removeChild(document.getElementById("bannerImgID"));
     }
@@ -151,8 +152,11 @@ function initPage() {
             x.className = "imageCaption_class";
             x.textContent=currentComponent.text;
             //x.createTextNode(currentComponent.text);
-            document.getElementById("content_body").appendChild(elem);
-            document.getElementById("content_body").appendChild(x);
+            var z = document.createElement("div");
+            z.className = "images_class";
+            z.appendChild(elem);
+            z.appendChild(x);
+            document.getElementById("content_body").appendChild(z);
             
         }else if(currentComponent.type == 3){
             

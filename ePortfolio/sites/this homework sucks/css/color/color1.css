@@ -8,18 +8,11 @@ body {
 
 #navbar
 {
-	margin: 0;
-	padding: 0;
-	list-style: none;
                   background-color: rgba(255,255,255,.1);
 }
 #navbar a
 {
-	display: block;
-	padding: .7em 1.25em;
 	color: #fff;
-	text-decoration: none;
-	border-bottom: 1px solid gray;
 }
 
 #navbar a:focus
@@ -32,4 +25,17 @@ body {
     text-shadow: 0.1em 0.1em 0.2em black;
     background-color: white;
     color: black;
+}
+
+#header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+#footer {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
 }
