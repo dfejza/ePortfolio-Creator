@@ -85,12 +85,11 @@ public class YesNoCancelDialog extends Stage {
         messagePane.getChildren().add(buttonBox);
         
         // CSS CLASSES
-        yesButton.getStyleClass().add(CSS_CLASS_LANG_OK_BUTTON);
-        noButton.getStyleClass().add(CSS_CLASS_LANG_OK_BUTTON);
-        cancelButton.getStyleClass().add(CSS_CLASS_LANG_OK_BUTTON);
+        yesButton.getStyleClass().add("horizontal_toolbar_button");
+        noButton.getStyleClass().add("horizontal_toolbar_button");
+        cancelButton.getStyleClass().add("horizontal_toolbar_button");
         messageLabel.getStyleClass().add(CSS_CLASS_LANG_PROMPT);
         messagePane.getStyleClass().add(CSS_CLASS_LANG_DIALOG_PANE);
-        buttonBox.getStyleClass().add(CSS_CLASS_LANG_DIALOG_PANE);
         
         // MAKE IT LOOK NICE
         messagePane.setPadding(new Insets(10, 20, 20, 20));

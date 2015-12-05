@@ -34,22 +34,37 @@ public class FileController {
     
     public FileController(EPortfolioView initUI, EPortfolioFileManager EPIO) {
         // NOTHING YET
-        saved = false;
+        saved = true;
         ui = initUI;
         this.EPIO = EPIO;
         siteExporter = new EPortfolioSiteExporter();
         //siteExporter = initSiteExporter;
     }
     public void handleNewEPRequest() {
-        if(!ui.getworkspaceInitialized()){
-            ui.startNewSession();
-        }else{
-            ui.getPages().reset();
-            ui.setBannerImageString("Select Banner Image");
-            ui.setStudentName("");
-            ui.reloadPages();
+        try {
+            // WE MAY HAVE TO SAVE CURRENT WORK
+            boolean continueToExit = true;
+            if (!saved) {
+                // THE USER CAN OPT OUT HERE
+                continueToExit = promptToSavev2();
+            }
+            // IF THE USER REALLY WANTS TO EXIT THE APP
+            if (continueToExit) {
+                if(!ui.getworkspaceInitialized()){
+                    ui.startNewSession();
+                }else{
+                    ui.getPages().reset();
+                    ui.setBannerImageString("Select Banner Image");
+                    ui.setStudentName("");
+                    ui.reloadPages();
+                }
+                saved = false;
+            }
+        } catch (IOException ioe) {
+            
         }
-        saved = false;
+        
+
     }
     public void handleLoadEPRequest() throws IOException {
         EPIO.loadSlideShow(ui, promptToOpen());
@@ -141,13 +156,39 @@ public class FileController {
         // AND NOW GET THE USER'S SELECTION
         String selection = yesNoCancelDialog.getSelection();
         boolean saveWork = selection.equals(YesNoCancelDialog.YES);
+        boolean cancel = selection.equals(YesNoCancelDialog.CANCEL);
         
         // IF THE USER SAID YES, THEN SAVE BEFORE MOVING ON
         if (saveWork) {
             handleSaveAsEPRequest();
         } // IF THE USER SAID CANCEL, THEN WE'LL TELL WHOEVER
         // CALLED THIS THAT THE USER IS NOT INTERESTED ANYMORE
-        else if (!saveWork) {
+        else if (cancel) {
+            return false;
+        }
+        
+        // IF THE USER SAID NO, WE JUST GO ON WITHOUT SAVING
+        // BUT FOR BOTH YES AND NO WE DO WHATEVER THE USER
+        // HAD IN MIND IN THE FIRST PLACE
+        return true;
+    }
+    
+    private boolean promptToSavev2() throws IOException {
+        // PROMPT THE USER TO SAVE UNSAVED WORK
+        YesNoCancelDialog yesNoCancelDialog = new YesNoCancelDialog(ui.getWindow());
+        yesNoCancelDialog.show("Would you like to save your work before starting anew?");
+        
+        // AND NOW GET THE USER'S SELECTION
+        String selection = yesNoCancelDialog.getSelection();
+        boolean saveWork = selection.equals(YesNoCancelDialog.YES);
+        boolean cancel = selection.equals(YesNoCancelDialog.CANCEL);
+        
+        // IF THE USER SAID YES, THEN SAVE BEFORE MOVING ON
+        if (saveWork) {
+            handleSaveAsEPRequest();
+        } // IF THE USER SAID CANCEL, THEN WE'LL TELL WHOEVER
+        // CALLED THIS THAT THE USER IS NOT INTERESTED ANYMORE
+        else if (cancel) {
             return false;
         }
         
