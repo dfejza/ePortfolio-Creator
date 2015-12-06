@@ -5,12 +5,10 @@ body, html {
         font-family: 'Indie Flower', cursive;
 }
 #bannerText{
-	font-size:24pt;
 	color:#ffffff;
 }
 
 #content_body{
-	font-size:16pt;
 	color:#ffffff;
 }
 
@@ -19,6 +17,5 @@ body, html {
 }
 
 .SlideShowCaption{
-    font-size:24pt;
     text-align: center;
 }

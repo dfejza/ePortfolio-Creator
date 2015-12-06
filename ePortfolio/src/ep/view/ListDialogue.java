@@ -87,7 +87,7 @@ public class ListDialogue {
         addHyper.setOnAction(e -> {
             String hyperlink = getHyperlinkDialogue();
             String selectedText = list.getSelectionModel().getSelectedItem();
-            String newNext = "[url=" +hyperlink + "]" + selectedText + "[/url]";
+            String newNext = "[url=" +"http://" +hyperlink + "]" + selectedText + "[/url]";
             list.getItems().set(list.getSelectionModel().getSelectedIndex(), newNext);
             if(list.getItems().size()==0)
                 addToList.setDisable(true);
@@ -148,6 +148,10 @@ public class ListDialogue {
         grid.getChildren().add(new Label("List Text:"));
         grid.getChildren().add(listConents);
         grid.getChildren().add(addToList);
+        Button addHyper = new Button();
+        addHyper.setText("Add Hyperlink");
+        addHyper.setDisable(false);
+        grid.getChildren().add(addHyper);
         grid.getChildren().add(removeFromList);
         
         ListView<String> list = new ListView<String>();
@@ -167,11 +171,21 @@ public class ListDialogue {
             items.add(listConents.getText());
             listConents.setText("");
             removeFromList.setDisable(false);
+            addHyper.setDisable(false);
         });
         removeFromList.setOnAction(e -> {
             list.getItems().remove(list.getSelectionModel().getSelectedItem());
             if(list.getItems().size()==0)
                 removeFromList.setDisable(true);
+        });
+        
+        addHyper.setOnAction(e -> {
+            String hyperlink = getHyperlinkDialogue();
+            String selectedText = list.getSelectionModel().getSelectedItem();
+            String newNext = "[url=" +"http://" +hyperlink + "]" + selectedText + "[/url]";
+            list.getItems().set(list.getSelectionModel().getSelectedIndex(), newNext);
+            if(list.getItems().size()==0)
+                addToList.setDisable(true);
         });
         wrapper.setTop(grid);
         wrapper.setCenter(body);

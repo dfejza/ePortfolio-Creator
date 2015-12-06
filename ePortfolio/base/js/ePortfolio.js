@@ -104,7 +104,17 @@ function initPage() {
         if(currentComponent.type == 1){
             
             var para = document.createElement("P");                       // Create a <p> element
-            var t = document.createTextNode(currentComponent.text);      // Create a text node
+            var text = currentComponent.text;
+            //[url=http://www.example.com/]Example[/url]
+            while (text.indexOf("[url=") > -1){
+                var startidx = text.indexOf("[url=");
+                var endidx = text.indexOf("[/url]");
+                var slectedString  = text.substring(startidx, endidx+6);
+                var substring  = text.substring(startidx, endidx+6);
+                substring = substring.replace(/\[url=([^\s\]]+)\s*\](.*(?=\[\/url\]))\[\/url\]/g, '<a href="$1">$2</a>');
+                text = text.replace(slectedString, substring);
+            }
+            para.innerHTML = text;
             //change the front of the component
             var type = currentComponent.compFont;
             para.style.fontFamily = type;
@@ -125,9 +135,6 @@ function initPage() {
                     text.setStyle("-fx-font-family: Sigmar One;");
                     getStylesheets().add("https://fonts.googleapis.com/css?family=Sigmar+One");
             }*/
-            
-            
-            para.appendChild(t);
             para.id = "c".concat(i);            // Create a ID for later use
             document.getElementById("content_body").appendChild(para);  
             
@@ -282,7 +289,9 @@ function initPage() {
                 var listItem = document.createElement("li");
                 
                 // add the item text
-                listItem.innerHTML = currentComponent.listData[iijj];
+                var text = currentComponent.listData[iijj];
+                text = text.replace(/\[url=([^\s\]]+)\s*\](.*(?=\[\/url\]))\[\/url\]/g, '<a href="$1">$2</a>');
+                listItem.innerHTML = text;
                 
                 // add listItem to the listElement
                 listElement.appendChild(listItem);

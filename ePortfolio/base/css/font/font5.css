@@ -4,12 +4,10 @@ body, html,h1 {
     font-family: 'Sigmar One', cursive;
 }
 #bannerText{
-	font-size:24pt;
 	color:#111111;
 }
 
 #content_body{
-	font-size:12pt;
 	color:#111111;
 }
 
@@ -17,6 +15,5 @@ body, html,h1 {
 }
 
 .SlideShowCaption{
-    font-size:24pt;
     text-align: center;
 }

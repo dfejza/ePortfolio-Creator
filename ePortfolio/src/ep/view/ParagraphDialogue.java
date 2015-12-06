@@ -90,7 +90,7 @@ public class ParagraphDialogue {
         addToList.setOnAction(e -> {
             String hyperlink = getHyperlinkDialogue();
             String selectedText = paragraphText.getSelectedText();
-            String newNext = "[url=" +hyperlink + "]" + selectedText + "[/url]";
+            String newNext = "[url=" +"http://" +hyperlink + "]" + selectedText + "[/url]";
             IndexRange selection = paragraphText.getSelection();
             String content = paragraphText.getText();
             String newString = content.substring(0, selection.getStart()) +newNext+ content.substring(selection.getEnd());           
@@ -133,14 +133,14 @@ public class ParagraphDialogue {
                 getClass().getResource(STYLE_SHEET_UI).toExternalForm());
         ObservableList<String> options =
                 FXCollections.observableArrayList(
-                        "Font 1",
-                        "Font 2",
-                        "Font 3",
-                        "Font 4",
-                        "Font 5"
+                        "Alegreya Sans",
+                        "Lato",
+                        "Indie Flower",
+                        "Titillium Web",
+                        "Sigmar One"
                 );
         final ComboBox comboBox = new ComboBox(options);
-        //comboBox.getSelectionModel().select(currentComponent.getFontType());
+        comboBox.getSelectionModel().select(1);
         TextArea paragraphText = new TextArea(currentComponent.getText());
         paragraphText.setWrapText(true);
         
@@ -161,18 +161,9 @@ public class ParagraphDialogue {
         grid.add(comboBox, 1, 0);
         
         Button addToList = new Button();
-        Button removeFromList = new Button();
         addToList.setText("Add Hyperlink");
-        removeFromList.setText("Remove Hyperlink");
-        TextField listConents = new TextField();
-        
-        ListView<String> list = new ListView<String>();
-        ObservableList<String> items =FXCollections.observableArrayList ();
-        list.setItems(items);
-        list.setPrefWidth(320);
-        list.setPrefHeight(300);
+        grid.add(addToList, 2, 0);
         addToList.setDisable(true);
-        removeFromList.setDisable(true);
         
         wrapper.addEventFilter(MouseEvent.MOUSE_RELEASED, (MouseEvent mouseEvent) -> {
             if(paragraphText.getSelectedText().length()>0){
@@ -184,22 +175,18 @@ public class ParagraphDialogue {
         
         
         addToList.setOnAction(e -> {
-            items.add(paragraphText.getSelectedText());
             String hyperlink = getHyperlinkDialogue();
-            removeFromList.setDisable(false);
+            String selectedText = paragraphText.getSelectedText();
+            String newNext = "[url=" +"http://" +hyperlink + "]" + selectedText + "[/url]";
+            IndexRange selection = paragraphText.getSelection();
+            String content = paragraphText.getText();
+            String newString = content.substring(0, selection.getStart()) +newNext+ content.substring(selection.getEnd());           
+            paragraphText.setText(newString);
+            
         });
         
-        removeFromList.setOnAction(e -> {
-            list.getItems().remove(list.getSelectionModel().getSelectedItem());
-            if(list.getItems().size()==0)
-                removeFromList.setDisable(true);
-        });
-        hyperLinkPane.setTop(new FlowPane(addToList,removeFromList));
-        hyperLinkPane.setCenter(list);
-        //hyperLinkPane.setBottom(removeFromList);
         wrapper.setTop(grid);
         wrapper.setCenter(body);
-        wrapper.setRight(hyperLinkPane);
         
         
         body.getChildren().add(new Label("Body Text:"));

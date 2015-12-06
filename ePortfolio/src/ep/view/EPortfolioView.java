@@ -646,8 +646,8 @@ public class EPortfolioView {
     private void initStrings() {
         bannerImage = "No Banner Image";
         studentName = "";
-        colorTheme = "color1.css";
-        layoutTheme = "layout1.css";
+        colorTheme = "color4.css";
+        layoutTheme = "layout4.css";
     }
 
     public String getCSSLayout() {
