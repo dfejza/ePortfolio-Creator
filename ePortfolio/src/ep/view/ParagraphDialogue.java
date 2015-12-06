@@ -95,6 +95,7 @@ public class ParagraphDialogue {
             String content = paragraphText.getText();
             String newString = content.substring(0, selection.getStart()) +newNext+ content.substring(selection.getEnd());           
             paragraphText.setText(newString);
+            
         });
         //hyperLinkPane.setBottom(removeFromList);
         wrapper.setTop(grid);
