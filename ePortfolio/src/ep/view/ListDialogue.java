@@ -19,6 +19,7 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 
@@ -47,6 +48,10 @@ public class ListDialogue {
         body.setHgap(10);
         body.setVgap(10);
         
+        Button addHyper = new Button();
+        addHyper.setText("Add Hyperlink");
+        addHyper.setDisable(true);
+        
         TextField listConents = new TextField();
         listConents.setPromptText("Enter list item here!");
         listConents.setPrefWidth(360);
@@ -58,6 +63,7 @@ public class ListDialogue {
         grid.getChildren().add(listConents);
         grid.getChildren().add(addToList);
         grid.getChildren().add(removeFromList);
+        grid.getChildren().add(addHyper);
         
         ListView<String> list = new ListView<String>();
         ObservableList<String> items =FXCollections.observableArrayList ();
@@ -70,12 +76,24 @@ public class ListDialogue {
             items.add(listConents.getText());
             listConents.setText("");
             removeFromList.setDisable(false);
+            addHyper.setDisable(false);
         });
         removeFromList.setOnAction(e -> {
             list.getItems().remove(list.getSelectionModel().getSelectedItem());
             if(list.getItems().size()==0)
                 removeFromList.setDisable(true);
         });
+        
+        addHyper.setOnAction(e -> {
+            String hyperlink = getHyperlinkDialogue();
+            String selectedText = list.getSelectionModel().getSelectedItem();
+            String newNext = "[url=" +hyperlink + "]" + selectedText + "[/url]";
+            list.getItems().set(list.getSelectionModel().getSelectedIndex(), newNext);
+            if(list.getItems().size()==0)
+                addToList.setDisable(true);
+        });
+        
+        
         wrapper.setTop(grid);
         wrapper.setCenter(body);
         
@@ -176,5 +194,22 @@ public class ListDialogue {
             return null;
         });
         Optional<Component> result = dialog.showAndWait();
+    }
+    private String getHyperlinkDialogue() {
+        TextInputDialog dialog = new TextInputDialog("www.google.com");
+        dialog.getDialogPane().setPrefSize(400, 320);
+        DialogPane dialogPane = dialog.getDialogPane();
+        dialogPane.getStylesheets().add(
+                getClass().getResource(STYLE_SHEET_UI).toExternalForm());
+        dialog.setTitle("Hyperlink Dialog");
+        dialog.setHeaderText("Enter a Hyperlink for your selected text.");
+        dialog.setContentText("HTTP Address:");
+        
+        // Traditional way to get the response value.
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()){
+            return result.get();
+        }
+        return null;
     }
 }

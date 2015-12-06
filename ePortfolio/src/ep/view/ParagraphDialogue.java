@@ -17,6 +17,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.IndexRange;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -70,20 +71,12 @@ public class ParagraphDialogue {
         
         grid.add(new Label("Font:"), 0, 0);
         grid.add(comboBox, 1, 0);
+        ;
         
         Button addToList = new Button();
-        Button removeFromList = new Button();
         addToList.setText("Add Hyperlink");
-        removeFromList.setText("Remove Hyperlink");
-        TextField listConents = new TextField();
-        
-        ListView<String> list = new ListView<String>();
-        ObservableList<String> items =FXCollections.observableArrayList ();
-        list.setItems(items);
-        list.setPrefWidth(320);
-        list.setPrefHeight(300);
+        grid.add(addToList, 2, 0);
         addToList.setDisable(true);
-        removeFromList.setDisable(true);
         
         wrapper.addEventFilter(MouseEvent.MOUSE_RELEASED, (MouseEvent mouseEvent) -> {
             if(paragraphText.getSelectedText().length()>0){
@@ -95,18 +88,14 @@ public class ParagraphDialogue {
         
         
         addToList.setOnAction(e -> {
-            items.add(paragraphText.getSelectedText());
             String hyperlink = getHyperlinkDialogue();
-            removeFromList.setDisable(false);
+            String selectedText = paragraphText.getSelectedText();
+            String newNext = "[url=" +hyperlink + "]" + selectedText + "[/url]";
+            IndexRange selection = paragraphText.getSelection();
+            String content = paragraphText.getText();
+            String newString = content.substring(0, selection.getStart()) +newNext+ content.substring(selection.getEnd());           
+            paragraphText.setText(newString);
         });
-        
-        removeFromList.setOnAction(e -> {
-            list.getItems().remove(list.getSelectionModel().getSelectedItem());
-            if(list.getItems().isEmpty())
-                removeFromList.setDisable(true);
-        });
-        hyperLinkPane.setTop(new FlowPane(addToList,removeFromList));
-        hyperLinkPane.setCenter(list);
         //hyperLinkPane.setBottom(removeFromList);
         wrapper.setTop(grid);
         wrapper.setCenter(body);
